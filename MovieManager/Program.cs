@@ -55,12 +55,12 @@ app.UseWhen(
 //() => تعني: نفّذ الكود عند استدعاء الـ Route.
 app.MapGet("/movies",()=> "Welcome to Movie Manager");
 //QueryString
-app.MapGet("/search",(string name)=> $"Searching for: {name} ");
+app.MapGet("/search",(string ?name)=> $"Searching for: {name} ");
 //Route Parameter
 //? يأتي بعد اسم الـ Route Parameter وليس قبله.
 
 //app.MapGet("/movie/{id?}", (int? id )=> id == null ? $"Movie Id not provided" :  $"Movie Id:{id}");
-
+//Route Constrain
 app.MapGet("/movie/{id:int}", (int id) => $"Movie Id:{id}");
 
 
@@ -73,7 +73,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapStaticAssets();
-
+//سيقوم باكتشاف جميع الكنترولر في المشروع كامل مع ميثود اكشن
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
