@@ -1,4 +1,7 @@
 //Configuration
+using MovieManager.Middlewere;
+using static System.Net.Mime.MediaTypeNames;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -12,11 +15,42 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
 }
 
+//middlewere 
+//context = يمثل الطلب الحالي.
+//next = ينقل الطلب إلى الـ  ميدل وير أو الـ الراوت الذي بعده.
+//داخل MapGet أو Use لا أكتب أنواع البارامترات، لأن C# يستنتجها تلقائيًا.
+//Middleware يستطيع تنفيذ كود قبل الطلب وبعده بعد رجوع الاستجابة، ولذلك يُسمى Pipeline.
+//app.Use(async (context, next) => 
+//{
+
+
+//    //أي طلب يخص مشروع ادارة الافلام سيتم تسجيل بداية الطلب ونهايته، وهذا مفيد جدًا أثناء التطوير وتتبع الأخطاء.
+//    Console.WriteLine("Movie Request Started");
+
+//    await next();
+
+//    Console.WriteLine("Movie Request Finished");
+
+
+//});
+// وظيفتها تسجيل الـ Custom Middleware داخل الـ Pipeline للتطبيق.
+
+//middlewere 1
+app.UseMiddleware<LogMiddleware>();
+
+//middlewere 2
+app.UseWhen(
+    context=>
+     context.Request.Path.StartsWithSegments("/movies") ||
+    context.Request.Path.StartsWithSegments("/movie/"),
+    appBuilder =>
+    {
+        appBuilder.UseMiddleware<MovieValidationMiddleware>();
+    } );
 
 
 
-
-
+//Route
 //الماب قت () تكتب داخل البروقرام سي اس  لأنها مسؤولة عن استقبال طلبات القت وربطها بمسار الراوت
 //() => تعني: نفّذ الكود عند استدعاء الـ Route.
 app.MapGet("/movies",()=> "Welcome to Movie Manager");
