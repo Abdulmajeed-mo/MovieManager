@@ -46,21 +46,31 @@ namespace MovieManager.Controllers
 
 
         }
+        //أصبح الديتيلز افضل ليش؟ لأنه يتعامل مع حالة عدم وجود البيانات.
         public IActionResult Details(int id)
         {
             List<Movie> movies = GetMovies();
 
             Movie movie = movies.FirstOrDefault(x=> x.Id==id);
 
+            if (movie==null)
+            {
+                return NotFound();
+            }
 
-            return Content($" Movie Id: {movie.Id}\n " +
-                $"Movie Name: {movie.Name}\n " +
-                $"Movie Year: {movie.Year}\n " +
-                $"Movie Rating: {movie.Rating} ");
+
+
+            //return Content($" Movie Id: {movie.Id}\n " +
+            //    $"Movie Name: {movie.Name}\n " +
+            //    $"Movie Year: {movie.Year}\n " +
+            //    $"Movie Rating: {movie.Rating} ");
+
+            //ليش حطيت موفي داخل ال الريترين؟ عشان تنتقل البيانات ويقراها الفيو 
+            return View(movie);
 
         }
 
-
+  
         public List<Movie> GetMovies()
         {
 
