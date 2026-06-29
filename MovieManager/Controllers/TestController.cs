@@ -14,5 +14,9 @@ namespace MovieManager.Controllers
             return Content("About Movie Manager");
 
         }
-}
+        public IActionResult Welcome(string name)
+        {
+            return Content($"Welcome {name}");
+        }
+    }
 }

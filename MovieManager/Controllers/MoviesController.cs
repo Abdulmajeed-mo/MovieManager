@@ -1,10 +1,86 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.DataProtection.KeyManagement;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 using MovieManager.Models;
-
 namespace MovieManager.Controllers
 {
     public class MoviesController : Controller
     {
+        [HttpPost]
+        public IActionResult TestValidation([FromBody] Movie movie)
+        {
+            if (ModelState.IsValid)
+            {
+                return Content("Movie Saved Successfully");
+            }
+
+            return Content("Invalid Data");
+
+        }
+
+
+
+
+        [HttpGet]
+        public IActionResult TestGet()
+        {
+            Movie movie = new Movie
+            {
+                Id = 2,
+                Name = "Obsession",
+                Year = 2026,
+                Rating = 7.9m
+            };
+
+            return Json(movie);
+        }
+        [HttpPost]
+        public IActionResult Test([FromBody] Movie movie)
+        {
+
+            return Json(movie);
+        }
+
+
+        // نستقبل مجموعة أفلام مرة واحدة من الـ Request Body.يل
+        [HttpPost]
+        public IActionResult TestCollection([FromBody] List<Movie> movies)
+        {
+            return Json(movies);
+        }
+
+        [HttpGet]
+        public IActionResult TestHeader([FromHeader] string  ApiKey  )
+        {
+            return Content($"Your Api Key is: {ApiKey}");
+        }
+
+
+
+        // استخدمت موفي الكلاس  موفي البندق لأن البيانات القادمة من المستخدم تتجمع داخل كائن واحد من نوع كلاس الموفي 
+        // بدل ما أستقبل كل خاصية في باراميتر منفصل.
+        //لازم يكون اثنين اكشن الاول يعرض الصفحة والثاني يستقبل البيانات
+        //الاول
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Movie movie)
+        {
+            if (ModelState.IsValid)
+            {
+                return Content("Movie Saved Successfully");
+            }
+
+            return Content("Invalid Data");
+
+        }
+
+
+
         public IActionResult Index()
         {
             //الفور ايتش هي عباره عن اللوب كل شوي تتحقق  بالبداية تكتب اسم الكلاس وبعدها تعطيه اسم موقت زي تشيك وبعدعا ان وبعدها تحط القائمه اللي سويتها انت اللي هي الموفيز
