@@ -20,6 +20,24 @@ namespace MovieManager.Controllers
         }
 
 
+        [HttpPost]
+        public IActionResult AddMovie([FromBody]Movie movie)
+        {
+            if(ModelState.IsValid)
+            {
+                return Content("Movie Added  Successfully");
+
+            }
+            return Content("Invalid Data Info");
+
+        }
+
+
+
+
+
+
+
 
 
         [HttpGet]
@@ -58,10 +76,11 @@ namespace MovieManager.Controllers
 
 
 
-        // استخدمت موفي الكلاس  موفي البندق لأن البيانات القادمة من المستخدم تتجمع داخل كائن واحد من نوع كلاس الموفي 
-        // بدل ما أستقبل كل خاصية في باراميتر منفصل.
-        //لازم يكون اثنين اكشن الاول يعرض الصفحة والثاني يستقبل البيانات
-        //الاول
+            // استخدمت موفي الكلاس  موفي البندق لأن البيانات القادمة من المستخدم تتجمع داخل كائن واحد من نوع كلاس الموفي 
+            // بدل ما أستقبل كل خاصية في باراميتر منفصل.
+            //لازم يكون اثنين اكشن الاول يعرض الصفحة والثاني يستقبل البيانات
+            //الاول
+        
         public IActionResult Create()
         {
             return View();
@@ -146,7 +165,43 @@ namespace MovieManager.Controllers
 
         }
 
-  
+
+
+        //عشان اجلب االفلم الواحد بالاي دي الخاص به
+        [HttpGet]
+        public IActionResult GetMovieById(int foundMovie)
+        {
+            List<Movie> movies = GetMovies();
+            //الفيلم الحالي في القائمة
+            Movie movie = movies.FirstOrDefault(x => x.Id== foundMovie);
+          
+            if (movie == null)
+            {
+                return NotFound();
+            }
+            return Json(movie);
+        
+        }
+
+
+
+
+
+
+            //عشان اجلب كل الافلام من داخل الللسته الللي تحت  وباستخدام بوست مان راح نظهر في ملف جيسون
+            [HttpGet]
+     public IActionResult GetAllMovies () 
+        {
+            return Json (GetMovies()); 
+        }
+
+
+
+
+
+
+
+
         public List<Movie> GetMovies()
         {
 
