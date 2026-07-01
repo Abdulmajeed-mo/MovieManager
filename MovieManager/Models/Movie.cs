@@ -17,7 +17,7 @@ namespace MovieManager.Models
         public string Name { get; set; }
 
         [Range(1990,2030)]
-        [MovieYearValidation]
+        //[MovieYearValidation]
         public int Year { get; set; }
         [Range(0,10)]
         public decimal Rating { get; set; }
