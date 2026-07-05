@@ -3,10 +3,44 @@ using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using MovieManager.Models;
+using MovieManager.Services;
+using System.Reflection.Metadata;
+using System.Xml.Linq;
 namespace MovieManager.Controllers
 {
+
+
+//    ذا كان الكلاس أو الـ Interface في Namespace مختلف، فلا تستطيع استخدامه إلا إذا:
+
+//أضفت using المناسب.
+//أو كتبت الاسم الكامل.
+
+//وهذه قاعدة ستتكرر كثيرًا في مشاريع ASP.NET Core.
+
+
     public class MoviesController : Controller
     {
+
+        //لازم يكون منفصل عن التنفيذ
+
+        //هذا هو Implementation
+
+        //الكنترولر يعتمد على الـ الانترفيس، وليس على الـ كلاس نفسه وهذا ما يسمى الديبندنسي انجيكشن.
+
+        //برايفت يعني هذا المتغير لا يستطيع أحد استخدامه إلا من داخل الكنترولر + لا يمكن أي كلاس آخر أن يصل إليه.
+        private readonly IMovieService _service;
+        //Constructor
+        //السيرفس هو باراميتر يستقبل الـ الاوبجكت الذي أنشأه الـ الفريم وورك.
+        public MoviesController(IMovieService service)
+        {
+            //نأخذ القيمة الموجودة داخل سرفيس ونضعها داخل _سيرفس.
+            _service= service;
+        }
+
+
+
+
+
         [HttpPost]
         public IActionResult TestValidation([FromBody] Movie movie)
         {
@@ -106,7 +140,7 @@ namespace MovieManager.Controllers
 
             //استدعاء الميثود شو موفيز وإرسال قائمة الأفلام لها حتى تتمكن من استخدامها داخلها.
             //لأننا في الاستدعاء لا نكتب النوع، نكتب المتغير فقط.
-            List<Movie> movies = GetMovies();
+            List<Movie> movies = _service.GetMovies();
             ShowMovies(movies);
             return View();
 
@@ -144,7 +178,7 @@ namespace MovieManager.Controllers
         //أصبح الديتيلز افضل ليش؟ لأنه يتعامل مع حالة عدم وجود البيانات.
         public IActionResult Details(int id)
         {
-            List<Movie> movies = GetMovies();
+            List<Movie> movies = _service.GetMovies();
 
             Movie movie = movies.FirstOrDefault(x=> x.Id==id);
 
@@ -171,7 +205,7 @@ namespace MovieManager.Controllers
         [HttpGet]
         public IActionResult GetMovieById(int foundMovie)
         {
-            List<Movie> movies = GetMovies();
+            List<Movie> movies = _service.GetMovies();
             //الفيلم الحالي في القائمة
             Movie movie = movies.FirstOrDefault(x => x.Id== foundMovie);
           
@@ -188,12 +222,12 @@ namespace MovieManager.Controllers
 
 
 
-            //عشان اجلب كل الافلام من داخل الللسته الللي تحت  وباستخدام بوست مان راح نظهر في ملف جيسون
-            [HttpGet]
-     public IActionResult GetAllMovies () 
-        {
-            return Json (GetMovies()); 
-        }
+     //       //عشان اجلب كل الافلام من داخل الللسته الللي تحت  وباستخدام بوست مان راح نظهر في ملف جيسون
+     //       [HttpGet]
+     //public IActionResult GetAllMovies () 
+     //   {
+     //       return Json (GetMovies()); 
+     //   }
 
 
 
@@ -207,24 +241,24 @@ namespace MovieManager.Controllers
 
 
 
-            //list ننشئها داخل الاندكس وتحديدا بعد الاوبجكت وقبل الريتيرن 
+        //    //list ننشئها داخل الاندكس وتحديدا بعد الاوبجكت وقبل الريتيرن 
 
-            //تقريبا هي زي الاوبجكت  اول تحط لست وبعدها تاخذ نوع الكلاس الللي تبي تسوي فيه قائمه وبعدها تسسميه انت 
-            //Add() لا تُكتب داخل اللست الـ List. يعني بدون اقواس
-            //أولًا أنشئ القائمة، ثم أضف العناصر إليها باستخدام Add().
-            List<Movie> movies = new List<Movie>();
-            //Add() هي Method(دالة) وظيفتها: إضافة عنصر واحد إلى الـ List.
-            movies.Add(movie1);
-            movies.Add(movie2);
-            movies.Add(movie3);
-            movies.Add(movie4);
-            movies.Add(movie5);
-            movies.Add(movie6);
+        //    //تقريبا هي زي الاوبجكت  اول تحط لست وبعدها تاخذ نوع الكلاس الللي تبي تسوي فيه قائمه وبعدها تسسميه انت 
+        //    //Add() لا تُكتب داخل اللست الـ List. يعني بدون اقواس
+        //    //أولًا أنشئ القائمة، ثم أضف العناصر إليها باستخدام Add().
+        //    List<Movie> movies = new List<Movie>();
+        //    //Add() هي Method(دالة) وظيفتها: إضافة عنصر واحد إلى الـ List.
+        //    movies.Add(movie1);
+        //    movies.Add(movie2);
+        //    movies.Add(movie3);
+        //    movies.Add(movie4);
+        //    movies.Add(movie5);
+        //    movies.Add(movie6);
 
 
-            return movies;
+        //    return movies;
 
-        }
+        //}
 
     }
 }

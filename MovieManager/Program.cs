@@ -1,8 +1,13 @@
 //Configuration
 using MovieManager.Middlewere;
+using MovieManager.Services;
+using static MovieManager.Controllers.MoviesController;
 using static System.Net.Mime.MediaTypeNames;
-
+using MovieManager.Services;
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddScoped<IMovieService, MovieService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

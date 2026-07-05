@@ -1,6 +1,9 @@
-﻿namespace MovieManager.Services
+﻿using MovieManager.Models;
+
+namespace MovieManager.Services
 {
-    public class IMovieService
+    public interface IMovieService
     {
+        List<Movie> GetMovies();
     }
 }
