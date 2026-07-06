@@ -4,15 +4,21 @@ using MovieManager.Services;
 using static MovieManager.Controllers.MoviesController;
 using static System.Net.Mime.MediaTypeNames;
 using MovieManager.Services;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
-
+//Service Container
+//IMovieService--->MovieService
 builder.Services.AddScoped<IMovieService, MovieService>();
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(); 
 
 var app = builder.Build();
+
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -58,15 +64,15 @@ app.UseWhen(
 //Route
 //الماب قت () تكتب داخل البروقرام سي اس  لأنها مسؤولة عن استقبال طلبات القت وربطها بمسار الراوت
 //() => تعني: نفّذ الكود عند استدعاء الـ Route.
-app.MapGet("/movies",()=> "Welcome to Movie Manager");
-//QueryString
-app.MapGet("/search",(string ?name)=> $"Searching for: {name} ");
-//Route Parameter
-//? يأتي بعد اسم الـ Route Parameter وليس قبله.
+//app.MapGet("/movies",()=> "Welcome to Movie Manager");
+////QueryString
+//app.MapGet("/search",(string ?name)=> $"Searching for: {name} ");
+////Route Parameter
+////? يأتي بعد اسم الـ Route Parameter وليس قبله.
 
-//app.MapGet("/movie/{id?}", (int? id )=> id == null ? $"Movie Id not provided" :  $"Movie Id:{id}");
-//Route Constrain
-app.MapGet("/movie/{id:int}", (int id) => $"Movie Id:{id}");
+////app.MapGet("/movie/{id?}", (int? id )=> id == null ? $"Movie Id not provided" :  $"Movie Id:{id}");
+////Route Constrain
+//app.MapGet("/movie/{id:int}", (int id) => $"Movie Id:{id}");
 
 
 

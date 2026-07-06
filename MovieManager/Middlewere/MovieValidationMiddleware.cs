@@ -7,8 +7,6 @@
         // 3. الباني "الكونستركتر": إنشاء الكونستركتور وبنفس اسم الكلاس لاستلام الخطوة التالية وتخزينها.
         // 4. تسوي ميثود: إنشاء ميثود التشغيل الأساسية (إنفوك أسينك) لاستقبال الطلب وتمريره.      
         private RequestDelegate _next;
-
-
             public MovieValidationMiddleware (RequestDelegate next)
         {
 

@@ -7,10 +7,69 @@ namespace MovieManager.Services
 
         public List<Movie> GetMovies()
         {
-            return new List<Movie>(); 
+
+            Movie movie1 = new Movie
+            {
+                Id = 1,
+                Name = "Interstellar",
+                Year = 2014,
+                Rating = 8.7m
+            };
+
+            Movie movie2 = new Movie
+            {
+                Id = 2,
+                Name = "The Dark Knight",
+                Year = 2008,
+                Rating = 9.0m
+            };
+
+            Movie movie3 = new Movie
+            {
+                Id = 3,
+                Name = "Inception",
+                Year = 2010,
+                Rating = 8.8m
+            };
+
+            Movie movie4 = new Movie
+            {
+                Id = 4,
+                Name = "The Shawshank Redemption",
+                Year = 1994,
+                Rating = 9.3m
+            };
+
+            Movie movie5 = new Movie
+            {
+                 Id= 5,
+                Name = "Parasite",
+                Year = 2019,
+                Rating = 8.5m
+            };
+
+            Movie movie6 = new Movie
+            {
+                Id = 6,
+                Name = "Whiplash",
+                Year = 2014,
+                Rating = 8.5m
+            };
+
+
+
+            List<Movie> movies = new List<Movie>();
+
+            movies.Add(movie1);
+            movies.Add(movie2);
+            movies.Add(movie3);
+            movies.Add(movie4);
+            movies.Add(movie5);
+            movies.Add(movie6);
+
+            return movies;
         }
-
-
+      
 
 
     }
