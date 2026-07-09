@@ -4,70 +4,61 @@ namespace MovieManager.Services
 {
     public class MovieService : IMovieService
     {
+        //fields
 
-        public List<Movie> GetMovies()
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //Constructors
+        private readonly string _baseUrl;
+        private readonly string _apiKey;
+        private readonly IConfiguration _configuration;
+        private readonly IHttpClientFactory _httpClientFactory;
+
+        //الكونفقريشن هو باراميتر يستقبل الـ الاوبجكت الذي أنشأه الـ الفريم وورك.
+        public MovieService(IConfiguration configuration , IHttpClientFactory httpClientFactory)
+        {
+            //نأخذ القيمة الموجودة داخال الكونفقريشن ونضعها داخل _كونفقريشن.
+            _configuration = configuration;
+            _httpClientFactory = httpClientFactory;
+            _baseUrl = _configuration["ApiSettings:BaseUrl"];
+            _apiKey = _configuration["ApiSettings:ApiKey"];
+
+        }
+
+
+
+
+
+
+
+
+        //Methods
+        public async Task<List<Movie>> GetMovies()
         {
 
-            Movie movie1 = new Movie
-            {
-                Id = 1,
-                Name = "Interstellar",
-                Year = 2014,
-                Rating = 8.7m
-            };
-
-            Movie movie2 = new Movie
-            {
-                Id = 2,
-                Name = "The Dark Knight",
-                Year = 2008,
-                Rating = 9.0m
-            };
-
-            Movie movie3 = new Movie
-            {
-                Id = 3,
-                Name = "Inception",
-                Year = 2010,
-                Rating = 8.8m
-            };
-
-            Movie movie4 = new Movie
-            {
-                Id = 4,
-                Name = "The Shawshank Redemption",
-                Year = 1994,
-                Rating = 9.3m
-            };
-
-            Movie movie5 = new Movie
-            {
-                 Id= 5,
-                Name = "Parasite",
-                Year = 2019,
-                Rating = 8.5m
-            };
-
-            Movie movie6 = new Movie
-            {
-                Id = 6,
-                Name = "Whiplash",
-                Year = 2014,
-                Rating = 8.5m
-            };
+            //أنشأت HttpClient
+             HttpClient client = _httpClientFactory.CreateClient();
+            //عنوان الموقع
+            client.BaseAddress = new Uri(_baseUrl);
 
 
-
-            List<Movie> movies = new List<Movie>();
-
-            movies.Add(movie1);
-            movies.Add(movie2);
-            movies.Add(movie3);
-            movies.Add(movie4);
-            movies.Add(movie5);
-            movies.Add(movie6);
-
-            return movies;
+            //السطر ذا يسوي اربع اشياء:
+            //يرسل HTTP GET Request.
+            //    يضيف مفتاح الـ API داخل الرابط.
+            //    ينتظر حتى يرد TMDB.
+            //    يخزن الرد القادم من TMDB.
+            HttpResponseMessage response = await client.GetAsync($"/3/movie/popular?api_key={_apiKey}");
         }
       
 
@@ -95,8 +86,68 @@ namespace MovieManager.Services
 
 
 
+//Movie movie1 = new Movie
+//{
+//    Id = 1,
+//    Name = "Interstellar",
+//    Year = 2014,
+//    Rating = 8.7m
+//};
+
+//Movie movie2 = new Movie
+//{
+//    Id = 2,
+//    Name = "The Dark Knight",
+//    Year = 2008,
+//    Rating = 9.0m
+//};
+
+//Movie movie3 = new Movie
+//{
+//    Id = 3,
+//    Name = "Inception",
+//    Year = 2010,
+//    Rating = 8.8m
+//};
+
+//Movie movie4 = new Movie
+//{
+//    Id = 4,
+//    Name = "The Shawshank Redemption",
+//    Year = 1994,
+//    Rating = 9.3m
+//};
+
+//Movie movie5 = new Movie
+//{
+//    Id = 5,
+//    Name = "Parasite",
+//    Year = 2019,
+//    Rating = 8.5m
+//};
+
+//Movie movie6 = new Movie
+//{
+//    Id = 6,
+//    Name = "Whiplash",
+//    Year = 2014,
+//    Rating = 8.5m
+//};
 
 
+
+//List<Movie> movies = new List<Movie>();
+
+//movies.Add(movie1);
+//movies.Add(movie2);
+//movies.Add(movie3);
+//movies.Add(movie4);
+//movies.Add(movie5);
+//movies.Add(movie6);
+
+//return movies;
+
+//------------------------------------------------------------------------------
 
 ////ذا اوبجكت  سويته من المودل عشان يجيب البيانات من المودل
 ////لأن أسماء المتغيرات في C# تبدأ بحرف صغير.
