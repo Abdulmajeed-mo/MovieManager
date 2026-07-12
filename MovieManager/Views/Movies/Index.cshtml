@@ -1,16 +1,13 @@
-﻿@model List<MovieManager.Models.Movie>
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@* البيانات التي سيستقبلها هذا ال فيو هي *@
+@model List<Movie>
+
 <h2>Movies</h2>
 
 @foreach (var movie in Model)
 {
     <p >
-        @movie.Name -
-        @movie.Year -
+        @movie.Title  -
+        @movie.ReleaseDate -
         @movie.Rating
     </p>
 }

@@ -1,5 +1,5 @@
 ﻿using MovieManager.Models;
-
+using System.Threading.Tasks;
 namespace MovieManager.Services
 {
 
@@ -8,7 +8,7 @@ namespace MovieManager.Services
     //هذا هوالعقد.
     public interface IMovieService
     {
-        List<Movie> GetMovies();
+        Task<List<Movie>> GetMovies();
     } 
 
 }

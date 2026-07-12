@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Razor.Hosting;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using MovieManager.Validations;
 namespace MovieManager.Models
 {
@@ -10,17 +11,14 @@ namespace MovieManager.Models
         //تعتبر خصائص وهنا تكتب في المودل
         //تمنع المستخدم من إرسال قيمة هذه الخاصية 
         //هو يشتغل في  Model Binding
-        [BindNever]
-        public int Id { get; set; }
-        [Required]
-        [StringLength(50)]
-        public string Name { get; set; }
+        [JsonPropertyName("title")]
+        public string Title { get; set; }
 
-        [Range(1990,2030)]
-        //[MovieYearValidation]
-        public int Year { get; set; }
-        [Range(0,10)]
+        [JsonPropertyName("release_date")]
+        public string ReleaseDate { get; set; }
+
+        [JsonPropertyName("vote_average")]
         public decimal Rating { get; set; }
-        
+
     }
 }

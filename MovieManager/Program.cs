@@ -8,18 +8,14 @@ using MovieManager.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//Service Container
-//IMovieService--->MovieService
+builder.Services.AddHttpClient();
+
 builder.Services.AddScoped<IMovieService, MovieService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews(); 
 
 var app = builder.Build();
-
-
-
-
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

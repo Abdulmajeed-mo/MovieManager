@@ -74,19 +74,19 @@ namespace MovieManager.Controllers
 
 
 
-        [HttpGet]
-        public IActionResult TestGet()
-        {
-            Movie movie = new Movie
-            {
-                Id = 2,
-                Name = "Obsession",
-                Year = 2026,
-                Rating = 7.9m
-            };
+        //[HttpGet]
+        //public IActionResult TestGet()
+        //{
+        //    Movie movie = new Movie
+        //    {
+        //        Id = 2,
+        //        Title = "Obsession",
+        //        Year = 2026,
+        //        Rating = 7.9m
+        //    };
 
-            return Json(movie);
-        }
+        //    return Json(movie);
+        //}
         [HttpPost]
         public IActionResult Test([FromBody] Movie movie)
         {
@@ -142,13 +142,19 @@ namespace MovieManager.Controllers
 
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             //الفور ايتش هي عباره عن اللوب كل شوي تتحقق  بالبداية تكتب اسم الكلاس وبعدها تعطيه اسم موقت زي تشيك وبعدعا ان وبعدها تحط القائمه اللي سويتها انت اللي هي الموفيز
 
             //استدعاء الميثود شو موفيز وإرسال قائمة الأفلام لها حتى تتمكن من استخدامها داخلها.
             //لأننا في الاستدعاء لا نكتب النوع، نكتب المتغير فقط.
-            List<Movie> movies = _service.GetMovies();
+            List<Movie> movies =await _service.GetMovies();
+
+            if (movies == null)
+            {
+                return Content("movies == null");
+            }
+
             return View(movies);
         }
 
@@ -193,16 +199,16 @@ namespace MovieManager.Controllers
 
         }
         //أصبح الديتيلز افضل ليش؟ لأنه يتعامل مع حالة عدم وجود البيانات.
-        public IActionResult Details(int id)
-        {
-            List<Movie> movies = _service.GetMovies();
+        //public IActionResult Details(int id)
+        //{
+        //    Task<List<Movie>> movies = _service.GetMovies();
 
-            Movie movie = movies.FirstOrDefault(x=> x.Id==id);
+        //    Movie movie = movies.FirstOrDefault(x=> x.Id==id);
 
-            if (movie==null)
-            {
-                return NotFound();
-            }
+        //    if (movie==null)
+        //    {
+        //        return NotFound();
+        //    }
 
 
 
@@ -211,28 +217,28 @@ namespace MovieManager.Controllers
             //    $"Movie Year: {movie.Year}\n " +
             //    $"Movie Rating: {movie.Rating} ");
 
-            //ليش حطيت موفي داخل ال الريترين؟ عشان تنتقل البيانات ويقراها الفيو 
-            return View(movie);
+        //    //ليش حطيت موفي داخل ال الريترين؟ عشان تنتقل البيانات ويقراها الفيو 
+        //    return View(movie);
 
-        }
+        //}
 
 
 
-        //عشان اجلب االفلم الواحد بالاي دي الخاص به
-        [HttpGet]
-        public IActionResult GetMovieById(int foundMovie)
-        {
-            List<Movie> movies = _service.GetMovies();
-            //الفيلم الحالي في القائمة
-            Movie movie = movies.FirstOrDefault(x => x.Id== foundMovie);
+        ////عشان اجلب االفلم الواحد بالاي دي الخاص به
+        //[HttpGet]
+        //public IActionResult GetMovieById(int foundMovie)
+        //{
+        //    List<Movie> movies = _service.GetMovies();
+        //    //الفيلم الحالي في القائمة
+        //    Movie movie = movies.FirstOrDefault(x => x.Id== foundMovie);
           
-            if (movie == null)
-            {
-                return NotFound();
-            }
-            return Json(movie);
+        //    if (movie == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Json(movie);
         
-        }
+        //}
 
 
 

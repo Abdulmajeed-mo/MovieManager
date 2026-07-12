@@ -1,4 +1,5 @@
 ﻿using MovieManager.Models;
+using System.Text.Json;
 
 namespace MovieManager.Services
 {
@@ -59,9 +60,27 @@ namespace MovieManager.Services
             //    ينتظر حتى يرد TMDB.
             //    يخزن الرد القادم من TMDB.
             HttpResponseMessage response = await client.GetAsync($"/3/movie/popular?api_key={_apiKey}");
+            
+            if (response.IsSuccessStatusCode )
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                Console.WriteLine(json);
+                //convert the json string to a list of movies
+                MovieApiResponse movieApiResponse =
+                    JsonSerializer.Deserialize<MovieApiResponse>(json,new JsonSerializerOptions
+                        {
+                            PropertyNameCaseInsensitive = true
+                        });
+                //return the list of movies
+                return movieApiResponse.Results;
+            }
+
+
+            //if it fails to get the data from the API, return an empty list
+            return new List<Movie>();
         }
       
-
+           
 
     }
 }
