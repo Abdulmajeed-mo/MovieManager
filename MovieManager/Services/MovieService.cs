@@ -1,4 +1,5 @@
-﻿using MovieManager.Models;
+﻿using MovieManager.DTOs;
+using MovieManager.Models;
 using System.Text.Json;
 
 namespace MovieManager.Services
@@ -63,6 +64,7 @@ namespace MovieManager.Services
             
             if (response.IsSuccessStatusCode )
             {
+                                                      //لقراءة الـ JSON.
                 string json = await response.Content.ReadAsStringAsync();
                 Console.WriteLine(json);
                 //convert the json string to a list of movies

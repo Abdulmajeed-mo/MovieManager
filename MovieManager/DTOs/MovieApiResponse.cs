@@ -1,4 +1,6 @@
-﻿namespace MovieManager.Models
+﻿using MovieManager.Models;
+
+namespace MovieManager.DTOs
 {
     public class MovieApiResponse
     {
