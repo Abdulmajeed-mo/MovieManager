@@ -1,12 +1,18 @@
 //Configuration
 using MovieManager.Middlewere;
 using MovieManager.Services;
-using static MovieManager.Controllers.MoviesController;
-using static System.Net.Mime.MediaTypeNames;
-using MovieManager.Services;
-
+using Microsoft.EntityFrameworkCore;
+using MovieManager.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+////ربطنا الابداتابيس كونتكس   بقاعدة البيانات حتى يقدر المشروع يتعامل معها.
+builder.Services.AddDbContext<AppDbContext>(options =>
+
+ //يقرأ بيانات الاتصال من الابسيتنق جيسون            يقول للانتتي فريمورك اننا بنستخدم اس كيو ال سيرفر.
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
+
 
 builder.Services.AddHttpClient();
 
@@ -21,6 +27,9 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
 }
+
+
+
 
 //middlewere 
 //context = يمثل الطلب الحالي.
