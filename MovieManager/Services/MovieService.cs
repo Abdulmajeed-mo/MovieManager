@@ -1,4 +1,5 @@
-﻿using MovieManager.DTOs;
+﻿using MovieManager.Data;
+using MovieManager.DTOs;
 using MovieManager.Models;
 using System.Text.Json;
 
@@ -21,21 +22,23 @@ namespace MovieManager.Services
 
 
 
-        //Constructors
+        //private readonly HttpClient _httpClient;
         private readonly string _baseUrl;
         private readonly string _apiKey;
         private readonly IConfiguration _configuration;
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly AppDbContext _Db;
 
+        //Constructors
         //الكونفقريشن هو باراميتر يستقبل الـ الاوبجكت الذي أنشأه الـ الفريم وورك.
-        public MovieService(IConfiguration configuration , IHttpClientFactory httpClientFactory)
+        public MovieService(IConfiguration configuration , IHttpClientFactory httpClientFactory, AppDbContext dbContext)
         {
             //نأخذ القيمة الموجودة داخال الكونفقريشن ونضعها داخل _كونفقريشن.
             _configuration = configuration;
             _httpClientFactory = httpClientFactory;
             _baseUrl = _configuration["ApiSettings:BaseUrl"];
             _apiKey = _configuration["ApiSettings:ApiKey"];
-
+            _Db = dbContext;
         }
 
 
@@ -81,6 +84,21 @@ namespace MovieManager.Services
             //if it fails to get the data from the API, return an empty list
             return new List<Movie>();
         }
+
+
+
+
+
+
+                    // التاسك لانها لا ترجع قيمة، فقط تنفذ العملية.
+        public async Task AddMovie (Movie movie)
+        {
+
+            await _Db.Movies.AddAsync(movie);
+            await _Db.SaveChangesAsync();
+        }
+
+
       
            
 

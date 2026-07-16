@@ -1,11 +1,12 @@
 ﻿
 
 using Microsoft.EntityFrameworkCore;
+using MovieManager.Models;
 
 namespace MovieManager.Data
 {
 
-    //جعلنا ApplicationDbContext             يرث من DbContext  .
+    //جعلنا AppDbContext             يرث من DbContext  .
 
     //DbContext
     //و الكلاس المسؤول عن الاتصال بقاعدة البيانات وإدارتها داخل الانتيتي فريمورك
@@ -13,6 +14,10 @@ namespace MovieManager.Data
 
     public class AppDbContext : DbContext
     {
+        //يمثل جدولًا في قاعدة البيانات، وكل داتا بيس سيت  يقابل جدولًا واحدًا.
+        //عندي جدول اسمه موفييز، وكل صف فيه يمثل كائنًا من نوع موفي.
+
+        public DbSet<Movie> Movies { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
