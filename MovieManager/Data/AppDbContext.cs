@@ -18,6 +18,8 @@ namespace MovieManager.Data
         //عندي جدول اسمه موفييز، وكل صف فيه يمثل كائنًا من نوع موفي.
 
         public DbSet<Movie> Movies { get; set; }
+        //أنشئ لي جدولًا جديدًا اسمه Reviews
+        public DbSet<Review> Reviews { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {

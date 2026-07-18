@@ -25,7 +25,12 @@ namespace MovieManager.Models
         
         public string PosterUrl { get; set; }
 
-       
+
+        //ولذلك EF Core يستخدمها كثيرًا في العلاقات One-to-Many.
+
+        //تسمح لك بالوصول إلى جميع مراجعات الفيلم
+        public ICollection<Review> Reviews { get; set; }
+
 
     }
 }
