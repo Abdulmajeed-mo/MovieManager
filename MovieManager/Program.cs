@@ -3,6 +3,7 @@ using MovieManager.Middlewere;
 using MovieManager.Services;
 using Microsoft.EntityFrameworkCore;
 using MovieManager.Data;
+using MovieManager.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 ////ربطنا الابداتابيس كونتكس   بقاعدة البيانات حتى يقدر المشروع يتعامل معها.
@@ -11,12 +12,15 @@ builder.Services.AddDbContext<AppDbContext>(options =>
  //يقرأ بيانات الاتصال من الابسيتنق جيسون            يقول للانتتي فريمورك اننا بنستخدم اس كيو ال سيرفر.
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+//Dependency Injection Container
+//إذا طلب أحد IMovieRepository، فأعطه كائنًا من MovieRepository.
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 
+builder.Services.AddScoped<IMovieService, MovieService>();
 
 
 builder.Services.AddHttpClient();
 
-builder.Services.AddScoped<IMovieService, MovieService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews(); 
