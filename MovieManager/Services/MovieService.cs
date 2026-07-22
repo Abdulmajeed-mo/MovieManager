@@ -90,17 +90,17 @@ namespace MovieManager.Services
 
 
 
-                    // التاسك لانها لا ترجع قيمة، فقط تنفذ العملية.
-        //public async Task AddMovie (Movie movie)
-        //{
 
-        //    await _Db.Movies.AddAsync(movie);
-        //    await _Db.SaveChangesAsync();
-        //}
+        // التاسك لانها لا ترجع قيمة، فقط تنفذ العملية.
+        public async Task AddMovie(Movie movie)
+        {
 
+            await _movieRepository.AddAsync(movie);
+        }
 
       
-           
+
+
 
     }
 }

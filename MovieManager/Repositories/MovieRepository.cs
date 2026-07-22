@@ -14,16 +14,49 @@ namespace MovieManager.Repositories
             _context = context;
         }
 
+        public async Task<List<Movie>> GetAllMovies()
+        {
+            return await _context.Movies.ToListAsync();
+        }
+
+        //For Repository 
+        // AddAsync()
+        // GetByIdAsync()
+        // UpdateAsync()
+        // DeleteAsync()
         public async Task AddAsync(Movie movie)
         {
 
             await _context.Movies.AddAsync(movie);
             await _context.SaveChangesAsync();
         }
-
-        public List<Movie> GetAllMovies()
+        public async Task<Movie?> GetByIdAsync(int id)
         {
-           return _context.Movies.ToList();
+            var movie = await _context.Movies.FindAsync(id);
+            return movie;
         }
+
+        public async Task UpdateAsync(Movie movie)
+        {
+            _context.Movies.Update(movie);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var movie = await _context.Movies.FindAsync(id);
+            if (movie != null)
+            {
+                _context.Movies.Remove(movie);
+                await _context.SaveChangesAsync();
+            }
+
+        }
+
+       
+
+
+
+
     }
 }
