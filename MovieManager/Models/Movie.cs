@@ -19,9 +19,10 @@ namespace MovieManager.Models
         [JsonPropertyName("release_date")]
         public string ReleaseDate { get; set; }
 
-        [JsonPropertyName("vote_average")]
         public int Duration { get; set; }
-        public decimal Rating { get; set; }
+
+        [JsonPropertyName("vote_average")]
+         public decimal Rating { get; set; }
         
         public string PosterUrl { get; set; }
 

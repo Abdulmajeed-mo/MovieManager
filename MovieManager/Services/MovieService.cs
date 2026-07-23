@@ -7,31 +7,19 @@ namespace MovieManager.Services
 {
     public class MovieService : IMovieService
     {
-        //fields
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //private readonly HttpClient _httpClient;
+      
+        
+        //private  //fields
         private readonly string _baseUrl;
         private readonly string _apiKey;
         private readonly IConfiguration _configuration;
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IMovieRepository _movieRepository;
+        private readonly ILogger<MovieService> _logger;
 
         //Constructors
         //الكونفقريشن هو باراميتر يستقبل الـ الاوبجكت الذي أنشأه الـ الفريم وورك.
-        public MovieService(IConfiguration configuration , IHttpClientFactory httpClientFactory, IMovieRepository movieRepository)
+        public MovieService(IConfiguration configuration , IHttpClientFactory httpClientFactory, IMovieRepository movieRepository , ILogger<MovieService> logger)
         {
             //نأخذ القيمة الموجودة داخال الكونفقريشن ونضعها داخل _كونفقريشن.
             _configuration = configuration;
@@ -39,6 +27,7 @@ namespace MovieManager.Services
             _baseUrl = _configuration["ApiSettings:BaseUrl"];
             _apiKey = _configuration["ApiSettings:ApiKey"];
             _movieRepository = movieRepository;
+            _logger = logger;
         }
 
 
@@ -50,10 +39,15 @@ namespace MovieManager.Services
 
         //Methods
         public async Task<List<Movie>> GetMovies()
-        {
+        {  
+
+            _logger.LogInformation("Fetching all movies");
+
+
+
 
             //أنشأت HttpClient
-             HttpClient client = _httpClientFactory.CreateClient();
+            HttpClient client = _httpClientFactory.CreateClient();
             //عنوان الموقع
             client.BaseAddress = new Uri(_baseUrl);
 
@@ -94,11 +88,23 @@ namespace MovieManager.Services
         // التاسك لانها لا ترجع قيمة، فقط تنفذ العملية.
         public async Task AddMovie(Movie movie)
         {
+            try
+            {
+                _logger.LogInformation("Adding a new movie");
+                await _movieRepository.AddAsync(movie);
+                _logger.LogInformation("Movie Added  Successfully");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while adding a movie");
+                
+            }
 
-            await _movieRepository.AddAsync(movie);
+
+          
         }
 
-      
+     
 
 
 

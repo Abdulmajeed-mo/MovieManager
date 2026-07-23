@@ -4,8 +4,15 @@ using MovieManager.Services;
 using Microsoft.EntityFrameworkCore;
 using MovieManager.Data;
 using MovieManager.Repositories;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+//يشغل Serilog
+builder.Host.UseSerilog((hostingContext, loggerConfiguration) =>
+    loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration));
+
 ////ربطنا الابداتابيس كونتكس   بقاعدة البيانات حتى يقدر المشروع يتعامل معها.
 builder.Services.AddDbContext<AppDbContext>(options =>
 
@@ -26,6 +33,12 @@ builder.Services.AddHttpClient();
 builder.Services.AddControllersWithViews(); 
 
 var app = builder.Build();
+
+
+//يستخدم السيريلوق لتسجيل كل ريكويست
+app.UseSerilogRequestLogging();
+
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
