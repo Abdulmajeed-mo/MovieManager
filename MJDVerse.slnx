@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="MovieManager.Core/MJDVerse.Application.csproj" Id="a3e8b719-96f3-400b-b09a-2bd92872f838" />
+  <Project Path="MovieManager.Domain/MJDVerse.Domain.csproj" Id="fdaa0810-3070-4091-8ae0-2504d2805bcd" />
+  <Project Path="MovieManager.Infrastructure/MJDVerse.Infrastructure.csproj" Id="8b323b43-a40b-469c-840e-13f8bfd49540" />
+  <Project Path="MovieManager.UI/MJDVerse.API.csproj" Id="752a0231-fb7c-4f19-a4b9-cbd83209049e" />
+</Solution>

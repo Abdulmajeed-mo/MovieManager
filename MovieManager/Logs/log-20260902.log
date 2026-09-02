@@ -1,0 +1,50 @@
+2026-09-02 11:03:25.331 +03:00 [INF] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-02 11:03:25.549 +03:00 [INF] Now listening on: http://localhost:5155
+2026-09-02 11:03:25.587 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-09-02 11:03:25.587 +03:00 [INF] Hosting environment: Development
+2026-09-02 11:03:25.587 +03:00 [INF] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager
+2026-09-02 11:03:26.726 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-02 11:03:26.945 +03:00 [INF] Executing endpoint 'MovieManager.Controllers.HomeController.Index (MovieManager)'
+2026-09-02 11:03:26.983 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller MovieManager.Controllers.HomeController (MovieManager).
+2026-09-02 11:03:26.993 +03:00 [INF] Executing ViewResult, running view Index.
+2026-09-02 11:03:27.128 +03:00 [INF] Executed ViewResult - view Index executed in 137.3044ms.
+2026-09-02 11:03:27.129 +03:00 [INF] Executed action MovieManager.Controllers.HomeController.Index (MovieManager) in 145.5021ms
+2026-09-02 11:03:27.129 +03:00 [INF] Executed endpoint 'MovieManager.Controllers.HomeController.Index (MovieManager)'
+2026-09-02 11:03:27.131 +03:00 [INF] HTTP GET / responded 200 in 254.9954 ms
+2026-09-02 11:03:27.136 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5155/ - 200 null text/html; charset=utf-8 420.8995ms
+2026-09-02 11:03:27.154 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5155/css/site.css?v=j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg - null null
+2026-09-02 11:03:27.155 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5155/lib/bootstrap/dist/css/bootstrap.min.css - null null
+2026-09-02 11:03:27.176 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5155/MovieManager.styles.css?v=dsKwU1EUl0o4W9qr-88UQl5u137GLYWhJtttUVmDLO0 - null null
+2026-09-02 11:03:27.207 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5155/css/site.css - null null
+2026-09-02 11:03:27.208 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5155/lib/jquery/dist/jquery.min.js - null null
+2026-09-02 11:03:27.210 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5155/img/movie.jpg - null null
+2026-09-02 11:03:27.266 +03:00 [INF] Sending file. Request path: '/css/site.css'. Physical path: 'C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager\wwwroot\css\site.css'
+2026-09-02 11:03:27.266 +03:00 [INF] Sending file. Request path: '/lib/jquery/dist/jquery.min.js'. Physical path: 'C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager\wwwroot\lib\jquery\dist\jquery.min.js'
+2026-09-02 11:03:27.266 +03:00 [INF] Sending file. Request path: '/css/site.css'. Physical path: 'C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager\wwwroot\css\site.css'
+2026-09-02 11:03:27.266 +03:00 [INF] Sending file. Request path: '/img/movie.jpg'. Physical path: 'C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager\wwwroot\img\movie.jpg'
+2026-09-02 11:03:27.266 +03:00 [INF] Sending file. Request path: '/MovieManager.styles.css'. Physical path: 'C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager\obj\Debug\net10.0\scopedcss\bundle\MovieManager.styles.css'
+2026-09-02 11:03:27.266 +03:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/css/bootstrap.min.css'. Physical path: 'C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css'
+2026-09-02 11:03:27.267 +03:00 [INF] HTTP GET /MovieManager.styles.css responded 200 in 90.3167 ms
+2026-09-02 11:03:27.267 +03:00 [INF] HTTP GET /img/movie.jpg responded 200 in 55.9583 ms
+2026-09-02 11:03:27.267 +03:00 [INF] HTTP GET /lib/bootstrap/dist/css/bootstrap.min.css responded 200 in 90.3455 ms
+2026-09-02 11:03:27.267 +03:00 [INF] HTTP GET /css/site.css responded 200 in 90.2801 ms
+2026-09-02 11:03:27.267 +03:00 [INF] HTTP GET /css/site.css responded 200 in 57.5836 ms
+2026-09-02 11:03:27.267 +03:00 [INF] HTTP GET /lib/jquery/dist/jquery.min.js responded 200 in 57.5913 ms
+2026-09-02 11:03:27.269 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5155/MovieManager.styles.css?v=dsKwU1EUl0o4W9qr-88UQl5u137GLYWhJtttUVmDLO0 - 200 1109 text/css 92.8532ms
+2026-09-02 11:03:27.269 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5155/css/site.css - 200 667 text/css 61.343ms
+2026-09-02 11:03:27.269 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5155/img/movie.jpg - 200 44661 image/jpeg 59.2403ms
+2026-09-02 11:03:27.269 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5155/css/site.css?v=j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg - 200 667 text/css 115.6234ms
+2026-09-02 11:03:27.269 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5155/lib/bootstrap/dist/css/bootstrap.min.css - 200 232803 text/css 115.3463ms
+2026-09-02 11:03:27.269 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5155/lib/jquery/dist/jquery.min.js - 200 87533 text/javascript 60.9457ms
+2026-09-02 11:03:27.270 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5155/lib/bootstrap/dist/js/bootstrap.bundle.min.js - null null
+2026-09-02 11:03:27.273 +03:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/js/bootstrap.bundle.min.js'. Physical path: 'C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js'
+2026-09-02 11:03:27.273 +03:00 [INF] HTTP GET /lib/bootstrap/dist/js/bootstrap.bundle.min.js responded 200 in 2.6880 ms
+2026-09-02 11:03:27.273 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5155/lib/bootstrap/dist/js/bootstrap.bundle.min.js - 200 80721 text/javascript 3.0139ms
+2026-09-02 11:03:27.301 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5155/js/site.js?v=hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo - null null
+2026-09-02 11:03:27.301 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5155/_framework/aspnetcore-browser-refresh.js - null null
+2026-09-02 11:03:27.302 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5155/_vs/browserLink - null null
+2026-09-02 11:03:27.302 +03:00 [INF] Sending file. Request path: '/js/site.js'. Physical path: 'C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager\wwwroot\js\site.js'
+2026-09-02 11:03:27.303 +03:00 [INF] HTTP GET /js/site.js responded 200 in 1.1143 ms
+2026-09-02 11:03:27.303 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5155/js/site.js?v=hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo - 200 231 text/javascript 1.5839ms
+2026-09-02 11:03:27.304 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5155/_framework/aspnetcore-browser-refresh.js - 200 14929 application/javascript; charset=utf-8 2.881ms
+2026-09-02 11:03:27.372 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5155/_vs/browserLink - 200 null text/javascript; charset=UTF-8 70.2995ms
