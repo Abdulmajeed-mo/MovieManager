@@ -1,116 +1,58 @@
-//Configuration
-using MovieManager.UI.Middlewere;
-using MovieManager.Core.Interfaces;
-using MovieManager.Core.Services;
-using MovieManager.Domain.Interfaces;
-using MovieManager.Infrastructure.Context;
-using MovieManager.Infrastructure.Repository;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MJDVerse.Application.Interfaces;
+using MJDVerse.Application.Services;
+using MJDVerse.Domain.Entities;
+using MJDVerse.Infrastructure.Context;
+using MJDVerse.Infrastructure.Repositories;
+using MJDVerse.Infrastructure.Services;
+using MovieManager.UI.Middlewere;
 using Serilog;
+using MJDVerse.Application.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Serilog
+builder.Host.UseSerilog((hostingContext, loggerConfiguration) =>loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration));
 
-//يشغل Serilog
-builder.Host.UseSerilog((hostingContext, loggerConfiguration) =>
-    loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration));
+// EF Core
+builder.Services.AddDbContext<AppDbContext>(options =>options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-////ربطنا الابداتابيس كونتكس   بقاعدة البيانات حتى يقدر المشروع يتعامل معها.
-builder.Services.AddDbContext<AppDbContext>(options =>
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
- //يقرأ بيانات الاتصال من الابسيتنق جيسون            يقول للانتتي فريمورك اننا بنستخدم اس كيو ال سيرفر.
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 
-//Dependency Injection Container
-//إذا طلب أحد IMovieRepository، فأعطه كائنًا من MovieRepository.
-builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+builder.Services.AddScoped<IIdentityService, IdentityService>();
 
-builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 
+builder.Services.AddScoped<IOtpRepository, OtpRepository>();
+
+
+builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpSettings"));
+
+// Controllers
+
+builder.Services.AddControllers();
+
+//Add Memory Cache
+builder.Services.AddMemoryCache();
+// HTTP Client
 builder.Services.AddHttpClient();
-
-
-// Add services to the container.
-builder.Services.AddControllersWithViews(); 
 
 var app = builder.Build();
 
-
-//يستخدم السيريلوق لتسجيل كل ريكويست
+// Serilog Request Logging
 app.UseSerilogRequestLogging();
 
-
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-}
-
-
-
-
-//middlewere 
-//context = يمثل الطلب الحالي.
-//next = ينقل الطلب إلى الـ  ميدل وير أو الـ الراوت الذي بعده.
-//داخل MapGet أو Use لا أكتب أنواع البارامترات، لأن C# يستنتجها تلقائيًا.
-//Middleware يستطيع تنفيذ كود قبل الطلب وبعده بعد رجوع الاستجابة، ولذلك يُسمى Pipeline.
-//app.Use(async (context, next) => 
-//{
-
-
-//    //أي طلب يخص مشروع ادارة الافلام سيتم تسجيل بداية الطلب ونهايته، وهذا مفيد جدًا أثناء التطوير وتتبع الأخطاء.
-//    Console.WriteLine("Movie Request Started");
-
-//    await next();
-
-//    Console.WriteLine("Movie Request Finished");
-
-
-//});
-// وظيفتها تسجيل الـ Custom Middleware داخل الـ Pipeline للتطبيق.
-
-//middlewere 1
+// Middleware
 app.UseMiddleware<LogMiddleware>();
 
-//middlewere 2
-app.UseWhen(
-    context=>
-     context.Request.Path.StartsWithSegments("/movies") ||
-    context.Request.Path.StartsWithSegments("/movie/"),
-    appBuilder =>
-    {
-        appBuilder.UseMiddleware<MovieValidationMiddleware>();
-    } );
-
-
-
-//Route
-//الماب قت () تكتب داخل البروقرام سي اس  لأنها مسؤولة عن استقبال طلبات القت وربطها بمسار الراوت
-//() => تعني: نفّذ الكود عند استدعاء الـ Route.
-//app.MapGet("/movies",()=> "Welcome to Movie Manager");
-////QueryString
-//app.MapGet("/search",(string ?name)=> $"Searching for: {name} ");
-////Route Parameter
-////? يأتي بعد اسم الـ Route Parameter وليس قبله.
-
-////app.MapGet("/movie/{id?}", (int? id )=> id == null ? $"Movie Id not provided" :  $"Movie Id:{id}");
-////Route Constrain
-//app.MapGet("/movie/{id:int}", (int id) => $"Movie Id:{id}");
-
-
-
-
-
-app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
 
-//سيقوم باكتشاف جميع الكنترولر في المشروع كامل مع ميثود اكشن
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
+app.MapControllers();
 
 app.Run();

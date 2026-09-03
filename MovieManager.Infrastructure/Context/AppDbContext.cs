@@ -1,25 +1,34 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MovieManager.Domain.Entities;
-namespace MovieManager.Infrastructure.Context
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using MJDVerse.Domain.Entities;
+
+namespace MJDVerse.Infrastructure.Context
 {
-
-    //جعلنا AppDbContext             يرث من DbContext  .
-
-    //DbContext
-    //و الكلاس المسؤول عن الاتصال بقاعدة البيانات وإدارتها داخل الانتيتي فريمورك
-    //من خلاله يتم تنفيذ جميع عمليات قاعدة البيانات مثل القراءة والإضافة والتعديل والحذف، عمليات "الكرد"د
-
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
-        //يمثل جدولًا في قاعدة البيانات، وكل داتا بيس سيت  يقابل جدولًا واحدًا.
-        //عندي جدول اسمه موفييز، وكل صف فيه يمثل كائنًا من نوع موفي.
-
         public DbSet<Movie> Movies { get; set; }
-        //أنشئ لي جدولًا جديدًا اسمه Reviews
         public DbSet<Review> Reviews { get; set; }
-        public AppDbContext(DbContextOptions<AppDbContext> options)
-            : base(options)
+        public DbSet<Person> People { get; set; }
+        public DbSet<Genre> Genres { get; set; }
+        public DbSet<CastMember> CastMembers { get; set; }
+        public DbSet<CrewMember> CrewMembers { get; set; }
+        public DbSet<MovieGenre> MovieGenres { get; set; }
+        public DbSet<WatchlistItem> WatchlistItems { get; set; }
+        public DbSet<Favorite> Favorites { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
+        public DbSet<WatchHistory> WatchHistories { get; set; }
+
+        public DbSet<OtpVerification> OtpVerifications { get; set; }
+        public AppDbContext(DbContextOptions<AppDbContext> options): base(options)
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfigurationsFromAssembly(
+                typeof(AppDbContext).Assembly);
         }
     }
 }

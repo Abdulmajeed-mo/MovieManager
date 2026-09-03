@@ -9,8 +9,7 @@
 
 
         //Many-to-Many
-        public ICollection<Movie> Movies { get; set; } = new List<Movie>();
 
-
+        public ICollection<MovieGenre> MovieGenres { get; set; } = new List<MovieGenre>();
     }
 }
