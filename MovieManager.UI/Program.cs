@@ -29,6 +29,7 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddScoped<IOtpRepository, OtpRepository>();
 
+builder.Services.AddScoped<IOtpRateLimiter, OtpRateLimiter>();
 
 builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpSettings"));
 

@@ -8,25 +8,30 @@ namespace MJDVerse.Application.Services
 {
     public class AuthService : IAuthService
     {
+
+        //Dependencies
+        //private readonly 
         private readonly IIdentityService _identityService;
         private readonly IEmailSender _emailSender;
         private readonly IOtpRepository _otpRepository;
+        private readonly IOtpRateLimiter _otpRateLimiter;
 
-        public AuthService(
-            IIdentityService identityService,
-            IEmailSender emailSender,
-            IOtpRepository otpRepository)
+
+
+
+        //Constructor
+        public AuthService(IIdentityService identityService,IEmailSender emailSender,IOtpRepository otpRepository , IOtpRateLimiter otpRateLimiter)
         {
             _identityService = identityService;
             _emailSender = emailSender;
             _otpRepository = otpRepository;
+            _otpRateLimiter = otpRateLimiter;
         }
 
 
 
-
-
-
+        //methods
+        //Register user
         public async Task<bool> RegisterAsync(RegisterRequestDto request)
         {
             var user = new ApplicationUser
@@ -36,9 +41,7 @@ namespace MJDVerse.Application.Services
                 PhoneNumber = request.PhoneNumber
             };
 
-            var result = await _identityService.CreateUserAsync(
-                user,
-                request.Password);
+            var result = await _identityService.CreateUserAsync(user,request.Password);
 
             if (!result.Success)
             {
@@ -60,10 +63,7 @@ namespace MJDVerse.Application.Services
             await _otpRepository.AddAsync(otpVerification);
             await _otpRepository.SaveChangesAsync();
 
-            await _emailSender.SendEmailAsync(
-                request.Email,
-                "MJDVerse Email Verification",
-                $"Your verification code is: {otp}");
+            await _emailSender.SendEmailAsync(request.Email,"MJDVerse Email Verification",$"Your verification code is: {otp}");
 
             return true;
         }
@@ -72,11 +72,10 @@ namespace MJDVerse.Application.Services
 
 
 
-
+        //Verify OTP
         public async Task<bool> VerifyOtpAsync(VerifyOtpRequestDto request)
         {
-            var otpVerification =
-                await _otpRepository.GetLatestOtpAsync(request.Email);
+            var otpVerification =await _otpRepository.GetLatestOtpAsync(request.Email);
 
             if (otpVerification == null)
             {
@@ -95,16 +94,14 @@ namespace MJDVerse.Application.Services
                 return false;
             }
 
-            var user =
-                await _identityService.FindByEmailAsync(request.Email);
+            var user =await _identityService.FindByEmailAsync(request.Email);
 
             if (user == null)
             {
                 return false;
             }
 
-            var confirmed =
-                await _identityService.ConfirmEmailAsync(user);
+            var confirmed =await _identityService.ConfirmEmailAsync(user);
 
             if (!confirmed)
             {
@@ -123,8 +120,7 @@ namespace MJDVerse.Application.Services
         //Verify Login OTP
         public async Task<bool> VerifyLoginOtpAsync(VerifyLoginOtpRequestDto request)
         {
-            var otpVerification =
-                await _otpRepository.GetLatestOtpAsync(request.Email);
+            var otpVerification = await _otpRepository.GetLatestOtpAsync(request.Email);
 
             if (otpVerification == null)
             {
@@ -154,15 +150,14 @@ namespace MJDVerse.Application.Services
 
 
         //Login 
-        public async Task<bool> LoginAsync(
-            LoginRequestDto request)
-        {
+        public async Task<bool> LoginAsync(LoginRequestDto request)
+        {  
+            
             ApplicationUser? user;
 
             if (request.Identifier.Contains("@"))
             {
-                user = await _identityService.FindByEmailAsync(
-                    request.Identifier);
+                user = await _identityService.FindByEmailAsync(request.Identifier);
             }
             else
             {
@@ -179,17 +174,16 @@ namespace MJDVerse.Application.Services
                 return false;
             }
 
-            var passwordValid =
-                await _identityService.CheckPasswordAsync(user,request.Password);
+            var passwordValid =await _identityService.CheckPasswordAsync(user,request.Password);
 
             if (!passwordValid)
             {
                 return false;
             }
 
-            await SendOtpAsync(user);
+            var otpSent = await SendOtpAsync(user);
 
-            return true;
+            return otpSent;
         }
 
 
@@ -197,9 +191,15 @@ namespace MJDVerse.Application.Services
 
 
 
-
-        private async Task SendOtpAsync(ApplicationUser user)
+        //send OTP to user email
+        private async Task<bool> SendOtpAsync(ApplicationUser user)
         {
+
+            if (!_otpRateLimiter.IsAllowed(user.Email!))
+            {
+                return false;
+            }
+
             var otp = RandomNumberGenerator.GetInt32(1000, 10000).ToString();
 
             var otpHash = HashOtp(otp);
@@ -216,6 +216,8 @@ namespace MJDVerse.Application.Services
             await _otpRepository.SaveChangesAsync();
 
             await _emailSender.SendEmailAsync(user.Email!,"MJDVerse Login Verification",$"Your verification code is: {otp}");
+
+            return true;
         }
 
 
