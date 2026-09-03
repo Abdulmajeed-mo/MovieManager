@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MovieManager.Core\MJDVerse.Application.csproj" />
     <ProjectReference Include="..\MovieManager.Domain\MJDVerse.Domain.csproj" />
   </ItemGroup>
 

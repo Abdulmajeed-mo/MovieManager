@@ -1,5 +1,4 @@
-﻿using MovieManager.Domain.Entities;
-namespace MovieManager.Core.Interfaces
+﻿namespace MJDVerse.Application.Interfaces
 {
 
     //في الابستركشن. لازم تكون الفكره انك تفصل بين الـ الكنترولر والـ السيرفس. عشان لو غيرت طريقة جلب البيانات من قاعدة البيانات، ما أحتاج أغير الكود في الـ الكنترولر.
@@ -7,7 +6,6 @@ namespace MovieManager.Core.Interfaces
     //هذا هوالعقد.
     public interface IMovieService
     {
-        Task<List<Movie>> GetMovies();
     } 
 
 }

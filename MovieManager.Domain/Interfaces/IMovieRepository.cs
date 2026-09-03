@@ -1,6 +1,5 @@
-﻿using MovieManager.Domain.Entities;
-
-namespace MovieManager.Domain.Interfaces
+﻿using MJDVerse.Domain.Entities;
+namespace MJDVerse.Domain.Interfaces
 {
     public interface IMovieRepository
     {
