@@ -22,10 +22,7 @@ namespace MJDVerse.Infrastructure.Repositories
         public async Task<OtpVerification?> GetLatestOtpAsync(
             string email)
         {
-            return await _context.OtpVerifications
-                .Where(x => x.Email == email && !x.IsUsed)
-                .OrderByDescending(x => x.CreatedAt)
-                .FirstOrDefaultAsync();
+            return await _context.OtpVerifications.Where(x => x.Email == email && !x.IsUsed).OrderByDescending(x => x.CreatedAt).FirstOrDefaultAsync();
         }
 
         public async Task SaveChangesAsync()

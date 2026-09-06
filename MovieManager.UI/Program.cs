@@ -1,14 +1,18 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MJDVerse.Application.Interfaces;
+using MJDVerse.Application.Options;
 using MJDVerse.Application.Services;
 using MJDVerse.Domain.Entities;
+using MJDVerse.Domain.Interfaces;
 using MJDVerse.Infrastructure.Context;
 using MJDVerse.Infrastructure.Repositories;
 using MJDVerse.Infrastructure.Services;
 using MovieManager.UI.Middlewere;
 using Serilog;
-using MJDVerse.Application.Options;
+using FluentValidation;
+using MJDVerse.Application.Validators.Movies;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +37,10 @@ builder.Services.AddScoped<IOtpRateLimiter, OtpRateLimiter>();
 
 builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpSettings"));
 
+
+
+builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 // Controllers
 
 builder.Services.AddControllers();
@@ -42,6 +50,8 @@ builder.Services.AddMemoryCache();
 // HTTP Client
 builder.Services.AddHttpClient();
 
+
+builder.Services.AddValidatorsFromAssemblyContaining<CreateMovieValidator>();
 var app = builder.Build();
 
 // Serilog Request Logging

@@ -1,0 +1,122 @@
+2026-09-06 13:08:00.834 +03:00 [INF] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-06 13:08:01.037 +03:00 [INF] Now listening on: http://localhost:5155
+2026-09-06 13:08:01.131 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-09-06 13:08:01.131 +03:00 [INF] Hosting environment: Development
+2026-09-06 13:08:01.131 +03:00 [INF] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-06 13:08:01.416 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-06 13:08:01.596 +03:00 [INF] HTTP GET / responded 404 in 20.2539 ms
+2026-09-06 13:08:01.614 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 216.9241ms
+2026-09-06 13:08:01.617 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-06 13:10:29.444 +03:00 [INF] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-06 13:10:29.582 +03:00 [INF] Now listening on: http://localhost:5155
+2026-09-06 13:10:29.658 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-09-06 13:10:29.659 +03:00 [INF] Hosting environment: Development
+2026-09-06 13:10:29.659 +03:00 [INF] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-06 13:10:30.132 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-06 13:10:30.268 +03:00 [INF] HTTP GET / responded 404 in 19.8489 ms
+2026-09-06 13:10:30.280 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 164.1012ms
+2026-09-06 13:10:30.282 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-06 13:11:10.394 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5155/api/movies - null null
+2026-09-06 13:11:10.417 +03:00 [INF] Executing endpoint 'MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API)'
+2026-09-06 13:11:10.461 +03:00 [INF] Route matched with {action = "GetMovies", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMovies(MJDVerse.Application.DTOs.Movies.MovieQueryParametersDto) on controller MJDVerse.API.Controllers.MoviesController (MJDVerse.API).
+2026-09-06 13:11:12.832 +03:00 [INF] Executed DbCommand (37ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Movies] AS [m]
+2026-09-06 13:11:12.867 +03:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-09-06 13:11:12.867 +03:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-09-06 13:11:12.921 +03:00 [INF] Executed DbCommand (19ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[Id], [m].[AverageRating], [m].[Description], [m].[PosterUrl], [m].[ReleaseDate], [m].[RuntimeMinutes], [m].[Title]
+FROM [Movies] AS [m]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2026-09-06 13:11:12.933 +03:00 [INF] Executing OkObjectResult, writing value of type 'MJDVerse.Application.DTOs.Movies.PagedResultDto`1[[MJDVerse.Application.DTOs.Movies.MovieDto, MJDVerse.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-06 13:11:12.959 +03:00 [INF] Executed action MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API) in 2495.0141ms
+2026-09-06 13:11:12.960 +03:00 [INF] Executed endpoint 'MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API)'
+2026-09-06 13:11:12.960 +03:00 [INF] HTTP GET /api/movies responded 200 in 2555.4820 ms
+2026-09-06 13:11:12.967 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5155/api/movies - 200 null application/json; charset=utf-8 2579.4349ms
+2026-09-06 13:11:13.002 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5155/favicon.ico - null null
+2026-09-06 13:11:13.005 +03:00 [INF] HTTP GET /favicon.ico responded 404 in 0.2925 ms
+2026-09-06 13:11:13.006 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5155/favicon.ico - 404 0 null 3.6831ms
+2026-09-06 13:11:13.006 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/favicon.ico, Response status code: 404
+2026-09-06 13:12:02.758 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5155/api/movies/api/movies - null null
+2026-09-06 13:12:02.763 +03:00 [INF] HTTP GET /api/movies/api/movies responded 404 in 3.5128 ms
+2026-09-06 13:12:02.766 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5155/api/movies/api/movies - 404 null null 7.9526ms
+2026-09-06 13:12:02.766 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/api/movies/api/movies, Response status code: 404
+2026-09-06 13:12:09.919 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5155//api/movies - null null
+2026-09-06 13:12:09.921 +03:00 [INF] HTTP GET //api/movies responded 404 in 0.1333 ms
+2026-09-06 13:12:09.921 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5155//api/movies - 404 null null 2.7751ms
+2026-09-06 13:12:09.922 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155//api/movies, Response status code: 404
+2026-09-06 13:12:12.200 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5155//api/movies - null null
+2026-09-06 13:12:12.202 +03:00 [INF] HTTP GET //api/movies responded 404 in 0.1793 ms
+2026-09-06 13:12:12.202 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5155//api/movies - 404 null null 2.5893ms
+2026-09-06 13:12:12.202 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155//api/movies, Response status code: 404
+2026-09-06 13:12:32.608 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5155/api/movies/api/movies - null null
+2026-09-06 13:12:32.615 +03:00 [INF] HTTP GET /api/movies/api/movies responded 404 in 0.2552 ms
+2026-09-06 13:12:32.616 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5155/api/movies/api/movies - 404 null null 8.1243ms
+2026-09-06 13:12:32.616 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/api/movies/api/movies, Response status code: 404
+2026-09-06 13:12:41.469 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5155/api/movies?query=batman - null null
+2026-09-06 13:12:41.470 +03:00 [INF] Executing endpoint 'MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API)'
+2026-09-06 13:12:41.471 +03:00 [INF] Route matched with {action = "GetMovies", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMovies(MJDVerse.Application.DTOs.Movies.MovieQueryParametersDto) on controller MJDVerse.API.Controllers.MoviesController (MJDVerse.API).
+2026-09-06 13:12:41.522 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__query_0_contains='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Movies] AS [m]
+WHERE [m].[Title] LIKE @__query_0_contains ESCAPE N'\'
+2026-09-06 13:12:41.524 +03:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-09-06 13:12:41.524 +03:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-09-06 13:12:41.531 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__query_0_contains='?' (Size = 200), @__p_1='?' (DbType = Int32), @__p_2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[Id], [m].[AverageRating], [m].[Description], [m].[PosterUrl], [m].[ReleaseDate], [m].[RuntimeMinutes], [m].[Title]
+FROM [Movies] AS [m]
+WHERE [m].[Title] LIKE @__query_0_contains ESCAPE N'\'
+ORDER BY (SELECT 1)
+OFFSET @__p_1 ROWS FETCH NEXT @__p_2 ROWS ONLY
+2026-09-06 13:12:41.532 +03:00 [INF] Executing OkObjectResult, writing value of type 'MJDVerse.Application.DTOs.Movies.PagedResultDto`1[[MJDVerse.Application.DTOs.Movies.MovieDto, MJDVerse.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-06 13:12:41.532 +03:00 [INF] Executed action MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API) in 61.3959ms
+2026-09-06 13:12:41.532 +03:00 [INF] Executed endpoint 'MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API)'
+2026-09-06 13:12:41.533 +03:00 [INF] HTTP GET /api/movies responded 200 in 62.2629 ms
+2026-09-06 13:12:41.533 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5155/api/movies?query=batman - 200 null application/json; charset=utf-8 64.3981ms
+2026-09-06 13:34:59.191 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5155/api/movies - null null
+2026-09-06 13:34:59.200 +03:00 [INF] Executing endpoint 'MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API)'
+2026-09-06 13:34:59.201 +03:00 [INF] Route matched with {action = "GetMovies", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMovies(MJDVerse.Application.DTOs.Movies.MovieQueryParametersDto) on controller MJDVerse.API.Controllers.MoviesController (MJDVerse.API).
+2026-09-06 13:35:00.866 +03:00 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Movies] AS [m]
+2026-09-06 13:35:00.870 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[Id], [m].[AverageRating], [m].[Description], [m].[PosterUrl], [m].[ReleaseDate], [m].[RuntimeMinutes], [m].[Title]
+FROM [Movies] AS [m]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2026-09-06 13:35:00.870 +03:00 [INF] Executing OkObjectResult, writing value of type 'MJDVerse.Application.DTOs.Movies.PagedResultDto`1[[MJDVerse.Application.DTOs.Movies.MovieDto, MJDVerse.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-06 13:35:00.870 +03:00 [INF] Executed action MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API) in 1669.3482ms
+2026-09-06 13:35:00.870 +03:00 [INF] Executed endpoint 'MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API)'
+2026-09-06 13:35:00.870 +03:00 [INF] HTTP GET /api/movies responded 200 in 1670.1818 ms
+2026-09-06 13:35:00.871 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5155/api/movies - 200 null application/json; charset=utf-8 1679.4989ms
+2026-09-06 13:35:12.819 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5155/api/movies/1 - null null
+2026-09-06 13:35:12.821 +03:00 [INF] Executing endpoint 'MJDVerse.API.Controllers.MoviesController.GetMovieById (MJDVerse.API)'
+2026-09-06 13:35:12.826 +03:00 [INF] Route matched with {action = "GetMovieById", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMovieById(Int32) on controller MJDVerse.API.Controllers.MoviesController (MJDVerse.API).
+2026-09-06 13:35:12.852 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [m].[Id], [m].[AverageRating], [m].[Description], [m].[PosterUrl], [m].[ReleaseDate], [m].[RuntimeMinutes], [m].[Title]
+FROM [Movies] AS [m]
+WHERE [m].[Id] = @__id_0
+2026-09-06 13:35:12.853 +03:00 [INF] Executing NotFoundObjectResult, writing value of type 'System.String'.
+2026-09-06 13:35:12.857 +03:00 [INF] Executed action MJDVerse.API.Controllers.MoviesController.GetMovieById (MJDVerse.API) in 31.3515ms
+2026-09-06 13:35:12.857 +03:00 [INF] Executed endpoint 'MJDVerse.API.Controllers.MoviesController.GetMovieById (MJDVerse.API)'
+2026-09-06 13:35:12.857 +03:00 [INF] HTTP GET /api/movies/1 responded 404 in 36.2145 ms
+2026-09-06 13:35:12.858 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5155/api/movies/1 - 404 null text/plain; charset=utf-8 38.434ms
+2026-09-06 13:35:29.569 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5155/api/movies?query=Batman - null null
+2026-09-06 13:35:29.570 +03:00 [INF] Executing endpoint 'MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API)'
+2026-09-06 13:35:29.571 +03:00 [INF] Route matched with {action = "GetMovies", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMovies(MJDVerse.Application.DTOs.Movies.MovieQueryParametersDto) on controller MJDVerse.API.Controllers.MoviesController (MJDVerse.API).
+2026-09-06 13:35:29.576 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__query_0_contains='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Movies] AS [m]
+WHERE [m].[Title] LIKE @__query_0_contains ESCAPE N'\'
+2026-09-06 13:35:29.579 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__query_0_contains='?' (Size = 200), @__p_1='?' (DbType = Int32), @__p_2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[Id], [m].[AverageRating], [m].[Description], [m].[PosterUrl], [m].[ReleaseDate], [m].[RuntimeMinutes], [m].[Title]
+FROM [Movies] AS [m]
+WHERE [m].[Title] LIKE @__query_0_contains ESCAPE N'\'
+ORDER BY (SELECT 1)
+OFFSET @__p_1 ROWS FETCH NEXT @__p_2 ROWS ONLY
+2026-09-06 13:35:29.579 +03:00 [INF] Executing OkObjectResult, writing value of type 'MJDVerse.Application.DTOs.Movies.PagedResultDto`1[[MJDVerse.Application.DTOs.Movies.MovieDto, MJDVerse.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-06 13:35:29.579 +03:00 [INF] Executed action MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API) in 8.6641ms
+2026-09-06 13:35:29.579 +03:00 [INF] Executed endpoint 'MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API)'
+2026-09-06 13:35:29.579 +03:00 [INF] HTTP GET /api/movies responded 200 in 9.1399 ms
+2026-09-06 13:35:29.580 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5155/api/movies?query=Batman - 200 null application/json; charset=utf-8 11.1027ms
