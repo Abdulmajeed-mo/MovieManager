@@ -1,18 +1,17 @@
+using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MJDVerse.API.Middlewere;
 using MJDVerse.Application.Interfaces;
 using MJDVerse.Application.Options;
 using MJDVerse.Application.Services;
+using MJDVerse.Application.Validators.Movies;
 using MJDVerse.Domain.Entities;
 using MJDVerse.Domain.Interfaces;
 using MJDVerse.Infrastructure.Context;
 using MJDVerse.Infrastructure.Repositories;
 using MJDVerse.Infrastructure.Services;
-using MovieManager.UI.Middlewere;
 using Serilog;
-using FluentValidation;
-using MJDVerse.Application.Validators.Movies;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,6 +40,20 @@ builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpS
 
 builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+
+builder.Services.AddScoped<IWatchlistService, WatchlistService>();
+
+builder.Services.AddScoped<IWatchlistRepository, WatchlistRepository>();
+
+builder.Services.AddScoped<IFavoriteService, FavoriteService>();
+builder.Services.AddScoped<IFavoriteRepository, FavoriteRepository>();
+
+
+builder.Services.AddScoped<IRatingService, RatingService>();
+builder.Services.AddScoped<IRatingRepository, RatingRepository>();
+
+builder.Services.AddScoped<IWatchHistoryService,WatchHistoryService>();
+builder.Services.AddScoped<IWatchHistoryRepository, WatchHistoryRepository>();
 // Controllers
 
 builder.Services.AddControllers();
@@ -52,16 +65,27 @@ builder.Services.AddHttpClient();
 
 
 builder.Services.AddValidatorsFromAssemblyContaining<CreateMovieValidator>();
+
+
+
+
+
+
+
+
+
+
 var app = builder.Build();
 
-// Serilog Request Logging
-app.UseSerilogRequestLogging();
+app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 
-// Middleware
-app.UseMiddleware<LogMiddleware>();
+app.UseMiddleware<CorrelationIdMiddleware>();
+
+app.UseSerilogRequestLogging();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

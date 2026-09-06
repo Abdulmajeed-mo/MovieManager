@@ -120,3 +120,138 @@ OFFSET @__p_1 ROWS FETCH NEXT @__p_2 ROWS ONLY
 2026-09-06 13:35:29.579 +03:00 [INF] Executed endpoint 'MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API)'
 2026-09-06 13:35:29.579 +03:00 [INF] HTTP GET /api/movies responded 200 in 9.1399 ms
 2026-09-06 13:35:29.580 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5155/api/movies?query=Batman - 200 null application/json; charset=utf-8 11.1027ms
+2026-09-06 14:07:05.320 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-06 14:07:05.459 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-06 14:07:05.535 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-06 14:07:05.535 +03:00 [INF] [] Hosting environment: Development
+2026-09-06 14:07:05.535 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-06 14:07:06.121 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-06 14:07:06.256 +03:00 [INF] [] HTTP GET / responded 404 in 15.3954 ms
+2026-09-06 14:07:06.269 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 166.4368ms
+2026-09-06 14:07:06.271 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-06 14:07:11.262 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/api/movies - null null
+2026-09-06 14:07:11.275 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API)'
+2026-09-06 14:07:11.316 +03:00 [INF] [] Route matched with {action = "GetMovies", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMovies(MJDVerse.Application.DTOs.Movies.MovieQueryParametersDto) on controller MJDVerse.API.Controllers.MoviesController (MJDVerse.API).
+2026-09-06 14:07:13.380 +03:00 [INF] [] Executed DbCommand (33ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Movies] AS [m]
+2026-09-06 14:07:13.409 +03:00 [WRN] [] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-09-06 14:07:13.409 +03:00 [WRN] [] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-09-06 14:07:13.458 +03:00 [INF] [] Executed DbCommand (20ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[Id], [m].[AverageRating], [m].[Description], [m].[PosterUrl], [m].[ReleaseDate], [m].[RuntimeMinutes], [m].[Title]
+FROM [Movies] AS [m]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2026-09-06 14:07:13.468 +03:00 [INF] [] Executing OkObjectResult, writing value of type 'MJDVerse.Application.DTOs.Movies.PagedResultDto`1[[MJDVerse.Application.DTOs.Movies.MovieDto, MJDVerse.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-06 14:07:13.490 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API) in 2171.789ms
+2026-09-06 14:07:13.490 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API)'
+2026-09-06 14:07:13.491 +03:00 [INF] [] HTTP GET /api/movies responded 200 in 2222.6480 ms
+2026-09-06 14:07:13.498 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/api/movies - 200 null application/json; charset=utf-8 2236.2227ms
+2026-09-06 14:07:50.376 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-06 14:07:50.543 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-06 14:07:50.617 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-06 14:07:50.618 +03:00 [INF] [] Hosting environment: Development
+2026-09-06 14:07:50.618 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-06 14:07:50.842 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-06 14:07:50.976 +03:00 [INF] [] HTTP GET / responded 404 in 15.0592 ms
+2026-09-06 14:07:50.990 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 160.5047ms
+2026-09-06 14:07:50.993 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-06 14:07:57.155 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/api/movies - null null
+2026-09-06 14:07:57.168 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API)'
+2026-09-06 14:07:57.215 +03:00 [INF] [] Route matched with {action = "GetMovies", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMovies(MJDVerse.Application.DTOs.Movies.MovieQueryParametersDto) on controller MJDVerse.API.Controllers.MoviesController (MJDVerse.API).
+2026-09-06 14:07:58.383 +03:00 [INF] [] Executed DbCommand (31ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Movies] AS [m]
+2026-09-06 14:07:58.410 +03:00 [WRN] [] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-09-06 14:07:58.410 +03:00 [WRN] [] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-09-06 14:07:58.456 +03:00 [INF] [] Executed DbCommand (16ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[Id], [m].[AverageRating], [m].[Description], [m].[PosterUrl], [m].[ReleaseDate], [m].[RuntimeMinutes], [m].[Title]
+FROM [Movies] AS [m]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2026-09-06 14:07:58.466 +03:00 [INF] [] Executing OkObjectResult, writing value of type 'MJDVerse.Application.DTOs.Movies.PagedResultDto`1[[MJDVerse.Application.DTOs.Movies.MovieDto, MJDVerse.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-06 14:07:58.490 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API) in 1272.7574ms
+2026-09-06 14:07:58.490 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API)'
+2026-09-06 14:07:58.491 +03:00 [INF] [] HTTP GET /api/movies responded 200 in 1330.1266 ms
+2026-09-06 14:07:58.498 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/api/movies - 200 null application/json; charset=utf-8 1343.1005ms
+2026-09-06 14:20:59.488 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-06 14:20:59.628 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-06 14:20:59.729 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-06 14:20:59.729 +03:00 [INF] [] Hosting environment: Development
+2026-09-06 14:20:59.729 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-06 14:20:59.834 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-06 14:20:59.973 +03:00 [INF] [] HTTP GET / responded 404 in 15.8668 ms
+2026-09-06 14:20:59.987 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 167.1048ms
+2026-09-06 14:20:59.988 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-06 14:34:13.259 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-06 14:34:13.406 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-06 14:34:13.487 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-06 14:34:13.487 +03:00 [INF] [] Hosting environment: Development
+2026-09-06 14:34:13.487 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-06 14:34:13.703 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-06 14:34:13.845 +03:00 [INF] [] HTTP GET / responded 404 in 29.3004 ms
+2026-09-06 14:34:13.860 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 171.8201ms
+2026-09-06 14:34:13.862 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-06 15:29:40.894 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-06 15:29:41.087 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-06 15:29:41.209 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-06 15:29:41.209 +03:00 [INF] [] Hosting environment: Development
+2026-09-06 15:29:41.209 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-06 15:29:41.820 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-06 15:29:42.012 +03:00 [INF] [] HTTP GET / responded 404 in 41.4458 ms
+2026-09-06 15:29:42.035 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 229.8261ms
+2026-09-06 15:29:42.040 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-06 15:31:37.525 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/movies - application/json 144
+2026-09-06 15:31:37.551 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.MoviesController.CreateMovie (MJDVerse.API)'
+2026-09-06 15:31:37.605 +03:00 [INF] [] Route matched with {action = "CreateMovie", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] CreateMovie(MJDVerse.Application.DTOs.Movies.CreateMovieDto) on controller MJDVerse.API.Controllers.MoviesController (MJDVerse.API).
+2026-09-06 15:31:40.957 +03:00 [INF] [] Executed DbCommand (78ms) [Parameters=[@p0='?' (Precision = 3) (Scale = 1) (DbType = Decimal), @p1='?' (Size = 2000), @p2='?' (Size = 500), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Int32), @p5='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Movies] ([AverageRating], [Description], [PosterUrl], [ReleaseDate], [RuntimeMinutes], [Title])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2026-09-06 15:31:41.035 +03:00 [INF] [] Executing OkObjectResult, writing value of type 'MJDVerse.Application.DTOs.Movies.MovieDto'.
+2026-09-06 15:31:41.054 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.MoviesController.CreateMovie (MJDVerse.API) in 3444.5726ms
+2026-09-06 15:31:41.054 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.MoviesController.CreateMovie (MJDVerse.API)'
+2026-09-06 15:31:41.056 +03:00 [INF] [] HTTP POST /api/movies responded 200 in 3529.6538 ms
+2026-09-06 15:31:41.065 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/movies - 200 null application/json; charset=utf-8 3547.0051ms
+2026-09-06 15:32:49.652 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/watchhistory/1 - application/json 4
+2026-09-06 15:32:49.693 +03:00 [INF] [] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-09-06 15:32:49.700 +03:00 [INF] [] AuthenticationScheme: Identity.Application was challenged.
+2026-09-06 15:32:49.700 +03:00 [INF] [] HTTP POST /api/watchhistory/1 responded 302 in 17.4010 ms
+2026-09-06 15:32:49.701 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/watchhistory/1 - 302 0 null 48.3249ms
+2026-09-06 15:32:49.704 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/Account/Login?ReturnUrl=%2Fapi%2Fwatchhistory%2F1 - null null
+2026-09-06 15:32:49.704 +03:00 [INF] [] HTTP GET /Account/Login responded 404 in 0.1591 ms
+2026-09-06 15:32:49.704 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/Account/Login?ReturnUrl=%2Fapi%2Fwatchhistory%2F1 - 404 0 null 0.7783ms
+2026-09-06 15:32:49.705 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/Account/Login, Response status code: 404
+2026-09-06 15:33:08.101 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/watchhistory/1 - application/json 4
+2026-09-06 15:33:08.104 +03:00 [INF] [] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-09-06 15:33:08.105 +03:00 [INF] [] AuthenticationScheme: Identity.Application was challenged.
+2026-09-06 15:33:08.105 +03:00 [INF] [] HTTP POST /api/watchhistory/1 responded 302 in 3.2454 ms
+2026-09-06 15:33:08.105 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/watchhistory/1 - 302 0 null 3.9107ms
+2026-09-06 15:33:08.107 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/Account/Login?ReturnUrl=%2Fapi%2Fwatchhistory%2F1 - null null
+2026-09-06 15:33:08.108 +03:00 [INF] [] HTTP GET /Account/Login responded 404 in 0.1523 ms
+2026-09-06 15:33:08.108 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/Account/Login?ReturnUrl=%2Fapi%2Fwatchhistory%2F1 - 404 0 null 0.7125ms
+2026-09-06 15:33:08.108 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/Account/Login, Response status code: 404
+2026-09-06 15:34:09.114 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/watchhistory/1 - application/json 4
+2026-09-06 15:34:09.120 +03:00 [INF] [] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-09-06 15:34:09.121 +03:00 [INF] [] AuthenticationScheme: Identity.Application was challenged.
+2026-09-06 15:34:09.121 +03:00 [INF] [] HTTP POST /api/watchhistory/1 responded 302 in 4.7531 ms
+2026-09-06 15:34:09.122 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/watchhistory/1 - 302 0 null 11.9546ms
+2026-09-06 15:34:09.126 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/Account/Login?ReturnUrl=%2Fapi%2Fwatchhistory%2F1 - null null
+2026-09-06 15:34:09.127 +03:00 [INF] [] HTTP GET /Account/Login responded 404 in 0.2241 ms
+2026-09-06 15:34:09.127 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/Account/Login?ReturnUrl=%2Fapi%2Fwatchhistory%2F1 - 404 0 null 1.314ms
+2026-09-06 15:34:09.127 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/Account/Login, Response status code: 404
+2026-09-06 15:34:56.176 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/api/watchhistory - null null
+2026-09-06 15:34:56.178 +03:00 [INF] [] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-09-06 15:34:56.178 +03:00 [INF] [] AuthenticationScheme: Identity.Application was challenged.
+2026-09-06 15:34:56.179 +03:00 [INF] [] HTTP GET /api/watchhistory responded 302 in 1.2251 ms
+2026-09-06 15:34:56.179 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/api/watchhistory - 302 0 null 2.6427ms
+2026-09-06 15:34:56.184 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/Account/Login?ReturnUrl=%2Fapi%2Fwatchhistory - null null
+2026-09-06 15:34:56.185 +03:00 [INF] [] HTTP GET /Account/Login responded 404 in 0.2877 ms
+2026-09-06 15:34:56.186 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/Account/Login?ReturnUrl=%2Fapi%2Fwatchhistory - 404 0 null 2.0332ms
+2026-09-06 15:34:56.186 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/Account/Login, Response status code: 404
