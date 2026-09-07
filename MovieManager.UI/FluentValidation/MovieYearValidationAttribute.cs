@@ -4,7 +4,7 @@ namespace MovieManager.UI.Validations
 {
     public class MovieYearValidationAttribute : ValidationAttribute
     {
-        protected override ValidationResult IsValid(object? value, ValidationContext validationContext)
+        protected override ValidationResult? IsValid(object? value,ValidationContext validationContext)
         {
             int year = (int)value!;
 

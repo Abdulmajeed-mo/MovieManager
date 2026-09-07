@@ -10,9 +10,9 @@ namespace MJDVerse.Domain.Entities
         //تمنع المستخدم من إرسال قيمة هذه الخاصية 
         //هو يشتغل في  Model Binding
         public int Id { get; set; }
-      
-        public string Title { get; set; }
-        public string Description { get; set; }
+
+        public string Title { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
 
         public ICollection<CastMember> CastMembers { get; set; } = new List<CastMember>();
 
