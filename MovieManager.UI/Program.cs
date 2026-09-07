@@ -1,87 +1,25 @@
-using FluentValidation;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using MJDVerse.API.Middlewere;
-using MJDVerse.Application.Interfaces;
-using MJDVerse.Application.Options;
-using MJDVerse.Application.Services;
-using MJDVerse.Application.Validators.Movies;
-using MJDVerse.Domain.Entities;
-using MJDVerse.Domain.Interfaces;
-using MJDVerse.Infrastructure.Context;
-using MJDVerse.Infrastructure.Repositories;
-using MJDVerse.Infrastructure.Services;
-using Serilog;
+using MJDVerse.API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Serilog
-builder.Host.UseSerilog((hostingContext, loggerConfiguration) =>loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration));
+builder.Host.AddLoggingServices(builder.Configuration);
+// Services
+builder.Services.AddDatabase(builder.Configuration);
 
-// EF Core
-builder.Services.AddDbContext<AppDbContext>(options =>options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddAuthenticationServices();
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
-
-builder.Services.AddScoped<IEmailSender, EmailSender>();
-
-builder.Services.AddScoped<IIdentityService, IdentityService>();
-
-builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddApplicationServices(builder.Configuration);
 
 
-builder.Services.AddScoped<IOtpRepository, OtpRepository>();
+builder.Services.AddValidationServices();
 
-builder.Services.AddScoped<IOtpRateLimiter, OtpRateLimiter>();
-
-builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpSettings"));
-
-
-
-builder.Services.AddScoped<IMovieService, MovieService>();
-builder.Services.AddScoped<IMovieRepository, MovieRepository>();
-
-builder.Services.AddScoped<IWatchlistService, WatchlistService>();
-
-builder.Services.AddScoped<IWatchlistRepository, WatchlistRepository>();
-
-builder.Services.AddScoped<IFavoriteService, FavoriteService>();
-builder.Services.AddScoped<IFavoriteRepository, FavoriteRepository>();
-
-
-builder.Services.AddScoped<IRatingService, RatingService>();
-builder.Services.AddScoped<IRatingRepository, RatingRepository>();
-
-builder.Services.AddScoped<IWatchHistoryService,WatchHistoryService>();
-builder.Services.AddScoped<IWatchHistoryRepository, WatchHistoryRepository>();
-// Controllers
-
-builder.Services.AddControllers();
-
-//Add Memory Cache
-builder.Services.AddMemoryCache();
-// HTTP Client
-builder.Services.AddHttpClient();
-
-
-builder.Services.AddValidatorsFromAssemblyContaining<CreateMovieValidator>();
-
-
-
-
-
-
-
-
-
+builder.Services.AddApiServices();
 
 var app = builder.Build();
 
-app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
-
-app.UseMiddleware<CorrelationIdMiddleware>();
-
-app.UseSerilogRequestLogging();
+// Middleware
+app.UseApplicationMiddleware();
 
 app.UseRouting();
 

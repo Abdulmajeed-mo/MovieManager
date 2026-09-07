@@ -24,21 +24,7 @@ namespace MJDVerse.Application.Services
 
 
 
-        public async Task<List<MovieDto>> GetAllMoviesAsync()
-        {
-            var movies = await _movieRepository.GetAllMovies();
-
-            return movies.Select(movie => new MovieDto
-            {
-                Id = movie.Id,
-                Title = movie.Title,
-                Description = movie.Description,
-                ReleaseDate = movie.ReleaseDate,
-                RuntimeMinutes = movie.RuntimeMinutes,
-                AverageRating = movie.AverageRating,
-                PosterUrl = movie.PosterUrl
-            }).ToList();
-        }
+     
 
 
 
@@ -190,22 +176,7 @@ namespace MJDVerse.Application.Services
 
 
 
-       //
-        public async Task<List<MovieDto>> SearchMoviesAsync(string query)
-        {
-            var movies = await _movieRepository.SearchAsync(query);
-
-            return movies.Select(movie => new MovieDto
-            {
-                Id = movie.Id,
-                Title = movie.Title,
-                Description = movie.Description,
-                ReleaseDate = movie.ReleaseDate,
-                RuntimeMinutes = movie.RuntimeMinutes,
-                AverageRating = movie.AverageRating,
-                PosterUrl = movie.PosterUrl
-            }).ToList();
-        }
+    
 
 
 

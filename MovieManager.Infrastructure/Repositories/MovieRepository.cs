@@ -14,10 +14,7 @@ namespace MJDVerse.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<List<Movie>> GetAllMovies()
-        {
-            return await _context.Movies.ToListAsync();
-        }
+       
 
 
 
@@ -104,9 +101,6 @@ namespace MJDVerse.Infrastructure.Repositories
 
 
 
-        public async Task<List<Movie>> SearchAsync(string query)
-        {
-            return await _context.Movies.Where(movie => movie.Title.Contains(query)).ToListAsync();
-        }
+       
     }
 }
