@@ -2,8 +2,10 @@
 using MJDVerse.Application.Options;
 using MJDVerse.Application.Services;
 using MJDVerse.Domain.Interfaces;
+using MJDVerse.Infrastructure.Providers;
 using MJDVerse.Infrastructure.Repositories;
 using MJDVerse.Infrastructure.Services;
+using Resend;
 
 namespace MJDVerse.API.Extensions
 {
@@ -11,12 +13,18 @@ namespace MJDVerse.API.Extensions
     {
         // Contains registrations for all Application Services and Repositories
         // responsible for application logic and data access.
-        public static IServiceCollection AddApplicationServices(
-            this IServiceCollection services,
-            IConfiguration configuration)
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services,IConfiguration configuration)
         {
             // Email & Authentication
             services.AddScoped<IEmailSender, EmailSender>();
+            services.AddHttpClient<ResendClient>();
+
+            services.Configure<ResendClientOptions>(options =>
+            {
+                options.ApiToken = configuration["Resend:ApiKey"] ?? string.Empty;
+            });
+
+            services.AddTransient<IResend, ResendClient>();
             services.AddScoped<IIdentityService, IdentityService>();
             services.AddScoped<IAuthService, AuthService>();
 
@@ -24,13 +32,19 @@ namespace MJDVerse.API.Extensions
 
 
 
+
+            services.AddHttpClient<IMovieMetadataProvider, TmdbMovieMetadataProvider>();
             // OTP
             services.AddScoped<IOtpRepository, OtpRepository>();
             services.AddSingleton<IOtpRateLimiter, OtpRateLimiter>();
 
             // SMTP Settings
-            services.Configure<SmtpSettings>(
-                configuration.GetSection("SmtpSettings"));
+            services.Configure<SmtpSettings>(configuration.GetSection("SmtpSettings"));
+
+
+            // JWT Setting
+            services.Configure<JwtSettings>( configuration.GetSection("JwtSettings"));
+            services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
             // Movies
             services.AddScoped<IMovieService, MovieService>();

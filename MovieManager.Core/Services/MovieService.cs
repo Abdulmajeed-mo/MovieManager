@@ -11,12 +11,15 @@ namespace MJDVerse.Application.Services
 
 
         private readonly IMovieRepository _movieRepository;
-        
+        private readonly IMovieMetadataProvider _movieMetadataProvider;
 
 
-        public MovieService(IMovieRepository movieRepository)
+        public MovieService(IMovieRepository movieRepository, IMovieMetadataProvider movieMetadataProvider)
         {
             _movieRepository = movieRepository;
+            _movieMetadataProvider = movieMetadataProvider;
+
+
         }
 
 
@@ -24,7 +27,7 @@ namespace MJDVerse.Application.Services
 
 
 
-     
+
 
 
 
@@ -176,7 +179,20 @@ namespace MJDVerse.Application.Services
 
 
 
-    
+
+        public async Task<List<TmdbMovieDto>> GetPopularMoviesAsync()
+        {
+            return await _movieMetadataProvider.GetMoviesAsync();
+        }
+
+
+
+
+
+
+
+
+
 
 
 

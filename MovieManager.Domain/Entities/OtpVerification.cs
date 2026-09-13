@@ -1,4 +1,6 @@
-﻿namespace MJDVerse.Domain.Entities
+﻿using MJDVerse.Domain.Enums;
+
+namespace MJDVerse.Domain.Entities
 {
     public class OtpVerification
     {
@@ -9,6 +11,8 @@
         public string Email { get; set; } = string.Empty;
 
         public string CodeHash { get; set; } = string.Empty;
+
+        public OtpPurpose Purpose { get; set; }
 
         public DateTime ExpiresAt { get; set; }
 

@@ -5,7 +5,7 @@ using MJDVerse.Application.Interfaces;
 namespace MJDVerse.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
@@ -15,15 +15,18 @@ namespace MJDVerse.API.Controllers
             _authService = authService;
         }
 
+
+
+
+
         [HttpPost("register")]
-        public async Task<IActionResult> Register(
-            RegisterRequestDto request)
+        public async Task<IActionResult> Register(RegisterRequestDto request)
         {
             var result = await _authService.RegisterAsync(request);
 
-            if (!result)
+            if (!result.Success)
             {
-                return BadRequest("Registration failed.");
+                return BadRequest(result.Errors);
             }
 
             return Ok("OTP sent to your email.");
@@ -53,25 +56,23 @@ namespace MJDVerse.API.Controllers
 
         [HttpPost("verify-login-otp")]
         public async Task<IActionResult> VerifyLoginOtp(
-    VerifyLoginOtpRequestDto request)
+      VerifyLoginOtpRequestDto request)
         {
-            var result =
-                await _authService.VerifyLoginOtpAsync(request);
+            var result = await _authService.VerifyLoginOtpAsync(request);
 
-            if (!result)
+            if (result is null)
             {
                 return BadRequest("Invalid or expired OTP.");
             }
 
-            return Ok("Login verified successfully.");
+            return Ok(result);
         }
 
 
 
 
         [HttpPost("verify-otp")]
-        public async Task<IActionResult> VerifyOtp(
-            VerifyOtpRequestDto request)
+        public async Task<IActionResult> VerifyOtp(VerifyOtpRequestDto request)
         {
             var result = await _authService.VerifyOtpAsync(request);
 

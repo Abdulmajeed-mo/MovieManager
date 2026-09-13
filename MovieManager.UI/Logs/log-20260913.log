@@ -1,0 +1,1150 @@
+2026-09-13 10:35:52.402 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 10:35:52.621 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 10:35:52.711 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 10:35:52.711 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 10:35:52.711 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 10:37:21.966 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - application/json 160
+2026-09-13 10:37:22.090 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 10:37:22.144 +03:00 [INF] [] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(MJDVerse.Application.DTOs.Auth.RegisterRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 10:37:24.938 +03:00 [INF] [] Executed DbCommand (64ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-09-13 10:37:25.120 +03:00 [INF] [] Executed DbCommand (7ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 256), @p8='?' (Size = 256), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (DbType = Boolean), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);
+2026-09-13 10:37:25.188 +03:00 [INF] [] Executed DbCommand (6ms) [Parameters=[@p0='?' (Size = 200), @p1='?' (DbType = DateTime2), @p2='?' (Size = 256), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Boolean), @p5='?' (DbType = Int32), @p6='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [OtpVerifications] ([CodeHash], [CreatedAt], [Email], [ExpiresAt], [IsUsed], [Purpose], [UserId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+2026-09-13 10:37:26.526 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API) in 4378.3228ms
+2026-09-13 10:37:26.527 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 10:37:26.530 +03:00 [ERR] [] HTTP POST /api/v1/auth/register responded 500 in 4540.2815 ms
+System.Net.Mail.SmtpException: The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.7.0 Authentication Required. For more information, go to
+   at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.EndSend(IAsyncResult result)
+   at System.Net.Mail.SendMailAsyncResult.SendMailFromCompleted(IAsyncResult result)
+--- End of stack trace from previous location ---
+   at System.Net.Mail.SendMailAsyncResult.End(IAsyncResult result)
+   at System.Net.Mail.SmtpClient.SendMailCallback(IAsyncResult result)
+--- End of stack trace from previous location ---
+   at MJDVerse.Infrastructure.Services.EmailSender.SendEmailAsync(String email, String subject, String body) in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.Infrastructure\Services\EmailSender.cs:line 49
+   at MJDVerse.Application.Services.AuthService.RegisterAsync(RegisterRequestDto request) in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.Core\Services\AuthService.cs:line 75
+   at MJDVerse.API.Controllers.AuthController.Register(RegisterRequestDto request) in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI\Controllers\AuthController.cs:line 25
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-09-13 10:37:26.683 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - 500 null application/json 4729.5976ms
+2026-09-13 10:37:33.930 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - application/json 160
+2026-09-13 10:37:33.933 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 10:37:33.933 +03:00 [INF] [] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(MJDVerse.Application.DTOs.Auth.RegisterRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 10:37:34.049 +03:00 [INF] [] Executed DbCommand (2ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-09-13 10:37:34.060 +03:00 [INF] [] Executing BadRequestObjectResult, writing value of type 'System.String[]'.
+2026-09-13 10:37:34.063 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API) in 129.8961ms
+2026-09-13 10:37:34.063 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 10:37:34.064 +03:00 [INF] [] HTTP POST /api/v1/auth/register responded 400 in 133.2672 ms
+2026-09-13 10:37:34.064 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - 400 null application/json; charset=utf-8 134.3032ms
+2026-09-13 11:15:31.328 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 11:15:31.466 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 11:15:31.554 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 11:15:31.554 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 11:15:31.554 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 11:15:59.723 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/verify-otp - application/json 61
+2026-09-13 11:15:59.833 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.VerifyOtp (MJDVerse.API)'
+2026-09-13 11:15:59.865 +03:00 [INF] [] Route matched with {action = "VerifyOtp", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] VerifyOtp(MJDVerse.Application.DTOs.Auth.VerifyOtpRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 11:16:01.270 +03:00 [INF] [] Executed DbCommand (55ms) [Parameters=[@__email_0='?' (Size = 256), @__purpose_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[CodeHash], [o].[CreatedAt], [o].[Email], [o].[ExpiresAt], [o].[IsUsed], [o].[Purpose], [o].[UserId]
+FROM [OtpVerifications] AS [o]
+WHERE [o].[Email] = @__email_0 AND [o].[Purpose] = @__purpose_1 AND [o].[IsUsed] = CAST(0 AS bit)
+ORDER BY [o].[CreatedAt] DESC
+2026-09-13 11:16:01.341 +03:00 [INF] [] Executing BadRequestObjectResult, writing value of type 'System.String'.
+2026-09-13 11:16:01.348 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.VerifyOtp (MJDVerse.API) in 1478.3561ms
+2026-09-13 11:16:01.349 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.VerifyOtp (MJDVerse.API)'
+2026-09-13 11:16:01.353 +03:00 [INF] [] HTTP POST /api/v1/auth/verify-otp responded 400 in 1609.5160 ms
+2026-09-13 11:16:01.362 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/verify-otp - 400 null text/plain; charset=utf-8 1649.8649ms
+2026-09-13 11:44:04.560 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 11:44:04.725 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 11:44:04.817 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 11:44:04.818 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 11:44:04.818 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 11:45:19.127 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 11:45:19.267 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 11:45:19.343 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 11:45:19.343 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 11:45:19.343 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 11:45:50.551 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 11:45:50.692 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 11:45:50.769 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 11:45:50.769 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 11:45:50.769 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 11:45:51.160 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-13 11:45:51.422 +03:00 [INF] [] HTTP GET / responded 404 in 98.8194 ms
+2026-09-13 11:45:51.433 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 291.2045ms
+2026-09-13 11:45:51.435 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-13 11:47:33.075 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - application/json 168
+2026-09-13 11:47:33.092 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 11:47:33.139 +03:00 [INF] [] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(MJDVerse.Application.DTOs.Auth.RegisterRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 11:47:34.655 +03:00 [INF] [] Executed DbCommand (50ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-09-13 11:47:34.831 +03:00 [INF] [] Executed DbCommand (5ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 256), @p8='?' (Size = 256), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (DbType = Boolean), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);
+2026-09-13 11:47:34.897 +03:00 [INF] [] Executed DbCommand (4ms) [Parameters=[@p0='?' (Size = 200), @p1='?' (DbType = DateTime2), @p2='?' (Size = 256), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Boolean), @p5='?' (DbType = Int32), @p6='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [OtpVerifications] ([CodeHash], [CreatedAt], [Email], [ExpiresAt], [IsUsed], [Purpose], [UserId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+2026-09-13 11:47:36.387 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API) in 3245.0127ms
+2026-09-13 11:47:36.389 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 11:47:36.391 +03:00 [ERR] [] HTTP POST /api/v1/auth/register responded 500 in 3314.7385 ms
+System.Net.Mail.SmtpException: The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.7.0 Authentication Required. For more information, go to
+   at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.EndSend(IAsyncResult result)
+   at System.Net.Mail.SendMailAsyncResult.SendMailFromCompleted(IAsyncResult result)
+--- End of stack trace from previous location ---
+   at System.Net.Mail.SendMailAsyncResult.End(IAsyncResult result)
+   at System.Net.Mail.SmtpClient.SendMailCallback(IAsyncResult result)
+--- End of stack trace from previous location ---
+   at MJDVerse.Infrastructure.Services.EmailSender.SendEmailAsync(String email, String subject, String body) in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.Infrastructure\Services\EmailSender.cs:line 49
+   at MJDVerse.Application.Services.AuthService.RegisterAsync(RegisterRequestDto request) in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.Core\Services\AuthService.cs:line 75
+   at MJDVerse.API.Controllers.AuthController.Register(RegisterRequestDto request) in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI\Controllers\AuthController.cs:line 25
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-09-13 11:47:36.587 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - 500 null application/json 3512.1887ms
+2026-09-13 11:48:21.340 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - application/json 168
+2026-09-13 11:48:21.348 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 11:48:21.348 +03:00 [INF] [] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(MJDVerse.Application.DTOs.Auth.RegisterRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 11:48:21.481 +03:00 [INF] [] Executed DbCommand (2ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-09-13 11:48:21.497 +03:00 [INF] [] Executing BadRequestObjectResult, writing value of type 'System.String[]'.
+2026-09-13 11:48:21.499 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API) in 150.9046ms
+2026-09-13 11:48:21.499 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 11:48:21.499 +03:00 [INF] [] HTTP POST /api/v1/auth/register responded 400 in 156.0838 ms
+2026-09-13 11:48:21.499 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - 400 null application/json; charset=utf-8 160.4853ms
+2026-09-13 11:52:28.716 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 11:52:28.852 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 11:52:28.934 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 11:52:28.934 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 11:52:28.935 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 11:52:31.050 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-13 11:52:31.252 +03:00 [INF] [] HTTP GET / responded 404 in 85.5671 ms
+2026-09-13 11:52:31.264 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 229.7563ms
+2026-09-13 11:52:31.266 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-13 11:53:25.267 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 11:53:25.327 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 11:53:25.391 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 11:53:25.391 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 11:53:25.391 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 11:53:35.183 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 11:53:35.246 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 11:53:35.312 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 11:53:35.312 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 11:53:35.312 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 11:53:35.458 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-13 11:53:35.564 +03:00 [INF] [] HTTP GET / responded 404 in 39.4120 ms
+2026-09-13 11:53:35.570 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 114.5439ms
+2026-09-13 11:53:35.574 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-13 11:53:46.185 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 11:53:46.323 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 11:53:46.399 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 11:53:46.400 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 11:53:46.400 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 11:53:47.290 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-13 11:53:47.505 +03:00 [INF] [] HTTP GET / responded 404 in 87.4690 ms
+2026-09-13 11:53:47.517 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 241.0838ms
+2026-09-13 11:53:47.520 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-13 11:54:25.337 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 11:54:25.475 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 11:54:25.555 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 11:54:25.555 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 11:54:25.555 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 11:54:26.427 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-13 11:54:26.641 +03:00 [INF] [] HTTP GET / responded 404 in 86.3429 ms
+2026-09-13 11:54:26.658 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 243.0364ms
+2026-09-13 11:54:26.661 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-13 11:55:02.696 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - application/json 170
+2026-09-13 11:55:02.711 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 11:55:02.762 +03:00 [INF] [] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(MJDVerse.Application.DTOs.Auth.RegisterRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 11:55:04.415 +03:00 [INF] [] Executed DbCommand (44ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-09-13 11:55:04.604 +03:00 [INF] [] Executed DbCommand (9ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 256), @p8='?' (Size = 256), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (DbType = Boolean), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);
+2026-09-13 11:55:04.677 +03:00 [INF] [] Executed DbCommand (3ms) [Parameters=[@p0='?' (Size = 200), @p1='?' (DbType = DateTime2), @p2='?' (Size = 256), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Boolean), @p5='?' (DbType = Int32), @p6='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [OtpVerifications] ([CodeHash], [CreatedAt], [Email], [ExpiresAt], [IsUsed], [Purpose], [UserId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+2026-09-13 11:55:06.063 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API) in 3295.7852ms
+2026-09-13 11:55:06.064 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 11:55:06.066 +03:00 [ERR] [] HTTP POST /api/v1/auth/register responded 500 in 3369.9556 ms
+System.Net.Mail.SmtpException: The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.7.0 Authentication Required. For more information, go to
+   at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.EndSend(IAsyncResult result)
+   at System.Net.Mail.SendMailAsyncResult.SendMailFromCompleted(IAsyncResult result)
+--- End of stack trace from previous location ---
+   at System.Net.Mail.SendMailAsyncResult.End(IAsyncResult result)
+   at System.Net.Mail.SmtpClient.SendMailCallback(IAsyncResult result)
+--- End of stack trace from previous location ---
+   at MJDVerse.Infrastructure.Services.EmailSender.SendEmailAsync(String email, String subject, String body) in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.Infrastructure\Services\EmailSender.cs:line 49
+   at MJDVerse.Application.Services.AuthService.RegisterAsync(RegisterRequestDto request) in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.Core\Services\AuthService.cs:line 75
+   at MJDVerse.API.Controllers.AuthController.Register(RegisterRequestDto request) in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI\Controllers\AuthController.cs:line 25
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-09-13 11:55:06.342 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - 500 null application/json 3646.124ms
+2026-09-13 12:02:14.640 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 12:02:14.799 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 12:02:14.875 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 12:02:14.876 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 12:02:14.877 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 12:02:15.751 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-13 12:02:15.964 +03:00 [INF] [] HTTP GET / responded 404 in 78.5947 ms
+2026-09-13 12:02:15.991 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 255.071ms
+2026-09-13 12:02:15.999 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-13 12:02:39.919 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - application/json 170
+2026-09-13 12:02:39.938 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 12:02:39.984 +03:00 [INF] [] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(MJDVerse.Application.DTOs.Auth.RegisterRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 12:02:42.385 +03:00 [INF] [] Executed DbCommand (64ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-09-13 12:02:42.488 +03:00 [INF] [] Executing BadRequestObjectResult, writing value of type 'System.String[]'.
+2026-09-13 12:02:42.497 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API) in 2507.232ms
+2026-09-13 12:02:42.498 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 12:02:42.500 +03:00 [INF] [] HTTP POST /api/v1/auth/register responded 400 in 2578.1268 ms
+2026-09-13 12:02:42.509 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - 400 null application/json; charset=utf-8 2590.0396ms
+2026-09-13 12:03:31.010 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 12:03:31.166 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 12:03:31.242 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 12:03:31.243 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 12:03:31.244 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 12:03:32.143 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-13 12:03:32.361 +03:00 [INF] [] HTTP GET / responded 404 in 83.2170 ms
+2026-09-13 12:03:32.379 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 250.5532ms
+2026-09-13 12:03:32.387 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-13 12:03:41.238 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - application/json 170
+2026-09-13 12:03:41.250 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 12:03:41.287 +03:00 [INF] [] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(MJDVerse.Application.DTOs.Auth.RegisterRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 12:03:42.929 +03:00 [INF] [] Executed DbCommand (58ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-09-13 12:03:43.117 +03:00 [INF] [] Executed DbCommand (7ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 256), @p8='?' (Size = 256), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (DbType = Boolean), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);
+2026-09-13 12:03:43.200 +03:00 [INF] [] Executed DbCommand (5ms) [Parameters=[@p0='?' (Size = 200), @p1='?' (DbType = DateTime2), @p2='?' (Size = 256), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Boolean), @p5='?' (DbType = Int32), @p6='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [OtpVerifications] ([CodeHash], [CreatedAt], [Email], [ExpiresAt], [IsUsed], [Purpose], [UserId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+2026-09-13 12:03:44.731 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API) in 3439.5409ms
+2026-09-13 12:03:44.735 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 12:03:44.738 +03:00 [ERR] [] HTTP POST /api/v1/auth/register responded 500 in 3497.6234 ms
+System.Net.Mail.SmtpException: The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.7.0 Authentication Required. For more information, go to
+   at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.EndSend(IAsyncResult result)
+   at System.Net.Mail.SendMailAsyncResult.SendMailFromCompleted(IAsyncResult result)
+--- End of stack trace from previous location ---
+   at System.Net.Mail.SendMailAsyncResult.End(IAsyncResult result)
+   at System.Net.Mail.SmtpClient.SendMailCallback(IAsyncResult result)
+--- End of stack trace from previous location ---
+   at MJDVerse.Infrastructure.Services.EmailSender.SendEmailAsync(String email, String subject, String body) in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.Infrastructure\Services\EmailSender.cs:line 49
+   at MJDVerse.Application.Services.AuthService.RegisterAsync(RegisterRequestDto request) in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.Core\Services\AuthService.cs:line 75
+   at MJDVerse.API.Controllers.AuthController.Register(RegisterRequestDto request) in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI\Controllers\AuthController.cs:line 25
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-09-13 12:03:44.994 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - 500 null application/json 3757.0103ms
+2026-09-13 12:03:48.677 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - application/json 170
+2026-09-13 12:03:48.683 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 12:03:48.684 +03:00 [INF] [] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(MJDVerse.Application.DTOs.Auth.RegisterRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 12:03:48.812 +03:00 [INF] [] Executed DbCommand (2ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-09-13 12:03:48.827 +03:00 [INF] [] Executing BadRequestObjectResult, writing value of type 'System.String[]'.
+2026-09-13 12:03:48.832 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API) in 146.4805ms
+2026-09-13 12:03:48.833 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 12:03:48.834 +03:00 [INF] [] HTTP POST /api/v1/auth/register responded 400 in 154.6186 ms
+2026-09-13 12:03:48.836 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - 400 null application/json; charset=utf-8 158.8289ms
+2026-09-13 12:40:06.932 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 12:40:07.195 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 12:40:07.332 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 12:40:07.333 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 12:40:07.335 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 12:40:08.778 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-13 12:40:09.103 +03:00 [INF] [] HTTP GET / responded 404 in 124.3742 ms
+2026-09-13 12:40:09.124 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 385.8485ms
+2026-09-13 12:40:09.133 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-13 12:40:43.521 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - application/json 166
+2026-09-13 12:40:43.540 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 12:40:43.607 +03:00 [INF] [] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(MJDVerse.Application.DTOs.Auth.RegisterRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 12:40:47.578 +03:00 [INF] [] Executed DbCommand (76ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-09-13 12:40:47.862 +03:00 [INF] [] Executed DbCommand (32ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 256), @p8='?' (Size = 256), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (DbType = Boolean), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);
+2026-09-13 12:40:47.965 +03:00 [INF] [] Executed DbCommand (7ms) [Parameters=[@p0='?' (Size = 200), @p1='?' (DbType = DateTime2), @p2='?' (Size = 256), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Boolean), @p5='?' (DbType = Int32), @p6='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [OtpVerifications] ([CodeHash], [CreatedAt], [Email], [ExpiresAt], [IsUsed], [Purpose], [UserId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+2026-09-13 12:40:48.052 +03:00 [INF] [] Start processing HTTP request POST https://api.resend.com/emails
+2026-09-13 12:40:48.058 +03:00 [INF] [] Sending HTTP request POST https://api.resend.com/emails
+2026-09-13 12:40:49.089 +03:00 [INF] [] Received HTTP response headers after 1020.7078ms - 200
+2026-09-13 12:40:49.099 +03:00 [INF] [] End processing HTTP request after 1051.8428ms - 200
+2026-09-13 12:40:49.158 +03:00 [INF] [] Executing OkObjectResult, writing value of type 'System.String'.
+2026-09-13 12:40:49.181 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API) in 5561.7343ms
+2026-09-13 12:40:49.188 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 12:40:49.196 +03:00 [INF] [] HTTP POST /api/v1/auth/register responded 200 in 5671.4303 ms
+2026-09-13 12:40:49.227 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - 200 null text/plain; charset=utf-8 5709.2234ms
+2026-09-13 12:41:57.940 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - application/json 165
+2026-09-13 12:41:57.964 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 12:41:57.969 +03:00 [INF] [] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(MJDVerse.Application.DTOs.Auth.RegisterRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 12:41:58.438 +03:00 [INF] [] Executed DbCommand (8ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-09-13 12:41:58.486 +03:00 [INF] [] Executing BadRequestObjectResult, writing value of type 'System.String[]'.
+2026-09-13 12:41:58.496 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API) in 519.227ms
+2026-09-13 12:41:58.501 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 12:41:58.504 +03:00 [INF] [] HTTP POST /api/v1/auth/register responded 400 in 554.0907 ms
+2026-09-13 12:41:58.511 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - 400 null application/json; charset=utf-8 571.5224ms
+2026-09-13 12:42:06.142 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - application/json 164
+2026-09-13 12:42:06.154 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 12:42:06.159 +03:00 [INF] [] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(MJDVerse.Application.DTOs.Auth.RegisterRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 12:42:06.477 +03:00 [INF] [] Executed DbCommand (2ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-09-13 12:42:06.501 +03:00 [INF] [] Executed DbCommand (16ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 256), @p8='?' (Size = 256), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (DbType = Boolean), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);
+2026-09-13 12:42:06.509 +03:00 [INF] [] Executed DbCommand (2ms) [Parameters=[@p0='?' (Size = 200), @p1='?' (DbType = DateTime2), @p2='?' (Size = 256), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Boolean), @p5='?' (DbType = Int32), @p6='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [OtpVerifications] ([CodeHash], [CreatedAt], [Email], [ExpiresAt], [IsUsed], [Purpose], [UserId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+2026-09-13 12:42:06.514 +03:00 [INF] [] Start processing HTTP request POST https://api.resend.com/emails
+2026-09-13 12:42:06.515 +03:00 [INF] [] Sending HTTP request POST https://api.resend.com/emails
+2026-09-13 12:42:07.042 +03:00 [INF] [] Received HTTP response headers after 524.9788ms - 403
+2026-09-13 12:42:07.044 +03:00 [INF] [] End processing HTTP request after 530.7624ms - 403
+2026-09-13 12:42:07.590 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API) in 1423.6661ms
+2026-09-13 12:42:07.592 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 12:42:07.594 +03:00 [ERR] [] HTTP POST /api/v1/auth/register responded 500 in 1440.0398 ms
+Resend.ResendException: You can only send testing emails to your own email address (abdu.majeed.19@gmail.com). To send emails to other recipients, please verify a domain at resend.com/domains, and change the `from` address to an email using this domain.
+   at Resend.ResendClient.Execute[T1,T2](HttpRequestMessage req, Func`2 map, CancellationToken cancellationToken)
+   at MJDVerse.Infrastructure.Services.EmailSender.SendEmailAsync(String email, String subject, String body) in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.Infrastructure\Services\EmailSender.cs:line 29
+   at MJDVerse.Application.Services.AuthService.RegisterAsync(RegisterRequestDto request) in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.Core\Services\AuthService.cs:line 75
+   at MJDVerse.API.Controllers.AuthController.Register(RegisterRequestDto request) in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI\Controllers\AuthController.cs:line 25
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-09-13 12:42:08.168 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - 500 null application/json 2025.9957ms
+2026-09-13 12:42:19.189 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - application/json 165
+2026-09-13 12:42:19.197 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 12:42:19.201 +03:00 [INF] [] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(MJDVerse.Application.DTOs.Auth.RegisterRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 12:42:19.335 +03:00 [INF] [] Executed DbCommand (2ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-09-13 12:42:19.340 +03:00 [INF] [] Executing BadRequestObjectResult, writing value of type 'System.String[]'.
+2026-09-13 12:42:19.342 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API) in 133.1304ms
+2026-09-13 12:42:19.344 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 12:42:19.345 +03:00 [INF] [] HTTP POST /api/v1/auth/register responded 400 in 147.7864 ms
+2026-09-13 12:42:19.347 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - 400 null application/json; charset=utf-8 158.422ms
+2026-09-13 12:42:28.351 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - application/json 166
+2026-09-13 12:42:28.358 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 12:42:28.359 +03:00 [INF] [] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(MJDVerse.Application.DTOs.Auth.RegisterRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 12:42:28.472 +03:00 [INF] [] Executed DbCommand (2ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-09-13 12:42:28.518 +03:00 [INF] [] Executed DbCommand (42ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 256), @p8='?' (Size = 256), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (DbType = Boolean), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);
+2026-09-13 12:42:28.524 +03:00 [INF] [] Executed DbCommand (2ms) [Parameters=[@p0='?' (Size = 200), @p1='?' (DbType = DateTime2), @p2='?' (Size = 256), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Boolean), @p5='?' (DbType = Int32), @p6='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [OtpVerifications] ([CodeHash], [CreatedAt], [Email], [ExpiresAt], [IsUsed], [Purpose], [UserId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+2026-09-13 12:42:28.526 +03:00 [INF] [] Start processing HTTP request POST https://api.resend.com/emails
+2026-09-13 12:42:28.527 +03:00 [INF] [] Sending HTTP request POST https://api.resend.com/emails
+2026-09-13 12:42:28.750 +03:00 [INF] [] Received HTTP response headers after 221.0191ms - 200
+2026-09-13 12:42:28.754 +03:00 [INF] [] End processing HTTP request after 228.0541ms - 200
+2026-09-13 12:42:28.760 +03:00 [INF] [] Executing OkObjectResult, writing value of type 'System.String'.
+2026-09-13 12:42:28.762 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API) in 400.4925ms
+2026-09-13 12:42:28.763 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 12:42:28.765 +03:00 [INF] [] HTTP POST /api/v1/auth/register responded 200 in 406.8551 ms
+2026-09-13 12:42:28.767 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - 200 null text/plain; charset=utf-8 416.3005ms
+2026-09-13 12:52:46.596 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 12:52:46.919 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 12:52:47.039 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 12:52:47.040 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 12:52:47.041 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 12:52:48.209 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-13 12:52:48.545 +03:00 [INF] [] HTTP GET / responded 404 in 135.8614 ms
+2026-09-13 12:52:48.565 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 395.5593ms
+2026-09-13 12:52:48.572 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-13 12:53:02.524 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - application/json 164
+2026-09-13 12:53:02.542 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 12:53:02.599 +03:00 [INF] [] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(MJDVerse.Application.DTOs.Auth.RegisterRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 12:53:06.191 +03:00 [INF] [] Executed DbCommand (80ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-09-13 12:53:06.492 +03:00 [INF] [] Executed DbCommand (46ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 256), @p8='?' (Size = 256), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (DbType = Boolean), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);
+2026-09-13 12:53:06.594 +03:00 [INF] [] Executed DbCommand (6ms) [Parameters=[@p0='?' (Size = 200), @p1='?' (DbType = DateTime2), @p2='?' (Size = 256), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Boolean), @p5='?' (DbType = Int32), @p6='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [OtpVerifications] ([CodeHash], [CreatedAt], [Email], [ExpiresAt], [IsUsed], [Purpose], [UserId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+2026-09-13 12:53:06.676 +03:00 [INF] [] Start processing HTTP request POST https://api.resend.com/emails
+2026-09-13 12:53:06.682 +03:00 [INF] [] Sending HTTP request POST https://api.resend.com/emails
+2026-09-13 12:53:07.537 +03:00 [INF] [] Received HTTP response headers after 849.8264ms - 200
+2026-09-13 12:53:07.542 +03:00 [INF] [] End processing HTTP request after 871.1366ms - 200
+2026-09-13 12:53:07.581 +03:00 [INF] [] Executing OkObjectResult, writing value of type 'System.String'.
+2026-09-13 12:53:07.597 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API) in 4987.3251ms
+2026-09-13 12:53:07.601 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 12:53:07.606 +03:00 [INF] [] HTTP POST /api/v1/auth/register responded 200 in 5075.1913 ms
+2026-09-13 12:53:07.618 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - 200 null text/plain; charset=utf-8 5094.6546ms
+2026-09-13 12:53:09.355 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - application/json 164
+2026-09-13 12:53:09.363 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 12:53:09.365 +03:00 [INF] [] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(MJDVerse.Application.DTOs.Auth.RegisterRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 12:53:09.545 +03:00 [INF] [] Executed DbCommand (3ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-09-13 12:53:09.557 +03:00 [INF] [] Executing BadRequestObjectResult, writing value of type 'System.String[]'.
+2026-09-13 12:53:09.561 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API) in 193.7984ms
+2026-09-13 12:53:09.563 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 12:53:09.564 +03:00 [INF] [] HTTP POST /api/v1/auth/register responded 400 in 205.9368 ms
+2026-09-13 12:53:09.567 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - 400 null application/json; charset=utf-8 211.5556ms
+2026-09-13 12:59:56.418 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/verify-otp - application/json 61
+2026-09-13 12:59:56.443 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.VerifyOtp (MJDVerse.API)'
+2026-09-13 12:59:56.460 +03:00 [INF] [] Route matched with {action = "VerifyOtp", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] VerifyOtp(MJDVerse.Application.DTOs.Auth.VerifyOtpRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 12:59:56.606 +03:00 [INF] [] Executed DbCommand (14ms) [Parameters=[@__email_0='?' (Size = 256), @__purpose_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[CodeHash], [o].[CreatedAt], [o].[Email], [o].[ExpiresAt], [o].[IsUsed], [o].[Purpose], [o].[UserId]
+FROM [OtpVerifications] AS [o]
+WHERE [o].[Email] = @__email_0 AND [o].[Purpose] = @__purpose_1 AND [o].[IsUsed] = CAST(0 AS bit)
+ORDER BY [o].[CreatedAt] DESC
+2026-09-13 12:59:56.613 +03:00 [INF] [] Executing BadRequestObjectResult, writing value of type 'System.String'.
+2026-09-13 12:59:56.615 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.VerifyOtp (MJDVerse.API) in 149.3492ms
+2026-09-13 12:59:56.617 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.VerifyOtp (MJDVerse.API)'
+2026-09-13 12:59:56.618 +03:00 [INF] [] HTTP POST /api/v1/auth/verify-otp responded 400 in 175.6285 ms
+2026-09-13 12:59:56.620 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/verify-otp - 400 null text/plain; charset=utf-8 206.2854ms
+2026-09-13 13:01:45.608 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 13:01:45.927 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 13:01:46.112 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 13:01:46.113 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 13:01:46.115 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 13:01:47.419 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-13 13:01:47.833 +03:00 [INF] [] HTTP GET / responded 404 in 148.8007 ms
+2026-09-13 13:01:47.858 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 466.1628ms
+2026-09-13 13:01:47.866 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-13 13:03:41.508 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - application/json 167
+2026-09-13 13:03:41.543 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 13:03:41.615 +03:00 [INF] [] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(MJDVerse.Application.DTOs.Auth.RegisterRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 13:03:43.982 +03:00 [INF] [] Executed DbCommand (98ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-09-13 13:03:44.261 +03:00 [INF] [] Executed DbCommand (7ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 256), @p8='?' (Size = 256), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (DbType = Boolean), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);
+2026-09-13 13:03:44.367 +03:00 [INF] [] Executed DbCommand (6ms) [Parameters=[@p0='?' (Size = 200), @p1='?' (DbType = DateTime2), @p2='?' (Size = 256), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Boolean), @p5='?' (DbType = Int32), @p6='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [OtpVerifications] ([CodeHash], [CreatedAt], [Email], [ExpiresAt], [IsUsed], [Purpose], [UserId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+2026-09-13 13:03:44.455 +03:00 [INF] [] Start processing HTTP request POST https://api.resend.com/emails
+2026-09-13 13:03:44.462 +03:00 [INF] [] Sending HTTP request POST https://api.resend.com/emails
+2026-09-13 13:03:45.202 +03:00 [INF] [] Received HTTP response headers after 727.8014ms - 200
+2026-09-13 13:03:45.210 +03:00 [INF] [] End processing HTTP request after 760.4636ms - 200
+2026-09-13 13:03:45.268 +03:00 [INF] [] Executing OkObjectResult, writing value of type 'System.String'.
+2026-09-13 13:03:45.294 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API) in 3664.0042ms
+2026-09-13 13:03:45.301 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 13:03:45.312 +03:00 [INF] [] HTTP POST /api/v1/auth/register responded 200 in 3799.4577 ms
+2026-09-13 13:03:45.347 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - 200 null text/plain; charset=utf-8 3839.9347ms
+2026-09-13 13:04:38.921 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/verify-otp - application/json 61
+2026-09-13 13:04:38.937 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.VerifyOtp (MJDVerse.API)'
+2026-09-13 13:04:38.945 +03:00 [INF] [] Route matched with {action = "VerifyOtp", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] VerifyOtp(MJDVerse.Application.DTOs.Auth.VerifyOtpRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 13:04:39.058 +03:00 [INF] [] Executed DbCommand (7ms) [Parameters=[@__email_0='?' (Size = 256), @__purpose_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[CodeHash], [o].[CreatedAt], [o].[Email], [o].[ExpiresAt], [o].[IsUsed], [o].[Purpose], [o].[UserId]
+FROM [OtpVerifications] AS [o]
+WHERE [o].[Email] = @__email_0 AND [o].[Purpose] = @__purpose_1 AND [o].[IsUsed] = CAST(0 AS bit)
+ORDER BY [o].[CreatedAt] DESC
+2026-09-13 13:04:39.124 +03:00 [INF] [] Executed DbCommand (44ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-09-13 13:04:39.454 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.VerifyOtp (MJDVerse.API) in 506.864ms
+2026-09-13 13:04:39.457 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.VerifyOtp (MJDVerse.API)'
+2026-09-13 13:04:39.459 +03:00 [ERR] [] HTTP POST /api/v1/auth/verify-otp responded 500 in 527.3607 ms
+System.InvalidOperationException: Sequence contains more than one element.
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Identity.UserManager`1.FindByEmailAsync(String email)
+   at MJDVerse.Infrastructure.Services.IdentityService.FindByEmailAsync(String email) in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.Infrastructure\Services\IdentityService.cs:line 37
+   at MJDVerse.Application.Services.AuthService.VerifyOtpAsync(VerifyOtpRequestDto request) in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.Core\Services\AuthService.cs:line 107
+   at MJDVerse.API.Controllers.AuthController.VerifyOtp(VerifyOtpRequestDto request) in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI\Controllers\AuthController.cs:line 77
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-09-13 13:04:39.858 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/verify-otp - 500 null application/json 938.5013ms
+2026-09-13 13:04:44.033 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/verify-otp - application/json 61
+2026-09-13 13:04:44.043 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.VerifyOtp (MJDVerse.API)'
+2026-09-13 13:04:44.047 +03:00 [INF] [] Route matched with {action = "VerifyOtp", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] VerifyOtp(MJDVerse.Application.DTOs.Auth.VerifyOtpRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 13:04:44.089 +03:00 [INF] [] Executed DbCommand (2ms) [Parameters=[@__email_0='?' (Size = 256), @__purpose_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[CodeHash], [o].[CreatedAt], [o].[Email], [o].[ExpiresAt], [o].[IsUsed], [o].[Purpose], [o].[UserId]
+FROM [OtpVerifications] AS [o]
+WHERE [o].[Email] = @__email_0 AND [o].[Purpose] = @__purpose_1 AND [o].[IsUsed] = CAST(0 AS bit)
+ORDER BY [o].[CreatedAt] DESC
+2026-09-13 13:04:44.095 +03:00 [INF] [] Executed DbCommand (1ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-09-13 13:04:44.365 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.VerifyOtp (MJDVerse.API) in 313.7549ms
+2026-09-13 13:04:44.369 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.VerifyOtp (MJDVerse.API)'
+2026-09-13 13:04:44.371 +03:00 [ERR] [] HTTP POST /api/v1/auth/verify-otp responded 500 in 328.8562 ms
+System.InvalidOperationException: Sequence contains more than one element.
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Identity.UserManager`1.FindByEmailAsync(String email)
+   at MJDVerse.Infrastructure.Services.IdentityService.FindByEmailAsync(String email) in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.Infrastructure\Services\IdentityService.cs:line 37
+   at MJDVerse.Application.Services.AuthService.VerifyOtpAsync(VerifyOtpRequestDto request) in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.Core\Services\AuthService.cs:line 107
+   at MJDVerse.API.Controllers.AuthController.VerifyOtp(VerifyOtpRequestDto request) in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI\Controllers\AuthController.cs:line 77
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-09-13 13:04:44.726 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/verify-otp - 500 null application/json 693.4361ms
+2026-09-13 13:20:09.399 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 13:20:09.945 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 13:20:10.092 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 13:20:10.104 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 13:20:10.105 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 13:20:11.505 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-13 13:20:11.851 +03:00 [INF] [] HTTP GET / responded 404 in 134.4825 ms
+2026-09-13 13:20:11.878 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 398.2503ms
+2026-09-13 13:20:11.887 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-13 13:20:34.162 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - application/json 170
+2026-09-13 13:20:34.186 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 13:20:34.259 +03:00 [INF] [] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(MJDVerse.Application.DTOs.Auth.RegisterRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 13:20:37.184 +03:00 [INF] [] Executed DbCommand (186ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-09-13 13:20:37.247 +03:00 [INF] [] Executed DbCommand (11ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-09-13 13:20:37.513 +03:00 [INF] [] Executed DbCommand (43ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 256), @p8='?' (Size = 256), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (DbType = Boolean), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);
+2026-09-13 13:20:37.681 +03:00 [INF] [] Executed DbCommand (57ms) [Parameters=[@p0='?' (Size = 200), @p1='?' (DbType = DateTime2), @p2='?' (Size = 256), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Boolean), @p5='?' (DbType = Int32), @p6='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [OtpVerifications] ([CodeHash], [CreatedAt], [Email], [ExpiresAt], [IsUsed], [Purpose], [UserId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+2026-09-13 13:20:37.778 +03:00 [INF] [] Start processing HTTP request POST https://api.resend.com/emails
+2026-09-13 13:20:37.786 +03:00 [INF] [] Sending HTTP request POST https://api.resend.com/emails
+2026-09-13 13:20:38.544 +03:00 [INF] [] Received HTTP response headers after 746.7744ms - 200
+2026-09-13 13:20:38.551 +03:00 [INF] [] End processing HTTP request after 779.5338ms - 200
+2026-09-13 13:20:38.575 +03:00 [INF] [] Executing OkObjectResult, writing value of type 'System.String'.
+2026-09-13 13:20:38.607 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API) in 4338.8266ms
+2026-09-13 13:20:38.612 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.Register (MJDVerse.API)'
+2026-09-13 13:20:38.616 +03:00 [INF] [] HTTP POST /api/v1/auth/register responded 200 in 4450.2975 ms
+2026-09-13 13:20:38.629 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/register - 200 null text/plain; charset=utf-8 4468.4964ms
+2026-09-13 13:21:34.090 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/verify-otp - application/json 61
+2026-09-13 13:21:34.098 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.VerifyOtp (MJDVerse.API)'
+2026-09-13 13:21:34.105 +03:00 [INF] [] Route matched with {action = "VerifyOtp", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] VerifyOtp(MJDVerse.Application.DTOs.Auth.VerifyOtpRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 13:21:34.244 +03:00 [INF] [] Executed DbCommand (8ms) [Parameters=[@__email_0='?' (Size = 256), @__purpose_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[CodeHash], [o].[CreatedAt], [o].[Email], [o].[ExpiresAt], [o].[IsUsed], [o].[Purpose], [o].[UserId]
+FROM [OtpVerifications] AS [o]
+WHERE [o].[Email] = @__email_0 AND [o].[Purpose] = @__purpose_1 AND [o].[IsUsed] = CAST(0 AS bit)
+ORDER BY [o].[CreatedAt] DESC
+2026-09-13 13:21:34.264 +03:00 [INF] [] Executed DbCommand (1ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-09-13 13:21:34.273 +03:00 [INF] [] Executed DbCommand (2ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-09-13 13:21:34.280 +03:00 [INF] [] Executed DbCommand (1ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-09-13 13:21:34.352 +03:00 [INF] [] Executed DbCommand (56ms) [Parameters=[@p14='?' (Size = 450), @p0='?' (DbType = Int32), @p1='?' (Size = 4000), @p15='?' (Size = 4000), @p2='?' (Size = 256), @p3='?' (DbType = Boolean), @p4='?' (DbType = Boolean), @p5='?' (DbType = DateTimeOffset), @p6='?' (Size = 256), @p7='?' (Size = 256), @p8='?' (Size = 4000), @p9='?' (Size = 4000), @p10='?' (DbType = Boolean), @p11='?' (Size = 4000), @p12='?' (DbType = Boolean), @p13='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p0, [ConcurrencyStamp] = @p1, [Email] = @p2, [EmailConfirmed] = @p3, [LockoutEnabled] = @p4, [LockoutEnd] = @p5, [NormalizedEmail] = @p6, [NormalizedUserName] = @p7, [PasswordHash] = @p8, [PhoneNumber] = @p9, [PhoneNumberConfirmed] = @p10, [SecurityStamp] = @p11, [TwoFactorEnabled] = @p12, [UserName] = @p13
+OUTPUT 1
+WHERE [Id] = @p14 AND [ConcurrencyStamp] = @p15;
+2026-09-13 13:21:34.366 +03:00 [INF] [] Executed DbCommand (4ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [OtpVerifications] SET [IsUsed] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-09-13 13:21:34.370 +03:00 [INF] [] Executing OkObjectResult, writing value of type 'System.String'.
+2026-09-13 13:21:34.372 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.VerifyOtp (MJDVerse.API) in 264.9434ms
+2026-09-13 13:21:34.374 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.VerifyOtp (MJDVerse.API)'
+2026-09-13 13:21:34.375 +03:00 [INF] [] HTTP POST /api/v1/auth/verify-otp responded 200 in 280.9862 ms
+2026-09-13 13:21:34.378 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/verify-otp - 200 null text/plain; charset=utf-8 287.5321ms
+2026-09-13 13:22:17.632 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/verify-otp - application/json 61
+2026-09-13 13:22:17.642 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.VerifyOtp (MJDVerse.API)'
+2026-09-13 13:22:17.645 +03:00 [INF] [] Route matched with {action = "VerifyOtp", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] VerifyOtp(MJDVerse.Application.DTOs.Auth.VerifyOtpRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 13:22:17.687 +03:00 [INF] [] Executed DbCommand (4ms) [Parameters=[@__email_0='?' (Size = 256), @__purpose_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[CodeHash], [o].[CreatedAt], [o].[Email], [o].[ExpiresAt], [o].[IsUsed], [o].[Purpose], [o].[UserId]
+FROM [OtpVerifications] AS [o]
+WHERE [o].[Email] = @__email_0 AND [o].[Purpose] = @__purpose_1 AND [o].[IsUsed] = CAST(0 AS bit)
+ORDER BY [o].[CreatedAt] DESC
+2026-09-13 13:22:17.698 +03:00 [INF] [] Executing BadRequestObjectResult, writing value of type 'System.String'.
+2026-09-13 13:22:17.699 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.VerifyOtp (MJDVerse.API) in 52.4326ms
+2026-09-13 13:22:17.701 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.VerifyOtp (MJDVerse.API)'
+2026-09-13 13:22:17.702 +03:00 [INF] [] HTTP POST /api/v1/auth/verify-otp responded 400 in 60.9300 ms
+2026-09-13 13:22:17.705 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/verify-otp - 400 null text/plain; charset=utf-8 72.5743ms
+2026-09-13 13:24:48.461 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 13:24:48.780 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 13:24:49.089 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 13:24:49.092 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 13:24:49.095 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 13:24:50.884 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-13 13:24:51.203 +03:00 [INF] [] HTTP GET / responded 404 in 132.8223 ms
+2026-09-13 13:24:51.227 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 388.8097ms
+2026-09-13 13:24:51.236 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-13 13:26:06.012 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/login - application/json 77
+2026-09-13 13:26:06.065 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.Login (MJDVerse.API)'
+2026-09-13 13:26:06.217 +03:00 [INF] [] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(MJDVerse.Application.DTOs.Auth.LoginRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 13:26:09.818 +03:00 [INF] [] Executed DbCommand (62ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-09-13 13:26:10.363 +03:00 [INF] [] Executed DbCommand (47ms) [Parameters=[@p0='?' (Size = 200), @p1='?' (DbType = DateTime2), @p2='?' (Size = 256), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Boolean), @p5='?' (DbType = Int32), @p6='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [OtpVerifications] ([CodeHash], [CreatedAt], [Email], [ExpiresAt], [IsUsed], [Purpose], [UserId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+2026-09-13 13:26:10.452 +03:00 [INF] [] Start processing HTTP request POST https://api.resend.com/emails
+2026-09-13 13:26:10.459 +03:00 [INF] [] Sending HTTP request POST https://api.resend.com/emails
+2026-09-13 13:26:11.132 +03:00 [INF] [] Received HTTP response headers after 663.4598ms - 200
+2026-09-13 13:26:11.140 +03:00 [INF] [] End processing HTTP request after 692.7663ms - 200
+2026-09-13 13:26:11.191 +03:00 [INF] [] Executing OkObjectResult, writing value of type 'System.String'.
+2026-09-13 13:26:11.218 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.Login (MJDVerse.API) in 4983.0214ms
+2026-09-13 13:26:11.226 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.Login (MJDVerse.API)'
+2026-09-13 13:26:11.239 +03:00 [INF] [] HTTP POST /api/v1/auth/login responded 200 in 5222.7757 ms
+2026-09-13 13:26:11.275 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/login - 200 null text/plain; charset=utf-8 5263.4094ms
+2026-09-13 13:27:40.898 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/verify-login-otp - application/json 61
+2026-09-13 13:27:40.919 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.VerifyLoginOtp (MJDVerse.API)'
+2026-09-13 13:27:40.936 +03:00 [INF] [] Route matched with {action = "VerifyLoginOtp", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] VerifyLoginOtp(MJDVerse.Application.DTOs.Auth.VerifyLoginOtpRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 13:27:41.180 +03:00 [INF] [] Executed DbCommand (3ms) [Parameters=[@__email_0='?' (Size = 256), @__purpose_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[CodeHash], [o].[CreatedAt], [o].[Email], [o].[ExpiresAt], [o].[IsUsed], [o].[Purpose], [o].[UserId]
+FROM [OtpVerifications] AS [o]
+WHERE [o].[Email] = @__email_0 AND [o].[Purpose] = @__purpose_1 AND [o].[IsUsed] = CAST(0 AS bit)
+ORDER BY [o].[CreatedAt] DESC
+2026-09-13 13:27:41.200 +03:00 [INF] [] Executing BadRequestObjectResult, writing value of type 'System.String'.
+2026-09-13 13:27:41.205 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.VerifyLoginOtp (MJDVerse.API) in 262.8452ms
+2026-09-13 13:27:41.210 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.VerifyLoginOtp (MJDVerse.API)'
+2026-09-13 13:27:41.214 +03:00 [INF] [] HTTP POST /api/v1/auth/verify-login-otp responded 400 in 306.2197 ms
+2026-09-13 13:27:41.218 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/verify-login-otp - 400 null text/plain; charset=utf-8 326.2453ms
+2026-09-13 13:29:17.405 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 13:29:17.632 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 13:29:17.777 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 13:29:17.779 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 13:29:17.780 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 13:29:19.154 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-13 13:29:19.470 +03:00 [INF] [] HTTP GET / responded 404 in 128.7451 ms
+2026-09-13 13:29:19.489 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 360.2046ms
+2026-09-13 13:29:19.497 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-13 13:29:25.133 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/verify-login-otp - application/json 61
+2026-09-13 13:29:25.150 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.VerifyLoginOtp (MJDVerse.API)'
+2026-09-13 13:29:25.200 +03:00 [INF] [] Route matched with {action = "VerifyLoginOtp", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] VerifyLoginOtp(MJDVerse.Application.DTOs.Auth.VerifyLoginOtpRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 13:29:27.438 +03:00 [INF] [] Executed DbCommand (64ms) [Parameters=[@__email_0='?' (Size = 256), @__purpose_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[CodeHash], [o].[CreatedAt], [o].[Email], [o].[ExpiresAt], [o].[IsUsed], [o].[Purpose], [o].[UserId]
+FROM [OtpVerifications] AS [o]
+WHERE [o].[Email] = @__email_0 AND [o].[Purpose] = @__purpose_1 AND [o].[IsUsed] = CAST(0 AS bit)
+ORDER BY [o].[CreatedAt] DESC
+2026-09-13 13:29:27.559 +03:00 [INF] [] Executing BadRequestObjectResult, writing value of type 'System.String'.
+2026-09-13 13:29:27.570 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.VerifyLoginOtp (MJDVerse.API) in 2362.0128ms
+2026-09-13 13:29:27.573 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.VerifyLoginOtp (MJDVerse.API)'
+2026-09-13 13:29:27.576 +03:00 [INF] [] HTTP POST /api/v1/auth/verify-login-otp responded 400 in 2439.6325 ms
+2026-09-13 13:29:27.588 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/verify-login-otp - 400 null text/plain; charset=utf-8 2456.0723ms
+2026-09-13 13:29:33.875 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/login - application/json 77
+2026-09-13 13:29:33.883 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.Login (MJDVerse.API)'
+2026-09-13 13:29:33.890 +03:00 [INF] [] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(MJDVerse.Application.DTOs.Auth.LoginRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 13:29:33.948 +03:00 [INF] [] Executed DbCommand (8ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-09-13 13:29:34.324 +03:00 [INF] [] Executed DbCommand (40ms) [Parameters=[@p0='?' (Size = 200), @p1='?' (DbType = DateTime2), @p2='?' (Size = 256), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Boolean), @p5='?' (DbType = Int32), @p6='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [OtpVerifications] ([CodeHash], [CreatedAt], [Email], [ExpiresAt], [IsUsed], [Purpose], [UserId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+2026-09-13 13:29:34.409 +03:00 [INF] [] Start processing HTTP request POST https://api.resend.com/emails
+2026-09-13 13:29:34.416 +03:00 [INF] [] Sending HTTP request POST https://api.resend.com/emails
+2026-09-13 13:29:35.138 +03:00 [INF] [] Received HTTP response headers after 710.4342ms - 200
+2026-09-13 13:29:35.146 +03:00 [INF] [] End processing HTTP request after 737.779ms - 200
+2026-09-13 13:29:35.179 +03:00 [INF] [] Executing OkObjectResult, writing value of type 'System.String'.
+2026-09-13 13:29:35.183 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.Login (MJDVerse.API) in 1291.1903ms
+2026-09-13 13:29:35.187 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.Login (MJDVerse.API)'
+2026-09-13 13:29:35.190 +03:00 [INF] [] HTTP POST /api/v1/auth/login responded 200 in 1311.5991 ms
+2026-09-13 13:29:35.197 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/login - 200 null text/plain; charset=utf-8 1321.4798ms
+2026-09-13 13:29:57.158 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/verify-login-otp - application/json 61
+2026-09-13 13:29:57.188 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.VerifyLoginOtp (MJDVerse.API)'
+2026-09-13 13:29:57.192 +03:00 [INF] [] Route matched with {action = "VerifyLoginOtp", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] VerifyLoginOtp(MJDVerse.Application.DTOs.Auth.VerifyLoginOtpRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-13 13:29:57.298 +03:00 [INF] [] Executed DbCommand (4ms) [Parameters=[@__email_0='?' (Size = 256), @__purpose_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[CodeHash], [o].[CreatedAt], [o].[Email], [o].[ExpiresAt], [o].[IsUsed], [o].[Purpose], [o].[UserId]
+FROM [OtpVerifications] AS [o]
+WHERE [o].[Email] = @__email_0 AND [o].[Purpose] = @__purpose_1 AND [o].[IsUsed] = CAST(0 AS bit)
+ORDER BY [o].[CreatedAt] DESC
+2026-09-13 13:29:57.310 +03:00 [INF] [] Executed DbCommand (1ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-09-13 13:29:57.358 +03:00 [INF] [] Executed DbCommand (40ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [OtpVerifications] SET [IsUsed] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-09-13 13:29:57.401 +03:00 [INF] [] Executing OkObjectResult, writing value of type 'MJDVerse.Application.DTOs.Auth.AuthResponseDto'.
+2026-09-13 13:29:57.406 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.VerifyLoginOtp (MJDVerse.API) in 207.5267ms
+2026-09-13 13:29:57.408 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.VerifyLoginOtp (MJDVerse.API)'
+2026-09-13 13:29:57.410 +03:00 [INF] [] HTTP POST /api/v1/auth/verify-login-otp responded 200 in 222.4619 ms
+2026-09-13 13:29:57.412 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/verify-login-otp - 200 null application/json; charset=utf-8 253.8864ms
+2026-09-13 13:33:45.173 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/api/v1/Favorites - null null
+2026-09-13 13:33:45.356 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.FavoritesController.GetMyFavorites (MJDVerse.API)'
+2026-09-13 13:33:45.370 +03:00 [INF] [] Route matched with {action = "GetMyFavorites", controller = "Favorites"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMyFavorites() on controller MJDVerse.API.Controllers.FavoritesController (MJDVerse.API).
+2026-09-13 13:33:45.660 +03:00 [INF] [] Executed DbCommand (15ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [f].[Id], [f].[AddedAt], [f].[MovieId], [f].[UserId], [m].[Id], [m].[AverageRating], [m].[Description], [m].[PosterUrl], [m].[ReleaseDate], [m].[RuntimeMinutes], [m].[Title]
+FROM [Favorites] AS [f]
+INNER JOIN [Movies] AS [m] ON [f].[MovieId] = [m].[Id]
+WHERE [f].[UserId] = @__userId_0
+ORDER BY [f].[AddedAt] DESC
+2026-09-13 13:33:45.670 +03:00 [INF] [] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[MJDVerse.Application.DTOs.Movies.MovieDto, MJDVerse.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-13 13:33:45.680 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.FavoritesController.GetMyFavorites (MJDVerse.API) in 304.48ms
+2026-09-13 13:33:45.682 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.FavoritesController.GetMyFavorites (MJDVerse.API)'
+2026-09-13 13:33:45.684 +03:00 [INF] [] HTTP GET /api/v1/Favorites responded 200 in 482.8854 ms
+2026-09-13 13:33:45.686 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/api/v1/Favorites - 200 null application/json; charset=utf-8 512.872ms
+2026-09-13 13:52:05.199 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 13:52:05.259 +03:00 [INF] [] Creating key {789da6e5-29b1-4aac-affe-aa80633053fc} with creation date 2026-09-13 10:52:05Z, activation date 2026-09-15 10:44:07Z, and expiration date 2026-12-12 10:52:05Z.
+2026-09-13 13:52:05.268 +03:00 [INF] [] Writing data to file 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys\key-789da6e5-29b1-4aac-affe-aa80633053fc.xml'.
+2026-09-13 13:52:05.364 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 13:52:05.447 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 13:52:05.449 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 13:52:05.450 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 13:52:06.506 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-13 13:52:06.767 +03:00 [INF] [] HTTP GET / responded 404 in 109.3384 ms
+2026-09-13 13:52:06.781 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 293.5667ms
+2026-09-13 13:52:06.785 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-13 14:16:03.365 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 14:16:03.537 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 14:16:03.634 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 14:16:03.635 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 14:16:03.636 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 14:20:13.173 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 14:20:13.331 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 14:20:13.412 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 14:20:13.413 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 14:20:13.414 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 14:20:14.215 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-13 14:20:14.448 +03:00 [INF] [] HTTP GET / responded 404 in 97.1685 ms
+2026-09-13 14:20:14.478 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 276.8885ms
+2026-09-13 14:20:14.496 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-13 14:21:19.180 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/api/v1/movies/popular - null null
+2026-09-13 14:21:19.206 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.MoviesController.GetPopularMovies (MJDVerse.API)'
+2026-09-13 14:21:19.247 +03:00 [INF] [] Route matched with {action = "GetPopularMovies", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPopularMovies() on controller MJDVerse.API.Controllers.MoviesController (MJDVerse.API).
+2026-09-13 14:23:14.481 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 14:23:14.635 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 14:23:14.736 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 14:23:14.737 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 14:23:14.738 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 14:23:15.414 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-13 14:23:15.639 +03:00 [INF] [] HTTP GET / responded 404 in 95.6745 ms
+2026-09-13 14:23:15.658 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 256.861ms
+2026-09-13 14:23:15.663 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-13 14:23:26.374 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/api/v1/movies/popular - null null
+2026-09-13 14:23:26.394 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.MoviesController.GetPopularMovies (MJDVerse.API)'
+2026-09-13 14:23:26.432 +03:00 [INF] [] Route matched with {action = "GetPopularMovies", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPopularMovies() on controller MJDVerse.API.Controllers.MoviesController (MJDVerse.API).
+2026-09-13 14:23:26.594 +03:00 [INF] [] Start processing HTTP request GET https://api.themoviedb.org/movie/popular?*
+2026-09-13 14:23:26.598 +03:00 [INF] [] Sending HTTP request GET https://api.themoviedb.org/movie/popular?*
+2026-09-13 14:23:27.048 +03:00 [INF] [] Received HTTP response headers after 446.362ms - 404
+2026-09-13 14:23:27.051 +03:00 [INF] [] End processing HTTP request after 459.937ms - 404
+2026-09-13 14:23:27.232 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.MoviesController.GetPopularMovies (MJDVerse.API) in 794.8162ms
+2026-09-13 14:23:27.234 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.MoviesController.GetPopularMovies (MJDVerse.API)'
+2026-09-13 14:23:27.236 +03:00 [ERR] [] HTTP GET /api/v1/movies/popular responded 500 in 852.8054 ms
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 404 (Not Found).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at MJDVerse.Infrastructure.Providers.TmdbMovieMetadataProvider.GetMoviesAsync() in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.Infrastructure\Providers\TmdbMovieMetadataProvider.cs:line 31
+   at MJDVerse.Application.Services.MovieService.GetPopularMoviesAsync() in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.Core\Services\MovieService.cs:line 185
+   at MJDVerse.API.Controllers.MoviesController.GetPopularMovies() in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI\Controllers\MoviesController.cs:line 39
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-09-13 14:23:27.502 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/api/v1/movies/popular - 500 null application/json 1128.7969ms
+2026-09-13 14:23:27.528 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/favicon.ico - null null
+2026-09-13 14:23:27.533 +03:00 [INF] [] HTTP GET /favicon.ico responded 404 in 1.7343 ms
+2026-09-13 14:23:27.535 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/favicon.ico - 404 0 null 6.4794ms
+2026-09-13 14:23:27.537 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/favicon.ico, Response status code: 404
+2026-09-13 14:24:15.828 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 14:24:16.023 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 14:24:16.107 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 14:24:16.108 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 14:24:16.109 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 14:24:16.948 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-13 14:24:17.161 +03:00 [INF] [] HTTP GET / responded 404 in 81.7123 ms
+2026-09-13 14:24:17.185 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 250.9965ms
+2026-09-13 14:24:17.195 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-13 14:26:29.663 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 14:26:29.866 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 14:26:29.977 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 14:26:29.978 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 14:26:29.979 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 14:26:31.168 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-13 14:26:31.414 +03:00 [INF] [] HTTP GET / responded 404 in 99.8732 ms
+2026-09-13 14:26:31.428 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 277.3349ms
+2026-09-13 14:26:31.433 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-13 14:26:56.491 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/api/v1/movies/popular - null null
+2026-09-13 14:26:56.538 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.MoviesController.GetPopularMovies (MJDVerse.API)'
+2026-09-13 14:26:56.577 +03:00 [INF] [] Route matched with {action = "GetPopularMovies", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPopularMovies() on controller MJDVerse.API.Controllers.MoviesController (MJDVerse.API).
+2026-09-13 14:26:56.738 +03:00 [INF] [] Start processing HTTP request GET https://api.themoviedb.org/movie/popular?*
+2026-09-13 14:26:56.742 +03:00 [INF] [] Sending HTTP request GET https://api.themoviedb.org/movie/popular?*
+2026-09-13 14:26:57.206 +03:00 [INF] [] Received HTTP response headers after 460.0655ms - 404
+2026-09-13 14:26:57.208 +03:00 [INF] [] End processing HTTP request after 473.906ms - 404
+2026-09-13 14:26:57.419 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.MoviesController.GetPopularMovies (MJDVerse.API) in 837.1832ms
+2026-09-13 14:26:57.421 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.MoviesController.GetPopularMovies (MJDVerse.API)'
+2026-09-13 14:26:57.424 +03:00 [ERR] [] HTTP GET /api/v1/movies/popular responded 500 in 918.5783 ms
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 404 (Not Found).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at MJDVerse.Infrastructure.Providers.TmdbMovieMetadataProvider.GetMoviesAsync() in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.Infrastructure\Providers\TmdbMovieMetadataProvider.cs:line 31
+   at MJDVerse.Application.Services.MovieService.GetPopularMoviesAsync() in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.Core\Services\MovieService.cs:line 185
+   at MJDVerse.API.Controllers.MoviesController.GetPopularMovies() in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI\Controllers\MoviesController.cs:line 39
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-09-13 14:26:57.687 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/api/v1/movies/popular - 500 null application/json 1196.3371ms
+2026-09-13 14:26:57.708 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/favicon.ico - null null
+2026-09-13 14:26:57.712 +03:00 [INF] [] HTTP GET /favicon.ico responded 404 in 1.7820 ms
+2026-09-13 14:26:57.714 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/favicon.ico - 404 0 null 6.075ms
+2026-09-13 14:26:57.717 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/favicon.ico, Response status code: 404
+2026-09-13 14:42:19.703 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 14:42:19.874 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 14:42:19.971 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 14:42:19.972 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 14:42:19.973 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 14:42:21.164 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-13 14:42:21.406 +03:00 [INF] [] HTTP GET / responded 404 in 96.0080 ms
+2026-09-13 14:42:21.422 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 280.2982ms
+2026-09-13 14:42:21.428 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-13 14:44:42.322 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 14:44:42.486 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 14:44:42.580 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 14:44:42.582 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 14:44:42.583 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 14:44:43.436 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-13 14:44:43.660 +03:00 [INF] [] HTTP GET / responded 404 in 87.1115 ms
+2026-09-13 14:44:43.675 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 254.3143ms
+2026-09-13 14:44:43.681 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-13 14:45:54.316 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 14:45:54.529 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 14:45:54.658 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 14:45:54.660 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 14:45:54.661 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 14:45:55.883 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-13 14:45:56.176 +03:00 [INF] [] HTTP GET / responded 404 in 121.8276 ms
+2026-09-13 14:45:56.194 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 330.3492ms
+2026-09-13 14:45:56.199 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-13 14:46:09.647 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/api/v1/movies/popular - null null
+2026-09-13 14:46:09.659 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.MoviesController.GetPopularMovies (MJDVerse.API)'
+2026-09-13 14:46:09.693 +03:00 [INF] [] Route matched with {action = "GetPopularMovies", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPopularMovies() on controller MJDVerse.API.Controllers.MoviesController (MJDVerse.API).
+2026-09-13 14:46:09.864 +03:00 [INF] [] Start processing HTTP request GET https://api.themoviedb.org/movie/popular?*
+2026-09-13 14:46:09.869 +03:00 [INF] [] Sending HTTP request GET https://api.themoviedb.org/movie/popular?*
+2026-09-13 14:46:10.317 +03:00 [INF] [] Received HTTP response headers after 445.072ms - 404
+2026-09-13 14:46:10.320 +03:00 [INF] [] End processing HTTP request after 459.4972ms - 404
+2026-09-13 14:46:10.662 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.MoviesController.GetPopularMovies (MJDVerse.API) in 964.62ms
+2026-09-13 14:46:10.664 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.MoviesController.GetPopularMovies (MJDVerse.API)'
+2026-09-13 14:46:10.666 +03:00 [ERR] [] HTTP GET /api/v1/movies/popular responded 500 in 1016.7612 ms
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 404 (Not Found).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at MJDVerse.Infrastructure.Providers.TmdbMovieMetadataProvider.GetMoviesAsync() in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.Infrastructure\Providers\TmdbMovieMetadataProvider.cs:line 31
+   at MJDVerse.Application.Services.MovieService.GetPopularMoviesAsync() in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.Core\Services\MovieService.cs:line 185
+   at MJDVerse.API.Controllers.MoviesController.GetPopularMovies() in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI\Controllers\MoviesController.cs:line 39
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-09-13 14:46:11.105 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/api/v1/movies/popular - 500 null application/json 1458.4726ms
+2026-09-13 14:47:24.795 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/api/v1/movies/popular - null null
+2026-09-13 14:47:24.818 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.MoviesController.GetPopularMovies (MJDVerse.API)'
+2026-09-13 14:47:24.820 +03:00 [INF] [] Route matched with {action = "GetPopularMovies", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPopularMovies() on controller MJDVerse.API.Controllers.MoviesController (MJDVerse.API).
+2026-09-13 14:47:24.829 +03:00 [INF] [] Start processing HTTP request GET https://api.themoviedb.org/movie/popular?*
+2026-09-13 14:47:24.830 +03:00 [INF] [] Sending HTTP request GET https://api.themoviedb.org/movie/popular?*
+2026-09-13 14:47:25.014 +03:00 [INF] [] Received HTTP response headers after 182.6367ms - 404
+2026-09-13 14:47:25.016 +03:00 [INF] [] End processing HTTP request after 187.1057ms - 404
+2026-09-13 14:47:25.247 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.MoviesController.GetPopularMovies (MJDVerse.API) in 425.6117ms
+2026-09-13 14:47:25.249 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.MoviesController.GetPopularMovies (MJDVerse.API)'
+2026-09-13 14:47:25.251 +03:00 [ERR] [] HTTP GET /api/v1/movies/popular responded 500 in 437.7717 ms
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 404 (Not Found).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at MJDVerse.Infrastructure.Providers.TmdbMovieMetadataProvider.GetMoviesAsync() in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.Infrastructure\Providers\TmdbMovieMetadataProvider.cs:line 31
+   at MJDVerse.Application.Services.MovieService.GetPopularMoviesAsync() in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.Core\Services\MovieService.cs:line 185
+   at MJDVerse.API.Controllers.MoviesController.GetPopularMovies() in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI\Controllers\MoviesController.cs:line 39
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-09-13 14:47:25.550 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/api/v1/movies/popular - 500 null application/json 760.0814ms
+2026-09-13 14:47:25.573 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/favicon.ico - null null
+2026-09-13 14:47:25.576 +03:00 [INF] [] HTTP GET /favicon.ico responded 404 in 0.1614 ms
+2026-09-13 14:47:25.578 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/favicon.ico - 404 0 null 5.345ms
+2026-09-13 14:47:25.581 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/favicon.ico, Response status code: 404
+2026-09-13 14:53:35.814 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 14:53:36.031 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 14:53:36.150 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 14:53:36.151 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 14:53:36.152 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 14:53:37.242 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-13 14:53:37.566 +03:00 [INF] [] HTTP GET / responded 404 in 122.3753 ms
+2026-09-13 14:53:37.586 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 389.1322ms
+2026-09-13 14:53:37.592 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-13 14:54:10.094 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/api/v1/movies/popular - null null
+2026-09-13 14:54:10.125 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.MoviesController.GetPopularMovies (MJDVerse.API)'
+2026-09-13 14:54:10.163 +03:00 [INF] [] Route matched with {action = "GetPopularMovies", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPopularMovies() on controller MJDVerse.API.Controllers.MoviesController (MJDVerse.API).
+2026-09-13 14:54:10.322 +03:00 [INF] [] Start processing HTTP request GET https://api.themoviedb.org/3/movie/popular?*
+2026-09-13 14:54:10.327 +03:00 [INF] [] Sending HTTP request GET https://api.themoviedb.org/3/movie/popular?*
+2026-09-13 14:54:10.788 +03:00 [INF] [] Received HTTP response headers after 457.1935ms - 401
+2026-09-13 14:54:10.791 +03:00 [INF] [] End processing HTTP request after 471.8919ms - 401
+2026-09-13 14:54:11.020 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.MoviesController.GetPopularMovies (MJDVerse.API) in 852.2182ms
+2026-09-13 14:54:11.023 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.MoviesController.GetPopularMovies (MJDVerse.API)'
+2026-09-13 14:54:11.026 +03:00 [ERR] [] HTTP GET /api/v1/movies/popular responded 500 in 909.2678 ms
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 401 (Unauthorized).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at MJDVerse.Infrastructure.Providers.TmdbMovieMetadataProvider.GetMoviesAsync() in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.Infrastructure\Providers\TmdbMovieMetadataProvider.cs:line 31
+   at MJDVerse.Application.Services.MovieService.GetPopularMoviesAsync() in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.Core\Services\MovieService.cs:line 185
+   at MJDVerse.API.Controllers.MoviesController.GetPopularMovies() in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI\Controllers\MoviesController.cs:line 39
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-09-13 14:54:11.325 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/api/v1/movies/popular - 500 null application/json 1231.9469ms
+2026-09-13 14:54:11.346 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/favicon.ico - null null
+2026-09-13 14:54:11.351 +03:00 [INF] [] HTTP GET /favicon.ico responded 404 in 1.9682 ms
+2026-09-13 14:54:11.352 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/favicon.ico - 404 0 null 6.2465ms
+2026-09-13 14:54:11.356 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/favicon.ico, Response status code: 404
+2026-09-13 14:54:59.619 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/api/v1/movies/popular - null null
+2026-09-13 14:54:59.632 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.MoviesController.GetPopularMovies (MJDVerse.API)'
+2026-09-13 14:54:59.633 +03:00 [INF] [] Route matched with {action = "GetPopularMovies", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPopularMovies() on controller MJDVerse.API.Controllers.MoviesController (MJDVerse.API).
+2026-09-13 14:54:59.642 +03:00 [INF] [] Start processing HTTP request GET https://api.themoviedb.org/3/movie/popular?*
+2026-09-13 14:54:59.643 +03:00 [INF] [] Sending HTTP request GET https://api.themoviedb.org/3/movie/popular?*
+2026-09-13 14:54:59.807 +03:00 [INF] [] Received HTTP response headers after 163.9576ms - 401
+2026-09-13 14:54:59.808 +03:00 [INF] [] End processing HTTP request after 166.957ms - 401
+2026-09-13 14:55:00.114 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.MoviesController.GetPopularMovies (MJDVerse.API) in 479.4901ms
+2026-09-13 14:55:00.116 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.MoviesController.GetPopularMovies (MJDVerse.API)'
+2026-09-13 14:55:00.118 +03:00 [ERR] [] HTTP GET /api/v1/movies/popular responded 500 in 487.6345 ms
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 401 (Unauthorized).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at MJDVerse.Infrastructure.Providers.TmdbMovieMetadataProvider.GetMoviesAsync() in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.Infrastructure\Providers\TmdbMovieMetadataProvider.cs:line 31
+   at MJDVerse.Application.Services.MovieService.GetPopularMoviesAsync() in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.Core\Services\MovieService.cs:line 185
+   at MJDVerse.API.Controllers.MoviesController.GetPopularMovies() in C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI\Controllers\MoviesController.cs:line 39
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-09-13 14:55:00.474 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/api/v1/movies/popular - 500 null application/json 855.9808ms
+2026-09-13 14:57:44.759 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-13 14:57:44.937 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-13 14:57:45.018 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-13 14:57:45.019 +03:00 [INF] [] Hosting environment: Development
+2026-09-13 14:57:45.020 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-13 14:57:46.103 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-13 14:57:46.334 +03:00 [INF] [] HTTP GET / responded 404 in 91.5292 ms
+2026-09-13 14:57:46.353 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 267.3802ms
+2026-09-13 14:57:46.359 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-13 14:57:52.367 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/api/v1/movies/popular - null null
+2026-09-13 14:57:52.380 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.MoviesController.GetPopularMovies (MJDVerse.API)'
+2026-09-13 14:57:52.413 +03:00 [INF] [] Route matched with {action = "GetPopularMovies", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPopularMovies() on controller MJDVerse.API.Controllers.MoviesController (MJDVerse.API).
+2026-09-13 14:57:52.585 +03:00 [INF] [] Start processing HTTP request GET https://api.themoviedb.org/3/movie/popular?*
+2026-09-13 14:57:52.590 +03:00 [INF] [] Sending HTTP request GET https://api.themoviedb.org/3/movie/popular?*
+2026-09-13 14:57:53.055 +03:00 [INF] [] Received HTTP response headers after 462.0838ms - 200
+2026-09-13 14:57:53.057 +03:00 [INF] [] End processing HTTP request after 475.9544ms - 200
+2026-09-13 14:57:53.088 +03:00 [INF] [] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[TmdbMovieDto, MJDVerse.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-13 14:57:53.101 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.MoviesController.GetPopularMovies (MJDVerse.API) in 682.8147ms
+2026-09-13 14:57:53.103 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.MoviesController.GetPopularMovies (MJDVerse.API)'
+2026-09-13 14:57:53.105 +03:00 [INF] [] HTTP GET /api/v1/movies/popular responded 200 in 735.5818 ms
+2026-09-13 14:57:53.109 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/api/v1/movies/popular - 200 null application/json; charset=utf-8 741.9745ms

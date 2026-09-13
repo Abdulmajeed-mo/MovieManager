@@ -1,4 +1,5 @@
 ﻿using MJDVerse.Domain.Entities;
+using MJDVerse.Domain.Enums;
 
 namespace MJDVerse.Application.Interfaces
 {
@@ -6,7 +7,7 @@ namespace MJDVerse.Application.Interfaces
     {
         Task AddAsync(OtpVerification otp);
 
-        Task<OtpVerification?> GetLatestOtpAsync(string email);
+        Task<OtpVerification?> GetLatestOtpAsync(string email,OtpPurpose purpose);
 
         Task SaveChangesAsync();
     }

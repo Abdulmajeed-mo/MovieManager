@@ -8,7 +8,7 @@ namespace MJDVerse.API.Controllers
     
     
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [Authorize]
     public class WatchlistController : ControllerBase
     {
@@ -63,8 +63,7 @@ namespace MJDVerse.API.Controllers
 
             if (!added)
             {
-                return BadRequest(
-                    "Movie does not exist or is already in your watchlist.");
+                return BadRequest("Movie does not exist or is already in your watchlist.");
             }
 
             return Ok("Movie added to watchlist.");

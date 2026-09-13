@@ -7,7 +7,8 @@ builder.Host.AddLoggingServices(builder.Configuration);
 // Services
 builder.Services.AddDatabase(builder.Configuration);
 
-builder.Services.AddAuthenticationServices();
+builder.Services.AddAuthenticationServices(builder.Configuration);
+
 
 builder.Services.AddApplicationServices(builder.Configuration);
 

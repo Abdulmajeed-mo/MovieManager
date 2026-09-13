@@ -6,7 +6,7 @@ using MJDVerse.Application.Interfaces;
 namespace MJDVerse.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class MoviesController : ControllerBase
     {
         private readonly IMovieService _movieService;
@@ -31,6 +31,15 @@ namespace MJDVerse.API.Controllers
 
 
 
+
+
+        [HttpGet("popular")]
+        public async Task<IActionResult> GetPopularMovies()
+        {
+            var movies = await _movieService.GetPopularMoviesAsync();
+
+            return Ok(movies);
+        }
 
 
 

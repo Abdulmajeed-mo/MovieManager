@@ -8,19 +8,16 @@ namespace MJDVerse.Application.Interfaces
     //هذا هوالعقد.
     public interface IMovieService
     {
-
         Task<PagedResultDto<MovieDto>> GetMoviesAsync(MovieQueryParametersDto parameters);
 
         Task<MovieDto> CreateMovieAsync(CreateMovieDto request);
 
         Task<MovieDto?> GetMovieByIdAsync(int id);
 
-        Task<MovieDto?> UpdateMovieAsync(int id,CreateMovieDto request);
+        Task<MovieDto?> UpdateMovieAsync(int id, CreateMovieDto request);
 
         Task<bool> DeleteMovieAsync(int id);
 
-        
-
+        Task<List<TmdbMovieDto>> GetPopularMoviesAsync();
     }
-
 }

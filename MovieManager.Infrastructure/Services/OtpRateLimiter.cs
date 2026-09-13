@@ -8,24 +8,27 @@ namespace MJDVerse.Infrastructure.Services
 
         public bool IsAllowed(string key)
         {
-            var now = DateTime.UtcNow;
-
-            if (!_requests.ContainsKey(key))
+            lock (_requests)
             {
-                _requests[key] = new List<DateTime>();
+                var now = DateTime.UtcNow;
+
+                if (!_requests.ContainsKey(key))
+                {
+                    _requests[key] = new List<DateTime>();
+                }
+
+                _requests[key].RemoveAll( time => time < now.AddSeconds(-60));
+
+                if (_requests[key].Count >= 4)
+                {
+                    return false;
+                }
+
+                _requests[key].Add(now);
+
+                return true;
             }
-
-            _requests[key].RemoveAll(
-                time => time < now.AddSeconds(-60));
-
-            if (_requests[key].Count >= 4)
-            {
-                return false;
-            }
-
-            _requests[key].Add(now);
-
-            return true;
         }
     }
 }
+

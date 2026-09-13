@@ -1,6 +1,7 @@
 ﻿using MJDVerse.Application.DTOs.Auth;
 using MJDVerse.Application.Interfaces;
 using MJDVerse.Domain.Entities;
+using MJDVerse.Domain.Enums;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -15,24 +16,25 @@ namespace MJDVerse.Application.Services
         private readonly IEmailSender _emailSender;
         private readonly IOtpRepository _otpRepository;
         private readonly IOtpRateLimiter _otpRateLimiter;
-
+        private readonly IJwtTokenGenerator _jwtTokenGenerator;
 
 
 
         //Constructor
-        public AuthService(IIdentityService identityService,IEmailSender emailSender,IOtpRepository otpRepository , IOtpRateLimiter otpRateLimiter)
+        public AuthService(IIdentityService identityService,IEmailSender emailSender,IOtpRepository otpRepository , IOtpRateLimiter otpRateLimiter, IJwtTokenGenerator jwtTokenGenerator)
         {
             _identityService = identityService;
             _emailSender = emailSender;
             _otpRepository = otpRepository;
             _otpRateLimiter = otpRateLimiter;
+            _jwtTokenGenerator = jwtTokenGenerator;
         }
 
 
 
         //methods
         //Register user
-        public async Task<bool> RegisterAsync(RegisterRequestDto request)
+        public async Task<(bool Success, string[] Errors)> RegisterAsync(RegisterRequestDto request)
         {
             var user = new ApplicationUser
             {
@@ -45,7 +47,12 @@ namespace MJDVerse.Application.Services
 
             if (!result.Success)
             {
-                return false;
+                return result;
+            }
+
+            if (!_otpRateLimiter.IsAllowed(user.Email!))
+            {
+                return result;
             }
 
             var otp = RandomNumberGenerator.GetInt32(1000, 10000).ToString();
@@ -54,9 +61,11 @@ namespace MJDVerse.Application.Services
 
             var otpVerification = new OtpVerification
             {
+
                 UserId = user.Id,
                 Email = user.Email!,
                 CodeHash = otpHash,
+                Purpose = OtpPurpose.Registration,
                 ExpiresAt = DateTime.UtcNow.AddSeconds(60)
             };
 
@@ -65,7 +74,7 @@ namespace MJDVerse.Application.Services
 
             await _emailSender.SendEmailAsync(request.Email,"MJDVerse Email Verification",$"Your verification code is: {otp}");
 
-            return true;
+            return (true, Array.Empty<string>());
         }
 
 
@@ -75,8 +84,9 @@ namespace MJDVerse.Application.Services
         //Verify OTP
         public async Task<bool> VerifyOtpAsync(VerifyOtpRequestDto request)
         {
-            var otpVerification =await _otpRepository.GetLatestOtpAsync(request.Email);
-
+            var otpVerification = await _otpRepository.GetLatestOtpAsync(request.Email,OtpPurpose.Registration);
+          
+            
             if (otpVerification == null)
             {
                 return false;
@@ -118,32 +128,40 @@ namespace MJDVerse.Application.Services
 
 
         //Verify Login OTP
-        public async Task<bool> VerifyLoginOtpAsync(VerifyLoginOtpRequestDto request)
+        public async Task<AuthResponseDto?> VerifyLoginOtpAsync(VerifyLoginOtpRequestDto request)
         {
-            var otpVerification = await _otpRepository.GetLatestOtpAsync(request.Email);
+            var otpVerification = await _otpRepository.GetLatestOtpAsync(request.Email, OtpPurpose.Login);
 
             if (otpVerification == null)
             {
-                return false;
+                return null;
             }
 
             if (otpVerification.ExpiresAt <= DateTime.UtcNow)
             {
-                return false;
+                return null;
             }
 
             var otpHash = HashOtp(request.Otp);
 
-            if (otpHash != otpVerification.CodeHash)
-            {
-                return false;
-            }
+
+            if (otpHash != otpVerification.CodeHash) return null;
+
+            var user = await _identityService.FindByEmailAsync(request.Email);
+
+
+            if (user == null) return null;
 
             otpVerification.IsUsed = true;
 
             await _otpRepository.SaveChangesAsync();
 
-            return true;
+            var token = _jwtTokenGenerator.GenerateToken(user);
+
+            return new AuthResponseDto
+            {
+                Token = token
+            };
         }
 
 
@@ -209,6 +227,7 @@ namespace MJDVerse.Application.Services
                 UserId = user.Id,
                 Email = user.Email!,
                 CodeHash = otpHash,
+                Purpose = OtpPurpose.Login,
                 ExpiresAt = DateTime.UtcNow.AddSeconds(60)
             };
 

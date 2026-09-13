@@ -6,7 +6,7 @@ using MJDVerse.Application.Interfaces;
 namespace MJDVerse.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [Authorize]
     public class FavoritesController : ControllerBase
     {
