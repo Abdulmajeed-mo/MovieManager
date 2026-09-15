@@ -1,0 +1,208 @@
+2026-09-15 14:10:41.794 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-15 14:10:42.050 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-15 14:10:42.169 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-15 14:10:42.170 +03:00 [INF] [] Hosting environment: Development
+2026-09-15 14:10:42.171 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-15 14:10:43.720 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-15 14:10:43.999 +03:00 [INF] [] HTTP GET / responded 404 in 96.8427 ms
+2026-09-15 14:10:44.016 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 314.8127ms
+2026-09-15 14:10:44.020 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-15 14:17:48.759 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-15 14:17:48.948 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-15 14:17:49.041 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-15 14:17:49.043 +03:00 [INF] [] Hosting environment: Development
+2026-09-15 14:17:49.045 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-15 14:17:50.305 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-15 14:17:50.525 +03:00 [INF] [] HTTP GET / responded 404 in 84.9739 ms
+2026-09-15 14:17:50.538 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 252.929ms
+2026-09-15 14:17:50.544 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-15 14:18:34.376 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/login - application/json 77
+2026-09-15 14:18:34.393 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.Login (MJDVerse.API)'
+2026-09-15 14:18:34.443 +03:00 [INF] [] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(MJDVerse.Application.DTOs.Auth.LoginRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-15 14:18:36.988 +03:00 [INF] [] Executed DbCommand (72ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-09-15 14:18:37.298 +03:00 [INF] [] Executed DbCommand (8ms) [Parameters=[@p0='?' (Size = 200), @p1='?' (DbType = DateTime2), @p2='?' (Size = 256), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Boolean), @p5='?' (DbType = Int32), @p6='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [OtpVerifications] ([CodeHash], [CreatedAt], [Email], [ExpiresAt], [IsUsed], [Purpose], [UserId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+2026-09-15 14:18:37.366 +03:00 [INF] [] Start processing HTTP request POST https://api.resend.com/emails
+2026-09-15 14:18:37.371 +03:00 [INF] [] Sending HTTP request POST https://api.resend.com/emails
+2026-09-15 14:18:38.189 +03:00 [INF] [] Received HTTP response headers after 814.6905ms - 200
+2026-09-15 14:18:38.191 +03:00 [INF] [] End processing HTTP request after 829.3635ms - 200
+2026-09-15 14:18:38.207 +03:00 [INF] [] Executing OkObjectResult, writing value of type 'System.String'.
+2026-09-15 14:18:38.215 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.Login (MJDVerse.API) in 3766.5146ms
+2026-09-15 14:18:38.218 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.Login (MJDVerse.API)'
+2026-09-15 14:18:38.221 +03:00 [INF] [] HTTP POST /api/v1/auth/login responded 200 in 3842.3235 ms
+2026-09-15 14:18:38.230 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/login - 200 null text/plain; charset=utf-8 3854.8847ms
+2026-09-15 14:19:08.265 +03:00 [INF] [] Request starting HTTP/1.1 POST http://localhost:5155/api/v1/auth/verify-login-otp - application/json 61
+2026-09-15 14:19:08.271 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.AuthController.VerifyLoginOtp (MJDVerse.API)'
+2026-09-15 14:19:08.275 +03:00 [INF] [] Route matched with {action = "VerifyLoginOtp", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] VerifyLoginOtp(MJDVerse.Application.DTOs.Auth.VerifyLoginOtpRequestDto) on controller MJDVerse.API.Controllers.AuthController (MJDVerse.API).
+2026-09-15 14:19:08.354 +03:00 [INF] [] Executed DbCommand (4ms) [Parameters=[@__email_0='?' (Size = 256), @__purpose_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[CodeHash], [o].[CreatedAt], [o].[Email], [o].[ExpiresAt], [o].[IsUsed], [o].[Purpose], [o].[UserId]
+FROM [OtpVerifications] AS [o]
+WHERE [o].[Email] = @__email_0 AND [o].[Purpose] = @__purpose_1 AND [o].[IsUsed] = CAST(0 AS bit)
+ORDER BY [o].[CreatedAt] DESC
+2026-09-15 14:19:08.362 +03:00 [INF] [] Executed DbCommand (1ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-09-15 14:19:08.372 +03:00 [INF] [] Executed DbCommand (3ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [OtpVerifications] SET [IsUsed] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-09-15 14:19:08.402 +03:00 [INF] [] Executing OkObjectResult, writing value of type 'MJDVerse.Application.DTOs.Auth.AuthResponseDto'.
+2026-09-15 14:19:08.404 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.AuthController.VerifyLoginOtp (MJDVerse.API) in 127.7575ms
+2026-09-15 14:19:08.405 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.AuthController.VerifyLoginOtp (MJDVerse.API)'
+2026-09-15 14:19:08.406 +03:00 [INF] [] HTTP POST /api/v1/auth/verify-login-otp responded 200 in 138.3352 ms
+2026-09-15 14:19:08.407 +03:00 [INF] [] Request finished HTTP/1.1 POST http://localhost:5155/api/v1/auth/verify-login-otp - 200 null application/json; charset=utf-8 142.7994ms
+2026-09-15 14:20:23.105 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/api/v1/users/profile - null null
+2026-09-15 14:20:23.124 +03:00 [INF] [] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenMalformedException: IDX14100: JWT is not well formed, there are no dots (.).
+The token needs to be in JWS or JWE Compact Serialization Format. (JWS): 'EncodedHeader.EncodedPayload.EncodedSignature'. (JWE): 'EncodedProtectedHeader.EncodedEncryptedKey.EncodedInitializationVector.EncodedCiphertext.EncodedAuthenticationTag'.
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken.ReadToken(ReadOnlyMemory`1 encodedTokenMemory)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken..ctor(String jwtEncodedString)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ReadToken(String token, TokenValidationParameters validationParameters)
+2026-09-15 14:20:23.132 +03:00 [INF] [] Bearer was not authenticated. Failure message: IDX14100: JWT is not well formed, there are no dots (.).
+The token needs to be in JWS or JWE Compact Serialization Format. (JWS): 'EncodedHeader.EncodedPayload.EncodedSignature'. (JWE): 'EncodedProtectedHeader.EncodedEncryptedKey.EncodedInitializationVector.EncodedCiphertext.EncodedAuthenticationTag'.
+2026-09-15 14:20:23.140 +03:00 [INF] [] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-09-15 14:20:23.144 +03:00 [INF] [] AuthenticationScheme: Bearer was challenged.
+2026-09-15 14:20:23.146 +03:00 [INF] [] HTTP GET /api/v1/users/profile responded 401 in 32.9064 ms
+2026-09-15 14:20:23.148 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/api/v1/users/profile - 401 0 null 42.8939ms
+2026-09-15 14:21:23.299 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/api/v1/users/profile - null null
+2026-09-15 14:21:23.341 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.UsersController.GetProfile (MJDVerse.API)'
+2026-09-15 14:21:23.347 +03:00 [INF] [] Route matched with {action = "GetProfile", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProfile() on controller MJDVerse.API.Controllers.UsersController (MJDVerse.API).
+2026-09-15 14:21:23.396 +03:00 [INF] [] Executed DbCommand (5ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2026-09-15 14:21:23.405 +03:00 [INF] [] Executing OkObjectResult, writing value of type 'MJDVerse.Application.DTOs.Users.UserProfileDto'.
+2026-09-15 14:21:23.407 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.UsersController.GetProfile (MJDVerse.API) in 58.6984ms
+2026-09-15 14:21:23.408 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.UsersController.GetProfile (MJDVerse.API)'
+2026-09-15 14:21:23.409 +03:00 [INF] [] HTTP GET /api/v1/users/profile responded 200 in 103.1356 ms
+2026-09-15 14:21:23.411 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/api/v1/users/profile - 200 null application/json; charset=utf-8 112.3383ms
+2026-09-15 14:52:46.808 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-15 14:52:46.962 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-15 14:52:47.045 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-15 14:52:47.046 +03:00 [INF] [] Hosting environment: Development
+2026-09-15 14:52:47.046 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-15 14:52:47.886 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-15 14:52:48.124 +03:00 [INF] [] HTTP GET / responded 404 in 90.2478 ms
+2026-09-15 14:52:48.139 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 267.0838ms
+2026-09-15 14:52:48.144 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-15 14:54:58.549 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/api/v1/movies?query=batman - null null
+2026-09-15 14:54:58.566 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API)'
+2026-09-15 14:54:58.616 +03:00 [INF] [] Route matched with {action = "GetMovies", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMovies(MJDVerse.Application.DTOs.Movies.MovieQueryParametersDto) on controller MJDVerse.API.Controllers.MoviesController (MJDVerse.API).
+2026-09-15 14:55:01.303 +03:00 [INF] [] Executed DbCommand (85ms) [Parameters=[@__query_0_contains='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Movies] AS [m]
+WHERE [m].[Title] LIKE @__query_0_contains ESCAPE N'\'
+2026-09-15 14:55:01.347 +03:00 [WRN] [] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-09-15 14:55:01.349 +03:00 [WRN] [] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-09-15 14:55:01.394 +03:00 [INF] [] Executed DbCommand (5ms) [Parameters=[@__query_0_contains='?' (Size = 200), @__p_1='?' (DbType = Int32), @__p_2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[Id], [m].[AverageRating], [m].[Description], [m].[PosterUrl], [m].[ReleaseDate], [m].[RuntimeMinutes], [m].[Title]
+FROM [Movies] AS [m]
+WHERE [m].[Title] LIKE @__query_0_contains ESCAPE N'\'
+ORDER BY (SELECT 1)
+OFFSET @__p_1 ROWS FETCH NEXT @__p_2 ROWS ONLY
+2026-09-15 14:55:01.468 +03:00 [INF] [] Executing OkObjectResult, writing value of type 'MJDVerse.Application.DTOs.Movies.PagedResultDto`1[[MJDVerse.Application.DTOs.Movies.MovieDto, MJDVerse.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-15 14:55:01.496 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API) in 2871.6359ms
+2026-09-15 14:55:01.500 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API)'
+2026-09-15 14:55:01.502 +03:00 [INF] [] HTTP GET /api/v1/movies responded 200 in 2949.8161 ms
+2026-09-15 14:55:01.513 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/api/v1/movies?query=batman - 200 null application/json; charset=utf-8 2968.904ms
+2026-09-15 15:03:51.527 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-15 15:03:51.803 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-15 15:03:51.962 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-15 15:03:51.964 +03:00 [INF] [] Hosting environment: Development
+2026-09-15 15:03:51.966 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-15 15:03:53.246 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-15 15:03:53.609 +03:00 [INF] [] HTTP GET / responded 404 in 181.5044 ms
+2026-09-15 15:03:53.646 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 426.7495ms
+2026-09-15 15:03:53.664 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-15 15:04:10.076 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/api/v1/movies?genre=Action - null null
+2026-09-15 15:04:10.117 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API)'
+2026-09-15 15:04:10.256 +03:00 [INF] [] Route matched with {action = "GetMovies", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMovies(MJDVerse.Application.DTOs.Movies.MovieQueryParametersDto) on controller MJDVerse.API.Controllers.MoviesController (MJDVerse.API).
+2026-09-15 15:04:17.669 +03:00 [INF] [] Executed DbCommand (106ms) [Parameters=[@__genre_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Movies] AS [m]
+WHERE EXISTS (
+    SELECT 1
+    FROM [MovieGenres] AS [m0]
+    INNER JOIN [Genres] AS [g] ON [m0].[GenreId] = [g].[Id]
+    WHERE [m].[Id] = [m0].[MovieId] AND [g].[Name] = @__genre_0)
+2026-09-15 15:04:17.729 +03:00 [WRN] [] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-09-15 15:04:17.732 +03:00 [WRN] [] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-09-15 15:04:17.831 +03:00 [INF] [] Executed DbCommand (51ms) [Parameters=[@__genre_0='?' (Size = 100), @__p_1='?' (DbType = Int32), @__p_2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[Id], [m].[AverageRating], [m].[Description], [m].[PosterUrl], [m].[ReleaseDate], [m].[RuntimeMinutes], [m].[Title]
+FROM [Movies] AS [m]
+WHERE EXISTS (
+    SELECT 1
+    FROM [MovieGenres] AS [m0]
+    INNER JOIN [Genres] AS [g] ON [m0].[GenreId] = [g].[Id]
+    WHERE [m].[Id] = [m0].[MovieId] AND [g].[Name] = @__genre_0)
+ORDER BY (SELECT 1)
+OFFSET @__p_1 ROWS FETCH NEXT @__p_2 ROWS ONLY
+2026-09-15 15:04:17.861 +03:00 [INF] [] Executing OkObjectResult, writing value of type 'MJDVerse.Application.DTOs.Movies.PagedResultDto`1[[MJDVerse.Application.DTOs.Movies.MovieDto, MJDVerse.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-15 15:04:17.913 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API) in 7641.912ms
+2026-09-15 15:04:17.919 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API)'
+2026-09-15 15:04:17.925 +03:00 [INF] [] HTTP GET /api/v1/movies responded 200 in 7838.3221 ms
+2026-09-15 15:04:17.953 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/api/v1/movies?genre=Action - 200 null application/json; charset=utf-8 7877.9044ms
+2026-09-15 15:36:34.839 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/api/v1/movies?genre=Action - null null
+2026-09-15 15:36:34.851 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API)'
+2026-09-15 15:36:34.853 +03:00 [INF] [] Route matched with {action = "GetMovies", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMovies(MJDVerse.Application.DTOs.Movies.MovieQueryParametersDto) on controller MJDVerse.API.Controllers.MoviesController (MJDVerse.API).
+2026-09-15 15:36:36.581 +03:00 [INF] [] Executed DbCommand (21ms) [Parameters=[@__genre_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Movies] AS [m]
+WHERE EXISTS (
+    SELECT 1
+    FROM [MovieGenres] AS [m0]
+    INNER JOIN [Genres] AS [g] ON [m0].[GenreId] = [g].[Id]
+    WHERE [m].[Id] = [m0].[MovieId] AND [g].[Name] = @__genre_0)
+2026-09-15 15:36:36.595 +03:00 [INF] [] Executed DbCommand (8ms) [Parameters=[@__genre_0='?' (Size = 100), @__p_1='?' (DbType = Int32), @__p_2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[Id], [m].[AverageRating], [m].[Description], [m].[PosterUrl], [m].[ReleaseDate], [m].[RuntimeMinutes], [m].[Title]
+FROM [Movies] AS [m]
+WHERE EXISTS (
+    SELECT 1
+    FROM [MovieGenres] AS [m0]
+    INNER JOIN [Genres] AS [g] ON [m0].[GenreId] = [g].[Id]
+    WHERE [m].[Id] = [m0].[MovieId] AND [g].[Name] = @__genre_0)
+ORDER BY (SELECT 1)
+OFFSET @__p_1 ROWS FETCH NEXT @__p_2 ROWS ONLY
+2026-09-15 15:36:36.598 +03:00 [INF] [] Executing OkObjectResult, writing value of type 'MJDVerse.Application.DTOs.Movies.PagedResultDto`1[[MJDVerse.Application.DTOs.Movies.MovieDto, MJDVerse.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-15 15:36:36.600 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API) in 1744.7719ms
+2026-09-15 15:36:36.602 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API)'
+2026-09-15 15:36:36.603 +03:00 [INF] [] HTTP GET /api/v1/movies responded 200 in 1757.2831 ms
+2026-09-15 15:36:36.605 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/api/v1/movies?genre=Action - 200 null application/json; charset=utf-8 1768.9868ms
+2026-09-15 15:52:55.209 +03:00 [INF] [] User profile is available. Using 'C:\Users\aalhasani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-09-15 15:52:55.525 +03:00 [INF] [] Now listening on: http://localhost:5155
+2026-09-15 15:52:55.654 +03:00 [INF] [] Application started. Press Ctrl+C to shut down.
+2026-09-15 15:52:55.655 +03:00 [INF] [] Hosting environment: Development
+2026-09-15 15:52:55.657 +03:00 [INF] [] Content root path: C:\Abdulmajeed_Project\ASP.NETCore\MovieManager\MovieManager.UI
+2026-09-15 15:52:57.380 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/ - null null
+2026-09-15 15:52:57.796 +03:00 [INF] [] HTTP GET / responded 404 in 162.2217 ms
+2026-09-15 15:52:57.816 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/ - 404 null null 467.459ms
+2026-09-15 15:52:57.824 +03:00 [INF] [] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5155/, Response status code: 404
+2026-09-15 15:53:33.533 +03:00 [INF] [] Request starting HTTP/1.1 GET http://localhost:5155/api/v1/movies - null null
+2026-09-15 15:53:33.594 +03:00 [INF] [] Executing endpoint 'MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API)'
+2026-09-15 15:53:33.773 +03:00 [INF] [] Route matched with {action = "GetMovies", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMovies(MJDVerse.Application.DTOs.Movies.MovieQueryParametersDto) on controller MJDVerse.API.Controllers.MoviesController (MJDVerse.API).
+2026-09-15 15:53:37.129 +03:00 [INF] [] Executed DbCommand (54ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Movies] AS [m]
+2026-09-15 15:53:37.201 +03:00 [WRN] [] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-09-15 15:53:37.203 +03:00 [WRN] [] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-09-15 15:53:37.291 +03:00 [INF] [] Executed DbCommand (29ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[Id], [m].[AverageRating], [m].[Description], [m].[PosterUrl], [m].[ReleaseDate], [m].[RuntimeMinutes], [m].[Title]
+FROM [Movies] AS [m]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2026-09-15 15:53:37.396 +03:00 [INF] [] Executing OkObjectResult, writing value of type 'MJDVerse.Application.DTOs.Movies.PagedResultDto`1[[MJDVerse.Application.DTOs.Movies.MovieDto, MJDVerse.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-09-15 15:53:37.428 +03:00 [INF] [] Executed action MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API) in 3642.1517ms
+2026-09-15 15:53:37.431 +03:00 [INF] [] Executed endpoint 'MJDVerse.API.Controllers.MoviesController.GetMovies (MJDVerse.API)'
+2026-09-15 15:53:37.433 +03:00 [INF] [] HTTP GET /api/v1/movies responded 200 in 3872.5057 ms
+2026-09-15 15:53:37.445 +03:00 [INF] [] Request finished HTTP/1.1 GET http://localhost:5155/api/v1/movies - 200 null application/json; charset=utf-8 3928.3917ms

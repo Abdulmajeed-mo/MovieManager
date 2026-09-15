@@ -28,8 +28,8 @@ namespace MJDVerse.API.Extensions
             services.AddScoped<IIdentityService, IdentityService>();
             services.AddScoped<IAuthService, AuthService>();
 
-
-
+            // User Service
+            services.AddScoped<IUserService, UserService>();
 
 
 

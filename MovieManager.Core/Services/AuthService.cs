@@ -66,7 +66,7 @@ namespace MJDVerse.Application.Services
                 Email = user.Email!,
                 CodeHash = otpHash,
                 Purpose = OtpPurpose.Registration,
-                ExpiresAt = DateTime.UtcNow.AddSeconds(60)
+                ExpiresAt = DateTime.UtcNow.AddMinutes(3)
             };
 
             await _otpRepository.AddAsync(otpVerification);
@@ -228,7 +228,7 @@ namespace MJDVerse.Application.Services
                 Email = user.Email!,
                 CodeHash = otpHash,
                 Purpose = OtpPurpose.Login,
-                ExpiresAt = DateTime.UtcNow.AddSeconds(60)
+                ExpiresAt = DateTime.UtcNow.AddMinutes(3)
             };
 
             await _otpRepository.AddAsync(otpVerification);

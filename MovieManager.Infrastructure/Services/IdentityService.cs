@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using MJDVerse.Application.DTOs.Users;
 using MJDVerse.Application.Interfaces;
 using MJDVerse.Domain.Entities;
 
@@ -63,6 +64,27 @@ namespace MJDVerse.Infrastructure.Services
         public async Task<bool> CheckPasswordAsync(ApplicationUser user,string password)
         {
             return await _userManager.CheckPasswordAsync(user, password);
+        }
+
+
+
+
+        public async Task<UserProfileDto?> GetUserProfileAsync(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            return new UserProfileDto
+            {
+                Id = user.Id,
+                Email = user.Email ?? string.Empty,
+                Username = user.UserName ?? string.Empty,
+                PhoneNumber = user.PhoneNumber ?? string.Empty
+            };
         }
     }
 }
