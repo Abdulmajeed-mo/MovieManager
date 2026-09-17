@@ -1,4 +1,5 @@
-﻿using MJDVerse.Application.DTOs.Movies;
+﻿using MJDVerse.Application.DTOs.External;
+using MJDVerse.Application.DTOs.Movies;
 using MJDVerse.Application.Interfaces;
 using MJDVerse.Domain.Entities;
 using MJDVerse.Domain.Interfaces;
@@ -12,12 +13,14 @@ namespace MJDVerse.Application.Services
 
         private readonly IMovieRepository _movieRepository;
         private readonly IMovieMetadataProvider _movieMetadataProvider;
+        private readonly IGenreRepository _genreRepository;
 
-
-        public MovieService(IMovieRepository movieRepository, IMovieMetadataProvider movieMetadataProvider)
+        public MovieService(IMovieRepository movieRepository, IMovieMetadataProvider movieMetadataProvider, IGenreRepository genreRepository)
         {
             _movieRepository = movieRepository;
             _movieMetadataProvider = movieMetadataProvider;
+            _genreRepository = genreRepository;
+
 
 
         }
@@ -46,6 +49,7 @@ namespace MJDVerse.Application.Services
             var movieDtos = result.Movies.Select(movie => new MovieDto
             {
                 Id = movie.Id,
+                TmdbId = movie.TmdbId,
                 Title = movie.Title,
                 Description = movie.Description,
                 ReleaseDate = movie.ReleaseDate,
@@ -74,6 +78,7 @@ namespace MJDVerse.Application.Services
         {
             var movie = new Movie
             {
+                TmdbId = request.TmdbId,
                 Title = request.Title,
                 Description = request.Description,
                 ReleaseDate = request.ReleaseDate,
@@ -86,6 +91,7 @@ namespace MJDVerse.Application.Services
             return new MovieDto
             {
                 Id = movie.Id,
+                TmdbId = movie.TmdbId,
                 Title = movie.Title,
                 Description = movie.Description,
                 ReleaseDate = movie.ReleaseDate,
@@ -113,6 +119,7 @@ namespace MJDVerse.Application.Services
             return new MovieDto
             {
                 Id = movie.Id,
+                TmdbId = movie.TmdbId,
                 Title = movie.Title,
                 Description = movie.Description,
                 ReleaseDate = movie.ReleaseDate,
@@ -147,6 +154,7 @@ namespace MJDVerse.Application.Services
             return new MovieDto
             {
                 Id = movie.Id,
+                TmdbId = movie.TmdbId,
                 Title = movie.Title,
                 Description = movie.Description,
                 ReleaseDate = movie.ReleaseDate,
@@ -182,20 +190,61 @@ namespace MJDVerse.Application.Services
 
         public async Task<List<TmdbMovieDto>> GetPopularMoviesAsync()
         {
-            return await _movieMetadataProvider.GetMoviesAsync();
+            var movies = await _movieMetadataProvider.GetMoviesAsync();
+            var genres = await _movieMetadataProvider.GetGenresAsync();
+
+            foreach (var movie in movies)
+            {
+                movie.Genres = genres.Where(genre => movie.GenreIds.Contains(genre.Id)).ToList();
+            }
+
+            return movies;
         }
 
 
 
 
+        public async Task<TmdbMovieDto?> GetMovieDetailsAsync(int id)
+        {
+            var movie = await _movieRepository.GetByIdAsync(id);
+
+            if (movie == null)
+            {
+                return null;
+            }
+
+            return await _movieMetadataProvider.GetMovieByIdAsync(movie.TmdbId);
+        }
 
 
 
+        public async Task<List<TmdbGenreDto>> GetGenresAsync()
+        {
+            return await _movieMetadataProvider.GetGenresAsync();
+        }
 
 
 
+        public async Task SyncGenresAsync()
+        {
+            var tmdbGenres = await _movieMetadataProvider.GetGenresAsync();
 
+            foreach (var tmdbGenre in tmdbGenres)
+            {
+                var existingGenre = await _genreRepository.GetByIdAsync(tmdbGenre.Id);
 
+                if (existingGenre == null)
+                {
+                    await _genreRepository.AddAsync(new Genre
+                    {
+                        Id = tmdbGenre.Id,
+                        Name = tmdbGenre.Name
+                    });
+                }
+            }
+
+            await _genreRepository.SaveChangesAsync();
+        }
 
     }
 }

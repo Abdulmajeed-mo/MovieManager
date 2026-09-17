@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using MJDVerse.Application.DTOs.External;
 using MJDVerse.Application.Interfaces;
 using System.Net.Http.Headers;
 using System.Text.Json;
@@ -10,9 +11,7 @@ namespace MJDVerse.Infrastructure.Providers
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
 
-        public TmdbMovieMetadataProvider(
-            HttpClient httpClient,
-            IConfiguration configuration)
+        public TmdbMovieMetadataProvider(HttpClient httpClient,IConfiguration configuration)
         {
             _httpClient = httpClient;
             _configuration = configuration;
@@ -23,6 +22,9 @@ namespace MJDVerse.Infrastructure.Providers
 
             _httpClient.DefaultRequestHeaders.Authorization =new AuthenticationHeaderValue("Bearer", token);
         }
+
+
+
 
         public async Task<List<TmdbMovieDto>> GetMoviesAsync()
         {
@@ -36,6 +38,52 @@ namespace MJDVerse.Infrastructure.Providers
 
             return result?.Results ?? new List<TmdbMovieDto>();
         }
+
+
+
+
+        public async Task<List<TmdbGenreDto>> GetGenresAsync()
+        {
+            var response = await _httpClient.GetAsync("genre/movie/list?language=en-US");
+
+            response.EnsureSuccessStatusCode();
+
+            var json = await response.Content.ReadAsStringAsync();
+
+            var result = JsonSerializer.Deserialize<TmdbGenreResponse>(json,new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+
+            return result?.Genres ?? new List<TmdbGenreDto>();
+        }
+
+
+        public async Task<TmdbMovieDto?> GetMovieByIdAsync(int tmdbId)
+        {
+            var response = await _httpClient.GetAsync(
+                $"movie/{tmdbId}?language=en-US");
+
+            response.EnsureSuccessStatusCode();
+
+            var json = await response.Content.ReadAsStringAsync();
+
+            return JsonSerializer.Deserialize<TmdbMovieDto>(
+                json,
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+        }
+
+
+
+        public class TmdbGenreResponse
+        {
+            public List<TmdbGenreDto> Genres { get; set; } = new();
+        }
+
+
 
 
         public class TmdbMovieResponse

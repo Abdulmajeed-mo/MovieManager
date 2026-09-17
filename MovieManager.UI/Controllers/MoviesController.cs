@@ -137,7 +137,37 @@ namespace MJDVerse.API.Controllers
 
 
 
+        [HttpGet("genres")]
+        public async Task<IActionResult> GetGenres()
+        {
+            var genres = await _movieService.GetGenresAsync();
+            return Ok(genres);
+        }
 
-       
+
+        [HttpGet("{id}/details")]
+        public async Task<IActionResult> GetMovieDetails(int id)
+        {
+            var movie = await _movieService.GetMovieDetailsAsync(id);
+
+            if (movie == null)
+            {
+                return NotFound("Movie not found.");
+            }
+
+            return Ok(movie);
+        }
+
+
+
+
+
+        [HttpPost("sync-genres")]
+        public async Task<IActionResult> SyncGenres()
+        {
+            await _movieService.SyncGenresAsync();
+
+            return Ok("Genres synced successfully.");
+        }
     }
 }

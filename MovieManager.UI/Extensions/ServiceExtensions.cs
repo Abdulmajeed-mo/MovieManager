@@ -50,6 +50,8 @@ namespace MJDVerse.API.Extensions
             services.AddScoped<IMovieService, MovieService>();
             services.AddScoped<IMovieRepository, MovieRepository>();
 
+            // Genres
+            services.AddScoped<IGenreRepository, GenreRepository>();
 
 
             // Watchlist

@@ -10,9 +10,9 @@ namespace MJDVerse.Infrastructure.Configurations
         {
             builder.HasKey(g => g.Id);
 
-            builder.Property(g => g.Name).IsRequired().HasMaxLength(100);
+            builder.Property(g => g.Id).ValueGeneratedNever();
 
-            builder.HasIndex(g => g.Name).IsUnique();
+            builder.Property(g => g.Name).IsRequired().HasMaxLength(100);
         }
     }
 }

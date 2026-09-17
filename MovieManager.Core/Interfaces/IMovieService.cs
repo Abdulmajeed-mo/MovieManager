@@ -1,4 +1,5 @@
-﻿using MJDVerse.Application.DTOs.Movies;
+﻿using MJDVerse.Application.DTOs.External;
+using MJDVerse.Application.DTOs.Movies;
 
 namespace MJDVerse.Application.Interfaces
 {
@@ -19,5 +20,10 @@ namespace MJDVerse.Application.Interfaces
         Task<bool> DeleteMovieAsync(int id);
 
         Task<List<TmdbMovieDto>> GetPopularMoviesAsync();
+        Task<List<TmdbGenreDto>> GetGenresAsync();
+
+        Task<TmdbMovieDto?> GetMovieDetailsAsync(int id);
+
+        Task SyncGenresAsync();
     }
 }
