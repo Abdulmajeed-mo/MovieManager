@@ -14,5 +14,7 @@ namespace MJDVerse.Domain.Interfaces
         Task<Movie?> GetByIdAsync(int id);
         Task UpdateAsync(Movie movie);
         Task DeleteAsync(int id);
+
+        Task AddMovieGenresAsync(int movieId, List<int> genreIds);
     }
 }

@@ -101,6 +101,22 @@ namespace MJDVerse.Infrastructure.Repositories
 
 
 
-       
+
+        public async Task AddMovieGenresAsync(int movieId, List<int> genreIds)
+        {
+            foreach (var genreId in genreIds)
+            {
+                await _context.MovieGenres.AddAsync(new MovieGenre
+                {
+                    MovieId = movieId,
+                    GenreId = genreId
+                });
+            }
+
+            await _context.SaveChangesAsync();
+        }
+
+
+
     }
 }

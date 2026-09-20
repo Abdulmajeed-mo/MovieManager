@@ -68,12 +68,17 @@ namespace MJDVerse.Infrastructure.Providers
 
             var json = await response.Content.ReadAsStringAsync();
 
-            return JsonSerializer.Deserialize<TmdbMovieDto>(
-                json,
-                new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                });
+            var movie = JsonSerializer.Deserialize<TmdbMovieDto>(json,new JsonSerializerOptions
+     {
+         PropertyNameCaseInsensitive = true
+     });
+
+            if (movie != null)
+            {
+                movie.GenreIds = movie.Genres.Select(genre => genre.Id).ToList();
+            }
+
+            return movie;
         }
 
 

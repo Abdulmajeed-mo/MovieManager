@@ -87,6 +87,14 @@ namespace MJDVerse.Application.Services
             };
 
             await _movieRepository.AddAsync(movie);
+            var movieDetails = await _movieMetadataProvider.GetMovieByIdAsync(movie.TmdbId);
+
+
+
+            if (movieDetails != null && movieDetails.GenreIds.Any())
+            {
+                await _movieRepository.AddMovieGenresAsync(movie.Id,movieDetails.GenreIds);
+            }
 
             return new MovieDto
             {
