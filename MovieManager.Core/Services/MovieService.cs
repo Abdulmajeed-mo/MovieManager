@@ -35,8 +35,7 @@ namespace MJDVerse.Application.Services
 
 
 
-        public async Task<PagedResultDto<MovieDto>> GetMoviesAsync(
-      MovieQueryParametersDto parameters)
+        public async Task<PagedResultDto<MovieDto>> GetMoviesAsync(MovieQueryParametersDto parameters)
         {
             var result = await _movieRepository.GetMoviesAsync(
                 parameters.Query,
@@ -252,6 +251,59 @@ namespace MJDVerse.Application.Services
             }
 
             await _genreRepository.SaveChangesAsync();
+        }
+
+
+
+
+
+        public async Task SyncMoviesAsync()
+        {
+            var tmdbMovies = await _movieMetadataProvider.GetMoviesAsync();
+            var existingMovies = await _movieRepository.GetAllAsync();
+
+            foreach (var tmdbMovie in tmdbMovies)
+            {
+                var existingMovie = existingMovies.FirstOrDefault(movie => movie.TmdbId == tmdbMovie.Id);
+
+                var movieDetails = await _movieMetadataProvider.GetMovieByIdAsync(tmdbMovie.Id);
+
+                if (movieDetails == null)
+                {
+                    continue;
+                }
+
+                DateTime? releaseDate = DateTime.TryParse(movieDetails.ReleaseDate,out var parsedReleaseDate)? parsedReleaseDate: null;
+                if (existingMovie == null)
+                {
+                    var movie = new Movie
+                    {
+                        TmdbId = movieDetails.Id,
+                        Title = movieDetails.Title,
+                        Description = movieDetails.Overview,
+                        ReleaseDate = releaseDate,
+                        RuntimeMinutes = movieDetails.Runtime,
+                        PosterUrl = movieDetails.PosterPath
+                    };
+
+                    await _movieRepository.AddAsync(movie);
+
+                    if (movieDetails.GenreIds.Any())
+                    {
+                        await _movieRepository.AddMovieGenresAsync(movie.Id,movieDetails.GenreIds);
+                    }
+                }
+                else
+                {
+                    existingMovie.Title = movieDetails.Title;
+                    existingMovie.Description = movieDetails.Overview;
+                    existingMovie.ReleaseDate = releaseDate;
+                    existingMovie.RuntimeMinutes = movieDetails.Runtime;
+                    existingMovie.PosterUrl = movieDetails.PosterPath;
+
+                    await _movieRepository.UpdateAsync(existingMovie);
+                }
+            }
         }
 
     }

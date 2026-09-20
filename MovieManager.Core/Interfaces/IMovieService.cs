@@ -25,5 +25,7 @@ namespace MJDVerse.Application.Interfaces
         Task<TmdbMovieDto?> GetMovieDetailsAsync(int id);
 
         Task SyncGenresAsync();
+
+        Task SyncMoviesAsync();
     }
 }

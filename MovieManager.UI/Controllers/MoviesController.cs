@@ -169,5 +169,16 @@ namespace MJDVerse.API.Controllers
 
             return Ok("Genres synced successfully.");
         }
+
+
+
+
+        [HttpPost("sync-movies")]
+        public async Task<IActionResult> SyncMovies()
+        {
+            await _movieService.SyncMoviesAsync();
+
+            return Ok("Movies synced successfully.");
+        }
     }
 }

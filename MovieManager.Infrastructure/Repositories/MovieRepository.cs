@@ -58,6 +58,14 @@ namespace MJDVerse.Infrastructure.Repositories
 
 
 
+        public async Task<List<Movie>> GetAllAsync()
+        {
+            return await _context.Movies.ToListAsync();
+        }
+
+
+
+
 
         public async Task AddAsync(Movie movie)
         {

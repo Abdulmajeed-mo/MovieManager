@@ -28,7 +28,7 @@ namespace MJDVerse.Domain.Entities
 
         public ICollection<MovieGenre> MovieGenres { get; set; } = new List<MovieGenre>();
 
-        public DateTime ReleaseDate { get; set; }
+        public DateTime? ReleaseDate { get; set; }
         public int RuntimeMinutes { get; set; }
 
         public decimal AverageRating { get; set; }

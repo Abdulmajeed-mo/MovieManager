@@ -11,6 +11,8 @@ namespace MJDVerse.Domain.Interfaces
 
 
         Task<(List<Movie> Movies, int TotalCount)> GetMoviesAsync(string? query,string? genre,string? sortBy,bool descending,int page,int pageSize); Task AddAsync(Movie movie);
+
+        Task<List<Movie>> GetAllAsync();
         Task<Movie?> GetByIdAsync(int id);
         Task UpdateAsync(Movie movie);
         Task DeleteAsync(int id);
