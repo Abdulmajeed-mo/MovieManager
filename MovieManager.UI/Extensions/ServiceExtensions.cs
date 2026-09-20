@@ -75,6 +75,15 @@ namespace MJDVerse.API.Extensions
             services.AddScoped<IWatchHistoryService, WatchHistoryService>();
             services.AddScoped<IWatchHistoryRepository, WatchHistoryRepository>();
 
+
+            // CORS Policy for Angular Frontend
+            services.AddCors(options =>{options.AddPolicy("AngularPolicy", policy =>
+                {
+                    policy.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
+                });
+            });
+
+
             return services;
         }
     }

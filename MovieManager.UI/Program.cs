@@ -17,12 +17,19 @@ builder.Services.AddValidationServices();
 
 builder.Services.AddApiServices();
 
+
+
+
+
 var app = builder.Build();
 
 // Middleware
 app.UseApplicationMiddleware();
 
 app.UseRouting();
+
+app.UseCors("AngularPolicy");
+
 
 app.UseAuthentication();
 app.UseAuthorization();
