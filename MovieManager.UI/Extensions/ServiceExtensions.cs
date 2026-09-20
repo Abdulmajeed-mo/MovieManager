@@ -2,6 +2,7 @@
 using MJDVerse.Application.Options;
 using MJDVerse.Application.Services;
 using MJDVerse.Domain.Interfaces;
+using MJDVerse.Infrastructure.BackgroundJobs;
 using MJDVerse.Infrastructure.Providers;
 using MJDVerse.Infrastructure.Repositories;
 using MJDVerse.Infrastructure.Services;
@@ -32,6 +33,7 @@ namespace MJDVerse.API.Extensions
             services.AddScoped<IUserService, UserService>();
 
 
+          
 
             services.AddHttpClient<IMovieMetadataProvider, TmdbMovieMetadataProvider>();
             // OTP
@@ -49,6 +51,9 @@ namespace MJDVerse.API.Extensions
             // Movies
             services.AddScoped<IMovieService, MovieService>();
             services.AddScoped<IMovieRepository, MovieRepository>();
+
+            // Background Service for Movie Sync
+            services.AddHostedService<MovieSyncBackgroundService>();
 
             // Genres
             services.AddScoped<IGenreRepository, GenreRepository>();
