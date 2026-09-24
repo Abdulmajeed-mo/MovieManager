@@ -17,9 +17,11 @@ namespace MJDVerse.Infrastructure.Context
         public DbSet<Favorite> Favorites { get; set; }
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<WatchHistory> WatchHistories { get; set; }
-
         public DbSet<OtpVerification> OtpVerifications { get; set; }
-        public AppDbContext(DbContextOptions<AppDbContext> options): base(options)
+        public DbSet<PendingRegistration> PendingRegistrations { get; set; }
+
+        public AppDbContext(DbContextOptions<AppDbContext> options)
+            : base(options)
         {
         }
 

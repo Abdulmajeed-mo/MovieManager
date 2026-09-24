@@ -33,12 +33,14 @@ namespace MJDVerse.API.Extensions
             services.AddScoped<IUserService, UserService>();
 
 
-          
-
             services.AddHttpClient<IMovieMetadataProvider, TmdbMovieMetadataProvider>();
+
+
             // OTP
             services.AddScoped<IOtpRepository, OtpRepository>();
+            services.AddScoped<IPendingRegistrationRepository, PendingRegistrationRepository>();
             services.AddSingleton<IOtpRateLimiter, OtpRateLimiter>();
+
 
             // SMTP Settings
             services.Configure<SmtpSettings>(configuration.GetSection("SmtpSettings"));

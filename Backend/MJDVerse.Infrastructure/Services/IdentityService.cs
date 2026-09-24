@@ -31,22 +31,31 @@ namespace MJDVerse.Infrastructure.Services
             );
         }
 
+        public async Task<(bool Success, string[] Errors)> CreateUserWithHashAsync(
+            ApplicationUser user)
+        {
+            var result = await _userManager.CreateAsync(user);
 
+            if (result.Succeeded)
+            {
+                return (true, Array.Empty<string>());
+            }
+
+            return (
+                false,
+                result.Errors.Select(e => e.Description).ToArray()
+            );
+        }
 
         public async Task<ApplicationUser?> FindByEmailAsync(string email)
         {
             return await _userManager.FindByEmailAsync(email);
         }
 
-
-
-
         public async Task<ApplicationUser?> FindByUsernameAsync(string username)
         {
             return await _userManager.FindByNameAsync(username);
         }
-
-
 
         public async Task<bool> ConfirmEmailAsync(ApplicationUser user)
         {
@@ -57,17 +66,12 @@ namespace MJDVerse.Infrastructure.Services
             return result.Succeeded;
         }
 
-
-
-
-
-        public async Task<bool> CheckPasswordAsync(ApplicationUser user,string password)
+        public async Task<bool> CheckPasswordAsync(
+            ApplicationUser user,
+            string password)
         {
             return await _userManager.CheckPasswordAsync(user, password);
         }
-
-
-
 
         public async Task<UserProfileDto?> GetUserProfileAsync(string userId)
         {
