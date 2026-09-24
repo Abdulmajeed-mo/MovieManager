@@ -1,0 +1,45 @@
+<div class="mx-auto mt-16 w-full max-w-md px-6">
+  <div class="rounded-xl border border-gray-800 bg-gray-900 p-8">
+    <h1 class="mb-2 text-2xl font-bold text-white">
+      Verify Email
+    </h1>
+
+    <p class="mb-6 text-sm text-gray-400">
+      Enter the 4-digit OTP sent to your email.
+    </p>
+
+    @if (errorMessage) {
+      <div class="mb-5 rounded-lg border border-red-800 bg-red-950 px-4 py-3 text-sm text-red-300">
+        {{ errorMessage }}
+      </div>
+    }
+
+    <form
+      [formGroup]="otpForm"
+      (ngSubmit)="verifyOtp()"
+      class="space-y-5"
+    >
+      <div>
+        <label class="mb-2 block text-sm text-gray-300">
+          OTP
+        </label>
+
+        <input
+          type="text"
+          inputmode="numeric"
+          maxlength="4"
+          formControlName="otp"
+          class="w-full rounded-lg border border-gray-700 bg-gray-950 px-4 py-3 text-center text-xl tracking-[0.5em] text-white outline-none focus:border-red-500"
+          placeholder="0000"
+        />
+      </div>
+
+      <button
+        type="submit"
+        class="w-full rounded-lg bg-red-600 px-4 py-3 font-semibold text-white hover:bg-red-700"
+      >
+        Verify Email
+      </button>
+    </form>
+  </div>
+</div>

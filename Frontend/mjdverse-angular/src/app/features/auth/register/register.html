@@ -1,0 +1,95 @@
+<div class="mx-auto mt-16 w-full max-w-md px-6">
+  <div class="rounded-xl border border-gray-800 bg-gray-900 p-8">
+    <h1 class="mb-2 text-2xl font-bold text-white">
+      Create Account
+    </h1>
+
+    <p class="mb-6 text-sm text-gray-400">
+      Create your MJDVerse account.
+    </p>
+
+    @if (errorMessage) {
+      <div class="mb-5 rounded-lg border border-red-800 bg-red-950 px-4 py-3 text-sm text-red-300">
+        {{ errorMessage }}
+      </div>
+    }
+
+    <form
+      [formGroup]="registerForm"
+      (ngSubmit)="register()"
+      class="space-y-5"
+    >
+      <div>
+        <label class="mb-2 block text-sm text-gray-300">
+          Email
+        </label>
+
+        <input
+          type="email"
+          formControlName="email"
+          class="w-full rounded-lg border border-gray-700 bg-gray-950 px-4 py-3 text-white outline-none focus:border-red-500"
+          placeholder="Enter your email"
+        />
+      </div>
+
+      <div>
+        <label class="mb-2 block text-sm text-gray-300">
+          Username
+        </label>
+
+        <input
+          type="text"
+          formControlName="username"
+          class="w-full rounded-lg border border-gray-700 bg-gray-950 px-4 py-3 text-white outline-none focus:border-red-500"
+          placeholder="Enter your username"
+        />
+      </div>
+
+      <div>
+        <label class="mb-2 block text-sm text-gray-300">
+          Phone Number
+        </label>
+
+        <input
+          type="tel"
+          formControlName="phoneNumber"
+          class="w-full rounded-lg border border-gray-700 bg-gray-950 px-4 py-3 text-white outline-none focus:border-red-500"
+          placeholder="Enter your phone number"
+        />
+      </div>
+
+      <div>
+        <label class="mb-2 block text-sm text-gray-300">
+          Password
+        </label>
+
+        <input
+          type="password"
+          formControlName="password"
+          class="w-full rounded-lg border border-gray-700 bg-gray-950 px-4 py-3 text-white outline-none focus:border-red-500"
+          placeholder="Enter your password"
+        />
+      </div>
+
+      <div>
+        <label class="mb-2 block text-sm text-gray-300">
+          Confirm Password
+        </label>
+
+        <input
+          type="password"
+          formControlName="confirmPassword"
+          class="w-full rounded-lg border border-gray-700 bg-gray-950 px-4 py-3 text-white outline-none focus:border-red-500"
+          placeholder="Confirm your password"
+        />
+      </div>
+
+      <button
+        type="submit"
+        class="w-full rounded-lg bg-red-600 px-4 py-3 font-semibold text-white hover:bg-red-700"
+      >
+        Register
+      </button>
+    </form>
+  </div>
+</div>
